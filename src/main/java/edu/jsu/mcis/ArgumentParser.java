@@ -23,9 +23,9 @@ public class ArgumentParser{
 		if(cla.length > argNames.size()) {
 			throw new TooManyArgsException("usage: java VolumeCalculator length width height\nVolumeCalculator.java: error: unrecognized arguments: " + cla[cla.length - 1]);
 		}
-		else if(cla.length < argNames.size() && cla.length == 2) throw new TooFewArgsException("Failed to supply the following arguments: height");
-		else if(cla.length < argNames.size() && cla.length == 1) throw new TooFewArgsException("Failed to supply the following arguments: width, height");
-		else if(cla.length < argNames.size() && cla.length == 0) throw new TooFewArgsException("Failed to supply the following arguments: length, width, height");
+		//else if(cla.length < argNames.size() && cla.length == 2) throw new TooFewArgsException("Failed to supply the following arguments: height");
+		//else if(cla.length < argNames.size() && cla.length == 1) throw new TooFewArgsException("Failed to supply the following arguments: width, height");
+		//else if(cla.length < argNames.size() && cla.length == 0) throw new TooFewArgsException("Failed to supply the following arguments: length, width, height");
 		else{
 			for(int i = 0; i < cla.length; i++)
 			{
