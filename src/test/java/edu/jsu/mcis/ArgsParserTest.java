@@ -59,7 +59,7 @@ public class ArgsParserTest {
 			p.addArg("width");
 			p.addArg("height");
 			thrown.expect(TooManyArgsException.class);
-			thrown.expectMessage("Unrecognized argument: " + s[3]);
+			thrown.expectMessage("usage: java VolumeCalculator length width height\nVolumeCalculator.java: error: unrecognized arguments: " + s[3]);
 			p.parse(s);		
 	}
 	
