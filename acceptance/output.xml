@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 2.9 (Jython 2.7.0 on java1.8.0_71)" generated="20160209 12:24:44.296">
+<suite source="C:\Users\Barry\CS310\ArgParse\acceptance\ArgParserTest.txt" name="ArgParserTest" id="s1">
+<test name="Test Volume Calculator Normal Function" id="s1-t1">
+<kw library="ArgParserKeywords" name="Start Volume Calculator With Arguments">
+<arguments>
+<arg>7</arg>
+<arg>5</arg>
+<arg>2</arg>
+</arguments>
+<status endtime="20160209 12:24:44.853" starttime="20160209 12:24:44.846" status="PASS"></status>
+</kw>
+<kw library="ArgParserKeywords" name="Get Length">
+<assign>
+<var>${length}</var>
+</assign>
+<msg level="WARN" timestamp="20160209 12:24:44.858">Keyword 'Get Length' found both from a custom test library 'ArgParserKeywords' and a standard library 'BuiltIn'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'ArgParserKeywords.Get Length' or 'BuiltIn.Get Length'.</msg>
+<msg level="INFO" timestamp="20160209 12:24:44.876">${length} = 7</msg>
+<status endtime="20160209 12:24:44.877" starttime="20160209 12:24:44.859" status="PASS"></status>
+</kw>
+<kw library="BuiltIn" name="Should Be Equal">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>7</arg>
+<arg>${length}</arg>
+</arguments>
+<status endtime="20160209 12:24:44.887" starttime="20160209 12:24:44.880" status="PASS"></status>
+</kw>
+<kw library="ArgParserKeywords" name="Get Width">
+<assign>
+<var>${width}</var>
+</assign>
+<msg level="INFO" timestamp="20160209 12:24:44.894">${width} = 5</msg>
+<status endtime="20160209 12:24:44.895" starttime="20160209 12:24:44.890" status="PASS"></status>
+</kw>
+<kw library="BuiltIn" name="Should Be Equal">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>5</arg>
+<arg>${width}</arg>
+</arguments>
+<status endtime="20160209 12:24:44.904" starttime="20160209 12:24:44.898" status="PASS"></status>
+</kw>
+<kw library="ArgParserKeywords" name="Get Height">
+<assign>
+<var>${height}</var>
+</assign>
+<msg level="INFO" timestamp="20160209 12:24:44.911">${height} = 2</msg>
+<status endtime="20160209 12:24:44.912" starttime="20160209 12:24:44.907" status="PASS"></status>
+</kw>
+<kw library="BuiltIn" name="Should Be Equal">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>2</arg>
+<arg>${height}</arg>
+</arguments>
+<status endtime="20160209 12:24:44.921" starttime="20160209 12:24:44.915" status="PASS"></status>
+</kw>
+<kw library="ArgParserKeywords" name="Get Program Output">
+<assign>
+<var>${output}</var>
+</assign>
+<msg level="INFO" timestamp="20160209 12:24:44.928">${output} = 70</msg>
+<status endtime="20160209 12:24:44.929" starttime="20160209 12:24:44.924" status="PASS"></status>
+</kw>
+<kw library="BuiltIn" name="Should Be Equal">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${output}</arg>
+<arg>70</arg>
+</arguments>
+<status endtime="20160209 12:24:44.936" starttime="20160209 12:24:44.931" status="PASS"></status>
+</kw>
+<status critical="yes" endtime="20160209 12:24:44.940" starttime="20160209 12:24:44.836" status="PASS"></status>
+</test>
+<test name="Test Unrecognized Argument" id="s1-t2">
+<kw library="ArgParserKeywords" name="Start Volume Calculator With Arguments">
+<arguments>
+<arg>7</arg>
+<arg>5</arg>
+<arg>2</arg>
+<arg>43</arg>
+</arguments>
+<msg level="FAIL" timestamp="20160209 12:24:44.975">TooManyArgsException: Unrecognized argument: 43</msg>
+<status endtime="20160209 12:24:44.977" starttime="20160209 12:24:44.954" status="FAIL"></status>
+</kw>
+<status critical="yes" endtime="20160209 12:24:44.979" starttime="20160209 12:24:44.948" status="FAIL">TooManyArgsException: Unrecognized argument: 43</status>
+</test>
+<test name="Test Absurd Program Normal Function" id="s1-t3">
+<kw library="ArgParserKeywords" name="Start Absurd Program With Arguments">
+<arguments>
+<arg>dog</arg>
+<arg>2</arg>
+<arg>true</arg>
+<arg>3.5</arg>
+</arguments>
+<status endtime="20160209 12:24:45.000" starttime="20160209 12:24:44.995" status="PASS"></status>
+</kw>
+<kw library="ArgParserKeywords" name="Get Pet">
+<assign>
+<var>${pet}</var>
+</assign>
+<msg level="INFO" timestamp="20160209 12:24:45.007">${pet} = dog</msg>
+<status endtime="20160209 12:24:45.008" starttime="20160209 12:24:45.002" status="PASS"></status>
+</kw>
+<kw library="BuiltIn" name="Should Be Equal">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>dog</arg>
+<arg>${pet}</arg>
+</arguments>
+<status endtime="20160209 12:24:45.017" starttime="20160209 12:24:45.011" status="PASS"></status>
+</kw>
+<kw library="ArgParserKeywords" name="Get Number">
+<assign>
+<var>${number}</var>
+</assign>
+<msg level="INFO" timestamp="20160209 12:24:45.024">${number} = 2</msg>
+<status endtime="20160209 12:24:45.025" starttime="20160209 12:24:45.019" status="PASS"></status>
+</kw>
+<kw library="BuiltIn" name="Should Be Equal">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>2</arg>
+<arg>${number}</arg>
+</arguments>
+<status endtime="20160209 12:24:45.034" starttime="20160209 12:24:45.028" status="PASS"></status>
+</kw>
+<kw library="ArgParserKeywords" name="Get Rainy">
+<assign>
+<var>${rainy}</var>
+</assign>
+<msg level="INFO" timestamp="20160209 12:24:45.041">${rainy} = true</msg>
+<status endtime="20160209 12:24:45.042" starttime="20160209 12:24:45.036" status="PASS"></status>
+</kw>
+<kw library="BuiltIn" name="Should Be Equal">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>true</arg>
+<arg>${rainy}</arg>
+</arguments>
+<status endtime="20160209 12:24:45.049" starttime="20160209 12:24:45.044" status="PASS"></status>
+</kw>
+<kw library="ArgParserKeywords" name="Get Bathrooms">
+<assign>
+<var>${bathrooms}</var>
+</assign>
+<msg level="INFO" timestamp="20160209 12:24:45.055">${bathrooms} = 3.5</msg>
+<status endtime="20160209 12:24:45.056" starttime="20160209 12:24:45.051" status="PASS"></status>
+</kw>
+<kw library="BuiltIn" name="Should Be Equal">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>3.5</arg>
+<arg>${bathrooms}</arg>
+</arguments>
+<status endtime="20160209 12:24:45.064" starttime="20160209 12:24:45.059" status="PASS"></status>
+</kw>
+<status critical="yes" endtime="20160209 12:24:45.069" starttime="20160209 12:24:44.990" status="PASS"></status>
+</test>
+<status endtime="20160209 12:24:45.082" starttime="20160209 12:24:44.314" status="FAIL"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="2" fail="1">Critical Tests</stat>
+<stat pass="2" fail="1">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="2" fail="1" name="ArgParserTest" id="s1">ArgParserTest</stat>
+</suite>
+</statistics>
+<errors>
+<msg level="WARN" timestamp="20160209 12:24:44.858">Keyword 'Get Length' found both from a custom test library 'ArgParserKeywords' and a standard library 'BuiltIn'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'ArgParserKeywords.Get Length' or 'BuiltIn.Get Length'.</msg>
+</errors>
+</robot>
