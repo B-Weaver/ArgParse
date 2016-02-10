@@ -3,12 +3,23 @@ import edu.jsu.mcis.*;
 public class ArgParserKeywords{
 	private ArgumentParser parser = new ArgumentParser();
 	private ArgumentParser parser2 = new ArgumentParser();
+	private String output;
 					
 	public void StartVolumeCalculatorWithArguments(String[] args){
 		parser.addArg("length");
 		parser.addArg("width");
 		parser.addArg("height");
-		parser.parse(args);
+		try {
+			parser.parse(args);
+			int l = Integer.parseInt(parser.getArg("length"));
+			int w = Integer.parseInt(parser.getArg("width"));
+			int h = Integer.parseInt(parser.getArg("height"));
+			int v = l*w*h;
+			output = v + "";
+		}
+		catch(Exception e) {
+			output = e.toString().substring(28);
+		}
 	}
 	
 	public String getLength(){
@@ -24,11 +35,7 @@ public class ArgParserKeywords{
 	}
 	
 	public String getProgramOutput(){
-		int l = Integer.parseInt(parser.getArg("length"));
-		int w = Integer.parseInt(parser.getArg("width"));
-		int h = Integer.parseInt(parser.getArg("height"));
-		int output = l*w*h;
-		return ""+output;
+		return output;
 	}
 	
 	public void StartAbsurdProgramWithArguments(String[] args){
