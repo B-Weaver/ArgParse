@@ -58,7 +58,7 @@ public class ArgsParserTest {
 			p.addArg("length");
 			p.addArg("width");
 			p.addArg("height");
-			thrown.expect(TooManyArgsException.class);
+			thrown.expect(RuntimeException.class);
 			thrown.expectMessage("usage: java VolumeCalculator length width height\nVolumeCalculator.java: error: unrecognized arguments: " + s[3]);
 			p.parse(s);		
 	}
@@ -70,8 +70,8 @@ public class ArgsParserTest {
 		p.addArg("length");
 		p.addArg("width");
 		p.addArg("height");
-		thrown.expect(TooFewArgsException.class);
-		thrown.expectMessage("Failed to supply the following arguments: length, width, height");
+		thrown.expect(RuntimeException.class);
+		thrown.expectMessage("usage: java VolumeCalculator length width height\nVolumeCalculator.java: error: the following arguments are required: length, width, height");
 		p.parse(s);
 	}
 }
