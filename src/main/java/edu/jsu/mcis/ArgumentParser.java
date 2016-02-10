@@ -2,47 +2,41 @@ package edu.jsu.mcis;
 import java.util.*;
 
 public class ArgumentParser{
-	private List<String> argNames;
-	private List<String> argValues;
+	private List<Argument> args;
 	
 	public ArgumentParser(){
-		argNames = new ArrayList<String>();
-		argValues = new ArrayList<String>();
+		args = new ArrayList<Argument>();
 	}
 	
 	public int getNumArguments(){
-		return argNames.size();
+		return args.size();
 	}
 	
 	public void addArg(String name)
 	{
-		argNames.add(name);
+		args.add(new Argument(name));
 	}
 	
 	public void parse(String[] cla){
-		if(cla.length > argNames.size()) {
-			throw new TooManyArgsException("usage: java VolumeCalculator length width height\nVolumeCalculator.java: error: unrecognized arguments: " + cla[cla.length - 1]);
+		if(cla.length > args.size()) {
+			throw new RuntimeException("usage: java VolumeCalculator length width height"+"\n"+"VolumeCalculator.java: error: unrecognized arguments: " + cla[cla.length - 1]);
 		}
-		//else if(cla.length < argNames.size() && cla.length == 2) throw new TooFewArgsException("Failed to supply the following arguments: height");
-		//else if(cla.length < argNames.size() && cla.length == 1) throw new TooFewArgsException("Failed to supply the following arguments: width, height");
-		//else if(cla.length < argNames.size() && cla.length == 0) throw new TooFewArgsException("Failed to supply the following arguments: length, width, height");
 		else{
-			for(int i = 0; i < cla.length; i++)
-			{
-				argValues.add(cla[i]);
+			if(cla.length == args.size()){
+				for(int i = 0; i < cla.length; i++){
+					args.get(i).setValue(cla[i]);
+				}
 			}
 		}
 	}
 	
 	public String getArg(String unit){
-		String value = "";
-		int position;
-		if(argNames.contains(unit))
-		{
-			position = argNames.indexOf(unit);
-			value = argValues.get(position);
+		Argument a = new Argument(unit);
+		if(args.contains(a)){
+			return args.get(args.indexOf(a)).getValue();
 		}
-		return value;
+		else 
+			return "";
 	}
 	
 }
