@@ -26,17 +26,12 @@ public class ArgParserKeywords{
 		parser.addArg("length");
 		parser.addArg("width");
 		parser.addArg("height");
-		try {
-			parser.parse(args);
-			int l = Integer.parseInt(parser.getArg("length"));
-			int w = Integer.parseInt(parser.getArg("width"));
-			int h = Integer.parseInt(parser.getArg("height"));
-			int v = l*w*h;
-			output = v + "";
-		}
-		catch(Exception e) {
-			output = e.toString().substring(35);
-		}
+		parser.parse(args);
+		int l = Integer.parseInt(parser.getArg("length"));
+		int w = Integer.parseInt(parser.getArg("width"));
+		int h = Integer.parseInt(parser.getArg("height"));
+		int v = l*w*h;
+		output = v + "";
 	}
 	
 	public String getLength(){
