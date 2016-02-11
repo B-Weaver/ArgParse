@@ -24,18 +24,7 @@ public class ArgumentParser{
 		else if(cla.length < args.size() && cla.length == 2) throw new RuntimeException("usage: java VolumeCalculator length width height\nVolumeCalculator.java: error: the following arguments are required: height");
 		else if(cla.length < args.size() && cla.length == 1) {
 			if(cla[0].equals("-h")){
-				String h = "";
-				h = "usage: java VolumeCalculator ";
-				for( int i = 0; i < args.size(); i++){
-					String n = args.get(args.indexOf(i)).getName();
-					h = h + n;
-				}
-				h = h + "\nCalculate the volume of a box.\npositional arguments:\n";
-				for(int j = 0; j < args.size(); j++){
-					String nd = args.get(args.indexOf(j)).getNameAndDescription();
-					h = h + "\t" + nd +"\n";
-				}
-				throw new TooManyArgsException(h);
+				throw new TooFewArgsException(getHelp());
 			}
 			else 
 				throw new RuntimeException("usage: java VolumeCalculator length width height\nVolumeCalculator.java: error: the following arguments are required: width, height");
@@ -59,6 +48,19 @@ public class ArgumentParser{
 			return "";
 	}
 	
-	
+	public String getHelp(){
+		String h = "";
+		h = "usage: java VolumeCalculator ";
+		for( int i = 0; i < args.size(); i++){
+			String n = args.get(args.indexOf(i)).getName();
+			h = h + n;
+		}
+		h = h + "\nCalculate the volume of a box.\npositional arguments:\n";
+		for(int j = 0; j < args.size(); j++){
+			String nd = args.get(args.indexOf(j)).getNameAndDescription();
+			h = h + "\t" + nd +"\n";
+		}
+		return h;
+	}
 	
 }
