@@ -19,7 +19,7 @@ public class ArgumentParser{
 	
 	public void parse(String[] cla){
 		if(cla.length > args.size()) {
-			throw new RuntimeException("usage: java VolumeCalculator length width height"+"\n"+"VolumeCalculator.java: error: unrecognized arguments: " + cla[cla.length - 1]);
+			throw new TooManyArgsException("usage: java VolumeCalculator length width height"+"\n"+"VolumeCalculator.java: error: unrecognized arguments: " + cla[cla.length - 1]);
 		}
 		else if(cla.length < args.size() && cla.length == 2) throw new RuntimeException("usage: java VolumeCalculator length width height\nVolumeCalculator.java: error: the following arguments are required: height");
 		else if(cla.length < args.size() && cla.length == 1) throw new RuntimeException("usage: java VolumeCalculator length width height\nVolumeCalculator.java: error: the following arguments are required: width, height");
