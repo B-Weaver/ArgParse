@@ -5,14 +5,15 @@ public class Argument{
 	
 	private String argName;
 	private String argValue;
+	private String argDescription;
 	
 	public Argument(String n){
 		argName = n;
 	}
 	
-	public Argument(String n, String v){
+	public Argument(String n, String d){
 		argName = n;
-		argValue = v;	
+		argDescription = d;	
 	}
 	
 	public void setValue(String v){
@@ -23,8 +24,16 @@ public class Argument{
 		return argName;
 	}
 	
+	public String getDescription(){
+		return argDescription;
+	}
+	
 	public String getValue(){
 		return argValue;
+	}
+	
+	public String getNameAndDescription(){
+		return argName + " " + argDescription;
 	}
 	
 	@Override

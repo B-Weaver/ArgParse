@@ -16,11 +16,10 @@ public class ArgumentTest{
 		
 	}
 	@Test
-	public void testCreateArgWithNameAndValue(){
+	public void testCreateArgWithNameAndDescription(){
 		
-		Argument s = new Argument("length", "17");
+		Argument s = new Argument("length", "the length of the box");
 		
-		assertEquals("length", s.getName());
-		assertEquals("17", s.getValue());
+		assertEquals("length the length of the box", s.getNameAndDescription());
 	}
 }
