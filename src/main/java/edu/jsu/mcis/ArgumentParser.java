@@ -74,11 +74,11 @@ public class ArgumentParser{
 		for(int j = 0; j < args.size(); j++){
 			if(j < args.size()-1){
 				String nd = args.get(j).getNameAndDescription();
-				h = h + "\t" + nd +"\n";
+				h = h + nd +"\n";
 			}
 			else{
 				String nd = args.get(j).getNameAndDescription();
-				h = h + "\t" + nd;
+				h = h + nd;
 			}
 		}
 		return h;

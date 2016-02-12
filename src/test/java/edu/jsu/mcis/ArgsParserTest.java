@@ -83,7 +83,7 @@ public class ArgsParserTest {
 		p.addArg("width", "the width of the box (float)");
 		p.addArg("height", "the height of the box (float)");
 		thrown.expect(TooFewArgsException.class);
-		thrown.expectMessage("usage: java VolumeCalculator length width height\nCalculate the volume of a box.\npositional arguments:\n	length the length of the box (float)\n	width the width of the box (float)\n	height the height of the box (float)");
+		thrown.expectMessage("usage: java VolumeCalculator length width height\nCalculate the volume of a box.\npositional arguments:\nlength the length of the box (float)\nwidth the width of the box (float)\nheight the height of the box (float)");
 		p.parse(s);
 	}
 }

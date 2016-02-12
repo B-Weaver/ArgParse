@@ -23,15 +23,20 @@ public class ArgParserKeywords{
 	}
 	
 	public void StartProgramWithArguments(String[] args){
-		parser.addArg("length");
-		parser.addArg("width");
-		parser.addArg("height");
-		parser.parse(args);
-		int l = Integer.parseInt(parser.getArg("length"));
-		int w = Integer.parseInt(parser.getArg("width"));
-		int h = Integer.parseInt(parser.getArg("height"));
-		int v = l*w*h;
-		output = v + "";
+		parser.addArg("length", "the length of the box (float)");
+		parser.addArg("width", "the width of the box (float)");
+		parser.addArg("height", "the height of the box (float)");
+		try {
+			parser.parse(args);
+			int l = Integer.parseInt(parser.getArg("length"));
+			int w = Integer.parseInt(parser.getArg("width"));
+			int h = Integer.parseInt(parser.getArg("height"));
+			int v = l*w*h;
+			output = v + "";
+		}
+		catch(Exception e) {
+			output = e.toString().substring(34);
+		}
 	}
 	
 	public String getLength(){
