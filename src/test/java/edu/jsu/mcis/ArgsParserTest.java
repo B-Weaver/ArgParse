@@ -79,11 +79,11 @@ public class ArgsParserTest {
 	public void testHelpMessage(){
 		String [] s = {"-h"};
 		ArgumentParser p = new ArgumentParser();
-		p.addArg("length");
-		p.addArg("width");
-		p.addArg("height");
+		p.addArg("length", "the length of the box (float)");
+		p.addArg("width", "the width of the box (float)");
+		p.addArg("height", "the height of the box (float)");
 		thrown.expect(TooFewArgsException.class);
-		thrown.expectMessage("usage: java VolumeCalculator length width height\nCalcuate the volume of a box.\npositional arguments:\n   length the length of the box (float)\n   width the width of the box(float)\n   height the height of the box(float)");
+		thrown.expectMessage("usage: java VolumeCalculator length width height\nCalculate the volume of a box.\npositional arguments:\n	length the length of the box (float)\n	width the width of the box (float)\n	height the height of the box (float)");
 		p.parse(s);
 	}
 }

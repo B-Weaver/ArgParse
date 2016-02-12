@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.jsu.mcis.ArgumentTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2016-02-11T20:58:47" hostname="LAPTOP-SIE2BR9A" time="0.006">
+<testsuite name="edu.jsu.mcis.ArgumentTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2016-02-12T03:31:01" hostname="LAPTOP-SIE2BR9A" time="0.002">
   <properties/>
-  <testcase name="testCreateArgWithNameAndDescription" classname="edu.jsu.mcis.ArgumentTest" time="0.002"/>
-  <testcase name="testCreateArgWithName" classname="edu.jsu.mcis.ArgumentTest" time="0.002"/>
+  <testcase name="testCreateArgWithNameAndDescription" classname="edu.jsu.mcis.ArgumentTest" time="0.0"/>
+  <testcase name="testCreateArgWithName" classname="edu.jsu.mcis.ArgumentTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
