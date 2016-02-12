@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.jsu.mcis.ArgsParserTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2016-02-12T03:42:46" hostname="LAPTOP-SIE2BR9A" time="0.055">
+<testsuite name="edu.jsu.mcis.ArgsParserTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2016-02-12T04:34:04" hostname="LAPTOP-SIE2BR9A" time="0.047">
   <properties/>
   <testcase name="testArgumentIsAddedCorrectly" classname="edu.jsu.mcis.ArgsParserTest" time="0.008"/>
   <testcase name="testCalculateVolume" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
   <testcase name="testArgumentValueIsParsedCorrectly" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
-  <testcase name="testTooManyArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.043"/>
+  <testcase name="testTooManyArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.036"/>
   <testcase name="testNewInstanceHasNoArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
   <testcase name="testHelpMessage" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
-  <testcase name="testTooFewArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
+  <testcase name="testTooFewArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
