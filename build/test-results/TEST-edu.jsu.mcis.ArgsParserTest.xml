@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.jsu.mcis.ArgsParserTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2016-02-12T04:49:04" hostname="LAPTOP-SIE2BR9A" time="0.047">
+<testsuite name="edu.jsu.mcis.ArgsParserTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2016-02-12T05:07:38" hostname="LAPTOP-SIE2BR9A" time="0.05">
   <properties/>
   <testcase name="testArgumentIsAddedCorrectly" classname="edu.jsu.mcis.ArgsParserTest" time="0.009"/>
   <testcase name="testCalculateVolume" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
   <testcase name="testArgumentValueIsParsedCorrectly" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
-  <testcase name="testTooManyArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.036"/>
+  <testcase name="testTooFewArgumentsForOneArgument" classname="edu.jsu.mcis.ArgsParserTest" time="0.037"/>
+  <testcase name="testTooFewArgumentsForTwoArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
+  <testcase name="testTooManyArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
   <testcase name="testNewInstanceHasNoArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
-  <testcase name="testHelpMessage" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
-  <testcase name="testTooFewArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
+  <testcase name="testTooFewArgumentsForZeroArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
+  <testcase name="testHelpMessage" classname="edu.jsu.mcis.ArgsParserTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

@@ -64,11 +64,38 @@ public class ArgsParserTest {
 	}
 
 	@Test
-	public void testTooFewArguments(){
+	public void testTooFewArgumentsForZeroArguments(){
 		String[] s = new String[0];
 		ArgumentParser p = new ArgumentParser();
+		p.addArg("length", "the length of the box (float)");
+		p.addArg("width", "the width of the box (float)");
+		p.addArg("height", "the height of the box (float)");
 		thrown.expect(TooFewArgsException.class);
 		thrown.expectMessage("usage: java VolumeCalculator length width height\nVolumeCalculator.java: error: the following arguments are required: length, width, height");
+		p.parse(s);
+	}
+	
+	@Test
+	public void testTooFewArgumentsForOneArgument(){
+		String[] s = {"7"};
+		ArgumentParser p = new ArgumentParser();
+		p.addArg("length", "the length of the box (float)");
+		p.addArg("width", "the width of the box (float)");
+		p.addArg("height", "the height of the box (float)");
+		thrown.expect(TooFewArgsException.class);
+		thrown.expectMessage("usage: java VolumeCalculator length width height\nVolumeCalculator.java: error: the following arguments are required: width, height");
+		p.parse(s);
+	}
+	
+	@Test
+	public void testTooFewArgumentsForTwoArguments(){
+		String[] s = {"7", "5"};
+		ArgumentParser p = new ArgumentParser();
+		p.addArg("length", "the length of the box (float)");
+		p.addArg("width", "the width of the box (float)");
+		p.addArg("height", "the height of the box (float)");
+		thrown.expect(TooFewArgsException.class);
+		thrown.expectMessage("usage: java VolumeCalculator length width height\nVolumeCalculator.java: error: the following arguments are required: height");
 		p.parse(s);
 	}
 	
