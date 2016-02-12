@@ -15,7 +15,7 @@ public class BoxVolumeCalculator{
 			System.out.println("The volume is: " + v);
 		}
 		catch(Exception e) {
-			System.out.println(e.toString().substring(34));
+			System.out.println(e.getMessage());
 		}
     }
 }

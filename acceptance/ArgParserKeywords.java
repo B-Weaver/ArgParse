@@ -18,7 +18,7 @@ public class ArgParserKeywords{
 			output = v + "";
 		}
 		catch(Exception e) {
-			output = e.toString().substring(35);
+			output = e.getMessage();
 		}
 	}
 	
@@ -35,7 +35,7 @@ public class ArgParserKeywords{
 			output = v + "";
 		}
 		catch(Exception e) {
-			output = e.toString().substring(31);
+			output = e.getMessage();
 		}
 	}
 	
