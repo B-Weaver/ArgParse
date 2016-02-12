@@ -9,6 +9,7 @@ public class Argument{
 	
 	public Argument(String n){
 		argName = n;
+		argDescription = "";
 	}
 	
 	public Argument(String n, String d){
@@ -22,6 +23,10 @@ public class Argument{
 	
 	public String getName(){
 		return argName;
+	}
+	
+	public void setDescription(String d){
+		argDescription = d;
 	}
 	
 	public String getDescription(){

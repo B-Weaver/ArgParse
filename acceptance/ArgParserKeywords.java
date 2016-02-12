@@ -35,7 +35,7 @@ public class ArgParserKeywords{
 			output = v + "";
 		}
 		catch(Exception e) {
-			output = e.toString().substring(34);
+			output = e.toString().substring(31);
 		}
 	}
 	

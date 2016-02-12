@@ -58,19 +58,16 @@ public class ArgsParserTest {
 			p.addArg("length");
 			p.addArg("width");
 			p.addArg("height");
-			thrown.expect(RuntimeException.class);
+			thrown.expect(TooManyArgsException.class);
 			thrown.expectMessage("usage: java VolumeCalculator length width height"+"\n"+"VolumeCalculator.java: error: unrecognized arguments: " + s[3]);
 			p.parse(s);		
 	}
 
 	@Test
 	public void testTooFewArguments(){
-		String[] s = {};
+		String[] s = new String[0];
 		ArgumentParser p = new ArgumentParser();
-		p.addArg("length");
-		p.addArg("width");
-		p.addArg("height");
-		thrown.expect(RuntimeException.class);
+		thrown.expect(TooFewArgsException.class);
 		thrown.expectMessage("usage: java VolumeCalculator length width height\nVolumeCalculator.java: error: the following arguments are required: length, width, height");
 		p.parse(s);
 	}
@@ -82,7 +79,7 @@ public class ArgsParserTest {
 		p.addArg("length", "the length of the box (float)");
 		p.addArg("width", "the width of the box (float)");
 		p.addArg("height", "the height of the box (float)");
-		thrown.expect(TooFewArgsException.class);
+		thrown.expect(GetHelpException.class);
 		thrown.expectMessage("usage: java VolumeCalculator length width height\nCalculate the volume of a box.\npositional arguments:\nlength the length of the box (float)\nwidth the width of the box (float)\nheight the height of the box (float)");
 		p.parse(s);
 	}
