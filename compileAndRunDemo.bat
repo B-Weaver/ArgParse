@@ -1,18 +1,24 @@
 cd demos
 
-javac -cp .;..\build\libs\ArgParse-1.0.jar BoxVolumeCalculator.java
+javac -cp .;..\build\libs\ArgParse-1.0.jar VolumeCalculator.java
 pause
 cls
 
-java -cp .;..\build\libs\ArgParse-1.0.jar BoxVolumeCalculator 7 5 2
+java -cp .;..\build\libs\ArgParse-1.0.jar VolumeCalculator 7
 pause
 cls
 
-java -cp .;..\build\libs\ArgParse-1.0.jar BoxVolumeCalculator 7 5 2 89
+java -cp .;..\build\libs\ArgParse-1.0.jar VolumeCalculator 7 5
 pause
 cls
 
-java -cp .;..\build\libs\ArgParse-1.0.jar BoxVolumeCalculator -h
+java -cp .;..\build\libs\ArgParse-1.0.jar VolumeCalculator 7 5 2
+pause
+cls
 
+java -cp .;..\build\libs\ArgParse-1.0.jar VolumeCalculator 7 5 2 89
+pause
+cls
 
+java -cp .;..\build\libs\ArgParse-1.0.jar VolumeCalculator -h
 pause

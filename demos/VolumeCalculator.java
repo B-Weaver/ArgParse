@@ -1,6 +1,6 @@
 import edu.jsu.mcis.*;
 
-public class BoxVolumeCalculator{
+public class VolumeCalculator{
 	public static void main(String[] args) {
 		ArgumentParser parser = new ArgumentParser();
 		parser.addArg("length","the length of the box");
