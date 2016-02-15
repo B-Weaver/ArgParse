@@ -1,7 +1,7 @@
 import edu.jsu.mcis.*;
 
 public class ArgParserKeywords{
-	private ArgumentParser parser = new ArgumentParser();
+	private ArgumentParser parser = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
 	private ArgumentParser parser2 = new ArgumentParser();
 	private String output;
 					

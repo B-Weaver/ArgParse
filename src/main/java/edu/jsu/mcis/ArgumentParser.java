@@ -107,4 +107,21 @@ public class ArgumentParser{
 		return h;
 	}
 	
+	public String invalidValue(){
+		String h = "";
+		h = "usage: java " + programName + " ";
+		for( int i = 0; i < args.size(); i++){
+			if(i < args.size()-1){
+				String n = args.get(i).getName();
+				h = h + n + " ";
+			}
+			else{
+				String n = args.get(i).getName();
+				h = h + n;
+			}
+		}
+		h = h + "\n";
+		return h;
+	}
+	
 }
