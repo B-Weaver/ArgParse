@@ -38,7 +38,7 @@ public class ArgumentParser{
 			}
 			
 			else if(cla.length > args.size()) {
-				throw new TooManyArgsException("usage: java " + programName + getAllArgNames() +"\nVolumeCalculator.java: error: unrecognized arguments: " + cla[cla.length - 1]);
+				throw new TooManyArgsException("usage: java " + programName + getAllArgNames() +"\n" + programName + ".java: error: unrecognized arguments: " + cla[cla.length - 1]);
 			}
 			else if(cla.length == args.size()){
 				for(int i = 0; i < cla.length; i++){
@@ -46,15 +46,37 @@ public class ArgumentParser{
 				}
 			}
 			else if(cla.length < args.size() && cla.length == 2){
-				throw new TooFewArgsException("usage: java " + programName + getAllArgNames() +"\nVolumeCalculator.java: error: the following arguments are required: height");
+				String message = "usage: java " + programName + getAllArgNames() +"\n" + programName + ".java: error: the following arguments are required: ";
+				for(int i = 2; i < args.size(); i++){
+					message = message + args.get(i).getName();
+				}
+				throw new TooFewArgsException(message);
 			}
 			else if(cla.length < args.size() && cla.length == 1) {
-				throw new TooFewArgsException("usage: java " + programName + getAllArgNames() +"\nVolumeCalculator.java: error: the following arguments are required: width, height");
+				String[] newArgs = new String[3];
+				String message = "usage: java " + programName + getAllArgNames() +"\n" + programName + ".java: error: the following arguments are required: ";
+				for(int i = 1; i < args.size(); i++){
+					newArgs[i] = args.get(i).getName();
+					message = message + newArgs[i];
+					if(i < 2){
+						message = message + ", ";
+					}
+				}
+				throw new TooFewArgsException(message);
 			}
 		}
 		
 		else if(cla.length == 0){
-			throw new TooFewArgsException("usage: java " + programName + getAllArgNames() +"\nVolumeCalculator.java: error: the following arguments are required: length, width, height");
+			String[] newArgs = new String[3];
+			String message = "usage: java " + programName + getAllArgNames() +"\n" + programName + ".java: error: the following arguments are required: ";
+			for(int i = 0; i < args.size(); i++){
+				newArgs[i] = args.get(i).getName();
+				message = message + newArgs[i];
+				if(i < 2){
+					message = message + ", ";
+				}
+			}
+			throw new TooFewArgsException(message);
 		}
 	}
 	
@@ -120,7 +142,7 @@ public class ArgumentParser{
 				h = h + n;
 			}
 		}
-		h = h + "\n";
+		h = h + "\n" +programName + ".java: error: invalid ";
 		return h;
 	}
 	
