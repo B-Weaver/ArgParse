@@ -58,7 +58,7 @@ public class ArgParserKeywords{
 	public void StartAbsurdProgramWithArguments(String[] args){
 		parser2.addArg("Pet", "Animal", "string");
 		parser2.addArg("Number", "random", "int");
-		parser2.addArg("Rainy", "weahter", "string");
+		parser2.addArg("Rainy", "weahter", "boolean");
 		parser2.addArg("Bathrooms", "number of bathrooms", "float");
 		parser2.parse(args);
 	}
