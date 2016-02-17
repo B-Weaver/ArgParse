@@ -6,6 +6,7 @@ public class Argument{
 	private String argName;
 	private String argValue;
 	private String argDescription;
+	private enum type{String, int, float, boolean};
 	
 	public Argument(String n){
 		argName = n;
@@ -15,6 +16,11 @@ public class Argument{
 	public Argument(String n, String d){
 		argName = n;
 		argDescription = d;	
+	}
+	
+	public Argument(String n, String d, type e){
+		argName = n;
+		argDescription = d;
 	}
 	
 	public void setValue(String v){
