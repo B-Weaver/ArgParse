@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
+<testsuite name="edu.jsu.mcis.ArgsParserTest" tests="10" skipped="0" failures="1" errors="0" timestamp="2016-02-16T09:12:06" hostname="LAPTOP-SIE2BR9A" time="0.072">
+  <properties/>
+  <testcase name="testArgumentIsAddedCorrectly" classname="edu.jsu.mcis.ArgsParserTest" time="0.01"/>
+  <testcase name="testCalculateVolume" classname="edu.jsu.mcis.ArgsParserTest" time="0.001"/>
+  <testcase name="testArgumentValueIsParsedCorrectly" classname="edu.jsu.mcis.ArgsParserTest" time="0.001"/>
+  <testcase name="testTooFewArgumentsForOneArgument" classname="edu.jsu.mcis.ArgsParserTest" time="0.031"/>
+  <testcase name="testTooFewArgumentsForTwoArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
+  <testcase name="testTooManyArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.001"/>
+  <testcase name="testNewInstanceHasNoArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.001"/>
+  <testcase name="testInvalidValueMessage" classname="edu.jsu.mcis.ArgsParserTest" time="0.014">
+=======
 <testsuite name="edu.jsu.mcis.ArgsParserTest" tests="10" skipped="0" failures="1" errors="0" timestamp="2016-02-16T20:54:06" hostname="Owner-PC" time="0.097">
   <properties/>
   <testcase name="testArgumentIsAddedCorrectly" classname="edu.jsu.mcis.ArgsParserTest" time="0.038"/>
@@ -9,6 +21,7 @@
   <testcase name="testTooManyArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.001"/>
   <testcase name="testNewInstanceHasNoArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.001"/>
   <testcase name="testInvalidValueMessage" classname="edu.jsu.mcis.ArgsParserTest" time="0.016">
+>>>>>>> 9cb636bb28d2d487140cd9dc3ae5b8e4e41f6016
     <failure message="java.lang.AssertionError: Expected test to throw (an instance of edu.jsu.mcis.InvalidValueException and exception with message a string containing &quot;usage: java VolumeCalculator length width height\nVolumeCalculator.java: error: argument width: invalid float value: something&quot;)" type="java.lang.AssertionError">java.lang.AssertionError: Expected test to throw (an instance of edu.jsu.mcis.InvalidValueException and exception with message a string containing &quot;usage: java VolumeCalculator length width height\nVolumeCalculator.java: error: argument width: invalid float value: something&quot;)
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.rules.ExpectedException.failDueToMissingException(ExpectedException.java:263)
@@ -53,7 +66,7 @@
 </failure>
   </testcase>
   <testcase name="testTooFewArgumentsForZeroArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.001"/>
-  <testcase name="testHelpMessage" classname="edu.jsu.mcis.ArgsParserTest" time="0.001"/>
+  <testcase name="testHelpMessage" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
