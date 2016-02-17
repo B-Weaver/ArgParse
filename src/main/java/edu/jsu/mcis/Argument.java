@@ -6,7 +6,8 @@ public class Argument{
 	private String argName;
 	private String argValue;
 	private String argDescription;
-	private enum type{String, int, float, boolean};
+	public enum Type{ STRING, INT, FLOAT, BOOLEAN };
+	private Type type;
 	
 	public Argument(String n){
 		argName = n;
@@ -18,9 +19,13 @@ public class Argument{
 		argDescription = d;	
 	}
 	
-	public Argument(String n, String d, type e){
+	public Argument(String n, String d, String t){
 		argName = n;
 		argDescription = d;
+		if(t.equals("STRING") || t.equals("string")) type = Type.STRING;
+		else if(t.equals("int") || t.equals("INT")) type = Type.INT;
+		else if(t.equals("float") || t.equals("FLOAT")) type = Type.FLOAT;
+		else if (t.equals("boolean") || t.equals ("BOOLEAN")) type = Type.BOOLEAN;
 	}
 	
 	public void setValue(String v){
@@ -46,6 +51,11 @@ public class Argument{
 	public String getNameAndDescription(){
 		return argName + " " + argDescription;
 	}
+	
+	public Type getArgType(){
+		return type;
+	}
+	
 	
 	@Override
 	public boolean equals(Object o){
