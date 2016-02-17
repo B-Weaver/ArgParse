@@ -5,6 +5,7 @@ public class ArgumentParser{
 	private List<Argument> args;
 	protected String programName;
 	protected String programPurpose;
+	protected String datatype;
 	
 	public ArgumentParser(){
 		args = new ArrayList<Argument>();
@@ -45,10 +46,10 @@ public class ArgumentParser{
 					if(args.get(i).getArgType() == Argument.Type.FLOAT){
 						try{
 							args.get(i).setValue(cla[i]);
-							float num = Float.parseFloat(args.get(i).getValue()-0.001f);
+							float num = Float.parseFloat(args.get(i).getValue());
 						}
-						catch(RunTimeException e){
-								throw new InvalidValueException("usage: java " + p.programName + getAllArgNames() + "\n" + p.programName +".java: error: argument width: invalid float value: something")
+						catch(RuntimeException e){
+								throw new InvalidValueException("usage: java " + programName + getAllArgNames() + "\n" + programName +".java: error: argument width: invalid float value: something");
 						}
 							
 					}
@@ -57,8 +58,8 @@ public class ArgumentParser{
 							args.get(i).setValue(cla[i]);
 							int num = Integer.parseInt(args.get(i).getValue());
 						}
-						catch(RunTimeException e){
-								throw new InvalidValueException("usage: java " + p.programName + getAllArgNames() + "\n" + p.programName +".java: error: argument width: invalid float value: something")
+						catch(RuntimeException e){
+								throw new InvalidValueException("usage: java " + programName + getAllArgNames() + "\n" + programName +".java: error: argument width: invalid float value: something");
 						}
 					}
 				}
