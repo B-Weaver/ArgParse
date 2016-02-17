@@ -40,4 +40,9 @@ public class ArgumentTest{
 		assertEquals("length the length of the box", s.getNameAndDescription());
 	}
 	
+	@Test
+	public void testGetArgType(){
+		Argument s = new Argument("length", "the length of the box", "FLOAT");
+		assertEquals(Argument.Type.FLOAT, s.getArgType());
+	}
 }
