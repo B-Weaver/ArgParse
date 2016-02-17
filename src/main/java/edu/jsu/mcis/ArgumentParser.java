@@ -31,6 +31,10 @@ public class ArgumentParser{
 		args.add(new Argument(name, description));
 	}
 	
+	public void addArg(String name, String description, String type){
+		args.add(new Argument(name, description, type));
+	}
+	
 	public void parse(String[] cla){
 		if(cla.length > 0){
 			if(cla[0].equals("-h")){
@@ -45,24 +49,26 @@ public class ArgumentParser{
 					if(args.get(i).getArgType() == Argument.Type.FLOAT){
 						try{
 							args.get(i).setValue(cla[i]);
-							float num = Float.parseFloat(args.get(i).getValue()-0.001f);
+							float num = Float.parseFloat(args.get(i).getValue());
 						}
-						catch(RunTimeException e){
-								throw new InvalidValueException("usage: java " + p.programName + getAllArgNames() + "\n" + p.programName +".java: error: argument width: invalid float value: something")
+						catch(RuntimeException e){
+								throw new InvalidValueException("usage: java " + programName + getAllArgNames() + "\n" + programName +".java: error: argument width: invalid float value: something");
 						}
 							
 					}
+					
 					else if(args.get(i).getArgType() == Argument.Type.INT){
 						try{
 							args.get(i).setValue(cla[i]);
 							int num = Integer.parseInt(args.get(i).getValue());
 						}
-						catch(RunTimeException e){
-								throw new InvalidValueException("usage: java " + p.programName + getAllArgNames() + "\n" + p.programName +".java: error: argument width: invalid float value: something")
+						catch(RuntimeException e){
+								throw new InvalidValueException("usage: java " + programName + getAllArgNames() + "\n" + programName +".java: error: argument width: invalid int value: something");
 						}
 					}
 				}
 			}
+			
 			else if(cla.length < args.size() && cla.length == 2){
 				String message = "usage: java " + programName + getAllArgNames() +"\n" + programName + ".java: error: the following arguments are required: ";
 				for(int i = 2; i < args.size(); i++){
@@ -70,6 +76,7 @@ public class ArgumentParser{
 				}
 				throw new TooFewArgsException(message);
 			}
+			
 			else if(cla.length < args.size() && cla.length == 1) {
 				String[] newArgs = new String[3];
 				String message = "usage: java " + programName + getAllArgNames() +"\n" + programName + ".java: error: the following arguments are required: ";
@@ -122,18 +129,10 @@ public class ArgumentParser{
 	
 	public String getHelp(){
 		String h = "";
-		h = "usage: java " + programName + " ";
-		for( int i = 0; i < args.size(); i++){
-			if(i < args.size()-1){
-				String n = args.get(i).getName();
-				h = h + n + " ";
-			}
-			else{
-				String n = args.get(i).getName();
-				h = h + n;
-			}
-		}
+		h = "usage: java " + programName + getAllArgNames();
+		
 		h = h + "\n" + programPurpose + "\npositional arguments:\n";
+		
 		for(int j = 0; j < args.size(); j++){
 			if(j < args.size()-1){
 				String nd = args.get(j).getNameAndDescription();
