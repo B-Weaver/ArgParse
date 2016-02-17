@@ -52,7 +52,7 @@ public class ArgumentParser{
 							float num = Float.parseFloat(args.get(i).getValue());
 						}
 						catch(RuntimeException e){
-								throw new InvalidValueException("usage: java " + programName + getAllArgNames() + "\n" + programName +".java: error: argument width: invalid float value: something");
+								throw new InvalidValueException(invalidValueMessage() + args.get(i).getName() + ": invalid float value: " + args.get(i).getValue());
 						}
 							
 					}
@@ -63,7 +63,15 @@ public class ArgumentParser{
 							int num = Integer.parseInt(args.get(i).getValue());
 						}
 						catch(RuntimeException e){
-								throw new InvalidValueException("usage: java " + programName + getAllArgNames() + "\n" + programName +".java: error: argument width: invalid int value: something");
+								throw new InvalidValueException(invalidValueMessage() + args.get(i).getName() + ": invalid int value: " + args.get(i).getValue());
+						}
+					}
+					else if(args.get(i).getArgType() == Argument.Type.STRING){
+						try{
+							args.get(i).setValue(cla[i]);
+						}
+						catch(RuntimeException e){
+								throw new InvalidValueException(invalidValueMessage() + args.get(i).getName() + ": invalid String value: " + args.get(i).getValue());
 						}
 					}
 				}
@@ -146,20 +154,11 @@ public class ArgumentParser{
 		return h;
 	}
 	
-	public String invalidValue(){
+	public String invalidValueMessage(){
 		String h = "";
-		h = "usage: java " + programName + " ";
-		for( int i = 0; i < args.size(); i++){
-			if(i < args.size()-1){
-				String n = args.get(i).getName();
-				h = h + n + " ";
-			}
-			else{
-				String n = args.get(i).getName();
-				h = h + n;
-			}
-		}
-		h = h + "\n" +programName + ".java: error: invalid ";
+		h = "usage: java " + programName + getAllArgNames();
+		
+		h = h + "\n" +programName + ".java: error: argument ";
 		return h;
 	}
 	
