@@ -42,7 +42,25 @@ public class ArgumentParser{
 			}
 			else if(cla.length == args.size()){
 				for(int i = 0; i < cla.length; i++){
-					args.get(i).setValue(cla[i]);
+					if(args.get(i).getArgType() == Argument.Type.FLOAT){
+						try{
+							args.get(i).setValue(cla[i]);
+							float num = Float.parseFloat(args.get(i).getValue()-0.001f);
+						}
+						catch(RunTimeException e){
+								throw new InvalidValueException("usage: java " + p.programName + getAllArgNames() + "\n" + p.programName +".java: error: argument width: invalid float value: something")
+						}
+							
+					}
+					else if(args.get(i).getArgType() == Argument.Type.INT){
+						try{
+							args.get(i).setValue(cla[i]);
+							int num = Integer.parseInt(args.get(i).getValue());
+						}
+						catch(RunTimeException e){
+								throw new InvalidValueException("usage: java " + p.programName + getAllArgNames() + "\n" + p.programName +".java: error: argument width: invalid float value: something")
+						}
+					}
 				}
 			}
 			else if(cla.length < args.size() && cla.length == 2){
