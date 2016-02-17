@@ -6,9 +6,9 @@ public class ArgParserKeywords{
 	private String output;
 					
 	public void StartVolumeCalculatorWithArguments(String[] args){
-		parser.addArg("length");
-		parser.addArg("width");
-		parser.addArg("height");
+		parser.addArg("length", "the length of the box (float)", "float");
+		parser.addArg("width", "the width of the box (float)", "float");
+		parser.addArg("height", "the height of the box (float)", "float");
 		try {
 			parser.parse(args);
 			int l = Integer.parseInt(parser.getArg("length"));
@@ -23,9 +23,9 @@ public class ArgParserKeywords{
 	}
 	
 	public void StartProgramWithArguments(String[] args){
-		parser.addArg("length", "the length of the box (float)");
-		parser.addArg("width", "the width of the box (float)");
-		parser.addArg("height", "the height of the box (float)");
+		parser.addArg("length", "the length of the box (float)", "float");
+		parser.addArg("width", "the width of the box (float)", "float");
+		parser.addArg("height", "the height of the box (float)", "float");
 		try {
 			parser.parse(args);
 			int l = Integer.parseInt(parser.getArg("length"));
@@ -56,10 +56,10 @@ public class ArgParserKeywords{
 	}
 	
 	public void StartAbsurdProgramWithArguments(String[] args){
-		parser2.addArg("Pet");
-		parser2.addArg("Number");
-		parser2.addArg("Rainy");
-		parser2.addArg("Bathrooms");
+		parser2.addArg("Pet", "Animal", "string");
+		parser2.addArg("Number", "random", "int");
+		parser2.addArg("Rainy", "weahter", "string");
+		parser2.addArg("Bathrooms", "number of bathrooms", "float");
 		parser2.parse(args);
 	}
 	
