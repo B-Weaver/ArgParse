@@ -91,9 +91,9 @@ public class ArgsParserTest {
 	public void testTooFewArgumentsForTwoArguments(){
 		String[] s = {"7", "5"};
 		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
-		p.addArg("length", "the length of the box", "float");
-		p.addArg("width", "the width of the box", "float");
-		p.addArg("height", "the height of the box", "float");
+		p.addArg("length", "the length of the box");
+		p.addArg("width", "the width of the box");
+		p.addArg("height", "the height of the box");
 		thrown.expect(TooFewArgsException.class);
 		thrown.expectMessage("usage: java "+ p.programName + " length width height\nVolumeCalculator.java: error: the following arguments are required: height");
 		p.parse(s);
@@ -103,9 +103,9 @@ public class ArgsParserTest {
 	public void testHelpMessage(){
 		String [] s = {"-h"};
 		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
-		p.addArg("length", "the length of the box (float)");
-		p.addArg("width", "the width of the box (float)");
-		p.addArg("height", "the height of the box (float)");
+		p.addArg("length", "the length of the box (float)", "float");
+		p.addArg("width", "the width of the box (float)", "string");
+		p.addArg("height", "the height of the box (float)", "int");
 		thrown.expect(GetHelpException.class);
 		thrown.expectMessage("usage: java "+ p.programName + " length width height\n" + p.programPurpose + "\npositional arguments:\nlength the length of the box (float)\nwidth the width of the box (float)\nheight the height of the box (float)");
 		p.parse(s);
@@ -115,9 +115,9 @@ public class ArgsParserTest {
 	public void testInvalidValueMessageFloat(){
 		String[] s = {"7", "something", "2"};
 		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
-		p.addArg("length", "the length of the box", "float");
+		p.addArg("length", "the length of the box", "string");
 		p.addArg("width", "the width of the box", "float");
-		p.addArg("height", "the height of the box", "float");
+		p.addArg("height", "the height of the box", "int");
 		thrown.expect(InvalidValueException.class);
 		thrown.expectMessage("usage: java " + p.programName + p.getAllArgNames() + "\n" + p.programName +".java: error: argument width: invalid float value: something");
 		p.parse(s);
@@ -129,7 +129,7 @@ public class ArgsParserTest {
 		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
 		p.addArg("length", "the length of the box", "int");
 		p.addArg("width", "the width of the box", "int");
-		p.addArg("height", "the height of the box", "int");
+		p.addArg("height", "the height of the box", "float");
 		thrown.expect(InvalidValueException.class);
 		thrown.expectMessage("usage: java " + p.programName + p.getAllArgNames() + "\n" + p.programName +".java: error: argument width: invalid int value: something");
 		p.parse(s);

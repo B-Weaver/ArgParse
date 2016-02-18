@@ -6,7 +6,7 @@ public class Argument{
 	private String argName;
 	private String argValue;
 	private String argDescription;
-	public enum Type{ STRING, INT, FLOAT, BOOLEAN };
+	public enum Type{ STRING, INT, FLOAT };
 	private Type type;
 	
 	public Argument(String n){
@@ -25,7 +25,6 @@ public class Argument{
 		if(t.equals("STRING") || t.equals("string")) type = Type.STRING;
 		else if(t.equals("int") || t.equals("INT")) type = Type.INT;
 		else if(t.equals("float") || t.equals("FLOAT")) type = Type.FLOAT;
-		else if (t.equals("boolean") || t.equals ("BOOLEAN")) type = Type.BOOLEAN;
 	}
 	
 	public void setValue(String v){
