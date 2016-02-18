@@ -67,6 +67,14 @@ public class ArgumentParser{
 							throw new InvalidValueException(invalidValueMessage() + args.get(i).getName() + ": invalid int value: " + args.get(i).getValue());
 						}
 					}
+					else if(args.get(i).getArgType() == Argument.Type.BOOLEAN){
+						try{
+							args.get(i).setValue(cla[i]);
+						}
+						catch(RuntimeException e){
+							throw new InvalidValueException(invalidValueMessage() + args.get(i).getName() + ": invalid boolean value: " + args.get(i).getValue());
+						}
+					}
 					else{
 						args.get(i).setValue(cla[i]);					
 					}					
