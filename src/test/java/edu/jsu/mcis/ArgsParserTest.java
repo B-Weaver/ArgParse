@@ -112,7 +112,7 @@ public class ArgsParserTest {
 	}
 	
 	@Test
-	public void testInvalidValueMessage(){
+	public void testInvalidValueMessageFloat(){
 		String[] s = {"7", "something", "2"};
 		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
 		p.addArg("length", "the length of the box", "float");
@@ -120,6 +120,18 @@ public class ArgsParserTest {
 		p.addArg("height", "the height of the box", "float");
 		thrown.expect(InvalidValueException.class);
 		thrown.expectMessage("usage: java " + p.programName + p.getAllArgNames() + "\n" + p.programName +".java: error: argument width: invalid float value: something");
+		p.parse(s);
+	}
+	
+	@Test
+	public void testInvalidValueMessageInt(){
+		String[] s = {"7", "something", "2"};
+		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
+		p.addArg("length", "the length of the box", "int");
+		p.addArg("width", "the width of the box", "int");
+		p.addArg("height", "the height of the box", "int");
+		thrown.expect(InvalidValueException.class);
+		thrown.expectMessage("usage: java " + p.programName + p.getAllArgNames() + "\n" + p.programName +".java: error: argument width: invalid int value: something");
 		p.parse(s);
 	}
 }
