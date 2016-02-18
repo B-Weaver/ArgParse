@@ -70,6 +70,7 @@ public class ArgumentParser{
 					else if(args.get(i).getArgType() == Argument.Type.BOOLEAN){
 						try{
 							args.get(i).setValue(cla[i]);
+							boolean bool = Boolean.parseBoolean(args.get(i).getValue());
 						}
 						catch(RuntimeException e){
 							throw new InvalidValueException(invalidValueMessage() + args.get(i).getName() + ": invalid boolean value: " + args.get(i).getValue());
