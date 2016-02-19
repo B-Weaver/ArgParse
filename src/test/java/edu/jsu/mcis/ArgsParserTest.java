@@ -146,4 +146,15 @@ public class ArgsParserTest {
 		thrown.expectMessage("usage: java " + p.programName + p.getAllArgNames() + "\n" + p.programName +".java: error: argument height: invalid boolean value: 2");
 		p.parse(s);
 	}
+	
+	@Test
+	public void testArgumentNotFoundException(){
+		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
+		p.addArg("length", "the length of the box", "boolean");
+		p.addArg("width", "the width of the box", "boolean");
+		p.addArg("height", "the height of the box", "boolean");
+		thrown.expect(ArgumentNotFoundException.class);
+		thrown.expectMessage("usage: java " + p.programName + p.getAllArgNames() + "\n" + p.programName +".java: error: argument height: invalid boolean value: 2");
+		p.getArg("depth");
+	}
 }
