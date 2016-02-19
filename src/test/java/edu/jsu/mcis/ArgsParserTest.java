@@ -48,6 +48,23 @@ public class ArgsParserTest {
 		assertEquals(70.0, length * width * height, 0.00001);
 	}
 	
+	@Test
+	public void testsizeEquals(){
+		String[] s = {"7", "5", "2"};
+		ArgumentParser p = new ArgumentParser();
+		p.addArg("length", "the length of the box", "float");
+		p.addArg("width", "the width of the box", "float");
+		p.addArg("height", "the height of the box", "float");
+		p.parse(s);
+		String len = p.getArg("length");
+		String wid = p.getArg("width");
+		String hgt = p.getArg("height");
+		float length = Float.parseFloat(len);
+		float width = Float.parseFloat(wid);
+		float height = Float.parseFloat(hgt);
+		assertTrue(s.length == p.getNumArguments());
+	}
+	
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
 	
@@ -155,7 +172,7 @@ public class ArgsParserTest {
 		p.addArg("width", "the width of the box", "boolean");
 		p.addArg("height", "the height of the box", "boolean");
 		thrown.expect(ArgumentNotFoundException.class);
-		thrown.expectMessage("usage: java " + p.programName + p.getAllArgNames() + "\n" + p.programName +".java: error: argument height: invalid boolean value: 2");
+		thrown.expectMessage("The argument depth was not found");
 		p.getArg("depth");
 	}
 }

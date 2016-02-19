@@ -25,9 +25,13 @@ public class Argument{
 		argName = n;
 		argDescription = d;
 		if(t.equals("STRING") || t.equals("string")) type = Type.STRING;
+		else if(t.equals("boolean") || t.equals("BOOLEAN")) type = Type.BOOLEAN;
 		else if(t.equals("int") || t.equals("INT")) type = Type.INT;
 		else if(t.equals("float") || t.equals("FLOAT")) type = Type.FLOAT;
-		else if(t.equals("boolean") || t.equals("BOOLEAN")) type = Type.BOOLEAN;
+		else{
+			throw new InvalidArgumentTypeException(t + " is not a valid argument type.");
+		}
+		
 	}
 	
 	public void setValue(String v){

@@ -37,83 +37,61 @@ public class ArgumentParser{
 	}
 	
 	public void parse(String[] cla){
-		if(cla.length > 0){
-			if(cla[0].equals("-h")){
+		if(cla.length < args.size()){
+			if(cla.length > 0 && cla[0].equals("-h")){
 				throw new GetHelpException(getHelp());
 			}
-			
-			else if(cla.length > args.size()) {
-				throw new TooManyArgsException("usage: java " + programName + getAllArgNames() +"\n" + programName + ".java: error: unrecognized arguments: " + cla[cla.length - 1]);
-			}
-			else if(cla.length == args.size()){
-				for(int i = 0; i < cla.length; i++){
-					if(args.get(i).getArgType() == Argument.Type.FLOAT){
-						try{
-							args.get(i).setValue(cla[i]);
-							float num = Float.parseFloat(args.get(i).getValue());
-						}
-						catch(RuntimeException e){
-								throw new InvalidValueException(invalidValueMessage() + args.get(i).getName() + ": invalid float value: " + args.get(i).getValue());
-						}
-							
-					}
-					
-					else if(args.get(i).getArgType() == Argument.Type.INT){
-						try{
-							args.get(i).setValue(cla[i]);
-							int num = Integer.parseInt(args.get(i).getValue());
-						}
-						catch(RuntimeException e){
-							throw new InvalidValueException(invalidValueMessage() + args.get(i).getName() + ": invalid int value: " + args.get(i).getValue());
-						}
-					}
-					else if(args.get(i).getArgType() == Argument.Type.BOOLEAN){
-						if(cla[i].equals("true") || cla[i].equals("false")){
-							args.get(i).setValue(cla[i]);
-						}
-						else{
-							throw new InvalidValueException(invalidValueMessage() + args.get(i).getName() + ": invalid boolean value: " + cla[i]);
-						}
+			else{
+				String message = "usage: java " + programName + getAllArgNames() +"\n" + programName + ".java: error: the following arguments are required:";
+				for(int i = cla.length; i < args.size(); i++){
+					if(i < args.size()-1){
+						message = message + " " + args.get(i).getName() + ",";
 					}
 					else{
-						args.get(i).setValue(cla[i]);					
-					}					
-				}
-			}
-			
-			else if(cla.length < args.size() && cla.length == 2){
-				String message = "usage: java " + programName + getAllArgNames() +"\n" + programName + ".java: error: the following arguments are required: ";
-				for(int i = 2; i < args.size(); i++){
-					message = message + args.get(i).getName();
-				}
-				throw new TooFewArgsException(message);
-			}
-			
-			else if(cla.length < args.size() && cla.length == 1) {
-				String[] newArgs = new String[3];
-				String message = "usage: java " + programName + getAllArgNames() +"\n" + programName + ".java: error: the following arguments are required: ";
-				for(int i = 1; i < args.size(); i++){
-					newArgs[i] = args.get(i).getName();
-					message = message + newArgs[i];
-					if(i < 2){
-						message = message + ", ";
+						message = message + " " + args.get(i).getName();
 					}
 				}
 				throw new TooFewArgsException(message);
 			}
 		}
 		
-		else if(cla.length == 0){
-			String[] newArgs = new String[3];
-			String message = "usage: java " + programName + getAllArgNames() +"\n" + programName + ".java: error: the following arguments are required: ";
-			for(int i = 0; i < args.size(); i++){
-				newArgs[i] = args.get(i).getName();
-				message = message + newArgs[i];
-				if(i < 2){
-					message = message + ", ";
+		else if(cla.length > args.size()) {
+				throw new TooManyArgsException("usage: java " + programName + getAllArgNames() +"\n" + programName + ".java: error: unrecognized arguments: " + cla[cla.length - 1]);
+			}
+		else{
+			for(int i = 0; i < cla.length; i++){
+				if(args.get(i).getArgType() == Argument.Type.FLOAT){
+					try{
+						args.get(i).setValue(cla[i]);
+						float num = Float.parseFloat(args.get(i).getValue());
+					}
+					catch(RuntimeException e){
+							throw new InvalidValueException(invalidValueMessage() + args.get(i).getName() + ": invalid float value: " + args.get(i).getValue());
+					}
+				}
+					
+				else if(args.get(i).getArgType() == Argument.Type.INT){
+					try{
+						args.get(i).setValue(cla[i]);
+						int num = Integer.parseInt(args.get(i).getValue());
+					}
+					catch(RuntimeException e){
+						throw new InvalidValueException(invalidValueMessage() + args.get(i).getName() + ": invalid int value: " + args.get(i).getValue());
+					}
+				}
+				else if(args.get(i).getArgType() == Argument.Type.BOOLEAN){
+					if(cla[i].equals("true") || cla[i].equals("false")){
+						args.get(i).setValue(cla[i]);
+					}
+					else{
+						throw new InvalidValueException(invalidValueMessage() + args.get(i).getName() + ": invalid boolean value: " + cla[i]);
+					}
+				}
+				else{
+					args.get(i).setValue(cla[i]);					
+										
 				}
 			}
-			throw new TooFewArgsException(message);
 		}
 	}
 	

@@ -2,6 +2,11 @@ package edu.jsu.mcis;
 
 import org.junit.*;
 import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.Rule;
+import org.junit.rules.ExpectedException;
 
 public class ArgumentTest{
 	
@@ -41,8 +46,43 @@ public class ArgumentTest{
 	}
 	
 	@Test
-	public void testGetArgType(){
+	public void testGetArgTypeFloat(){
 		Argument s = new Argument("length", "the length of the box", "FLOAT");
 		assertEquals(Argument.Type.FLOAT, s.getArgType());
+	}
+	
+	@Test
+	public void testGetArgTypeString(){
+		Argument s = new Argument("length", "the length of the box", "string");
+		assertEquals(Argument.Type.STRING, s.getArgType());
+	}
+	
+	@Test
+	public void testGetArgTypeInt(){
+		Argument s = new Argument("length", "the length of the box", "int");
+		assertEquals(Argument.Type.INT, s.getArgType());
+	}
+	
+	@Test
+	public void testGetArgTypeBoolean(){
+		Argument s = new Argument("length", "the length of the box", "boolean");
+		assertEquals(Argument.Type.BOOLEAN, s.getArgType());
+	}
+	
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
+	
+	@Test
+	public void testInvalidArgumentTypeException(){
+		thrown.expect(InvalidArgumentTypeException.class);
+		thrown.expectMessage("spoon is not a valid argument type.");
+		Argument s = new Argument("length", "the length of the box", "spoon");
+		
+	}
+	
+	@Test
+	public void testGetArgFails(){
+		Argument s = new Argument("length", "the length of the box", "FLOAT");
+		assertEquals(false, s.equals("hat"));
 	}
 }
