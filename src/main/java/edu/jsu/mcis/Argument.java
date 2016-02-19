@@ -12,11 +12,13 @@ public class Argument{
 	public Argument(String n){
 		argName = n;
 		argDescription = "";
+		type = Type.STRING;
 	}
 	
 	public Argument(String n, String d){
 		argName = n;
 		argDescription = d;	
+		type = Type.STRING;
 	}
 	
 	public Argument(String n, String d, String t){
