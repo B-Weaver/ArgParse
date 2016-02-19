@@ -143,7 +143,7 @@ public class ArgsParserTest {
 		p.addArg("width", "the width of the box", "boolean");
 		p.addArg("height", "the height of the box", "boolean");
 		thrown.expect(InvalidValueException.class);
-		thrown.expectMessage("usage: java " + p.programName + p.getAllArgNames() + "\n" + p.programName +".java: error: argument width: invalid boolean value: 2");
+		thrown.expectMessage("usage: java " + p.programName + p.getAllArgNames() + "\n" + p.programName +".java: error: argument height: invalid boolean value: 2");
 		p.parse(s);
 	}
 }
