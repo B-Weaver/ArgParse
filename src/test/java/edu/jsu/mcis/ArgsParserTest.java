@@ -115,8 +115,8 @@ public class ArgsParserTest {
 	public void testInvalidValueMessageFloat(){
 		String[] s = {"7", "something", "2"};
 		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
-		p.addArg("length", "the length of the box", "string");
-		p.addArg("width", "the width of the box", "float");
+		p.addArg("length", "the length of the box", "STRING");
+		p.addArg("width", "the width of the box", "FLOAT");
 		p.addArg("height", "the height of the box", "int");
 		thrown.expect(InvalidValueException.class);
 		thrown.expectMessage("usage: java " + p.programName + p.getAllArgNames() + "\n" + p.programName +".java: error: argument width: invalid float value: something");
@@ -127,7 +127,7 @@ public class ArgsParserTest {
 	public void testInvalidValueMessageInt(){
 		String[] s = {"7", "something", "2"};
 		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
-		p.addArg("length", "the length of the box", "int");
+		p.addArg("length", "the length of the box", "INT");
 		p.addArg("width", "the width of the box", "int");
 		p.addArg("height", "the height of the box", "float");
 		thrown.expect(InvalidValueException.class);
@@ -141,7 +141,7 @@ public class ArgsParserTest {
 		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
 		p.addArg("length", "the length of the box", "boolean");
 		p.addArg("width", "the width of the box", "boolean");
-		p.addArg("height", "the height of the box", "boolean");
+		p.addArg("height", "the height of the box", "BOOLEAN");
 		thrown.expect(InvalidValueException.class);
 		thrown.expectMessage("usage: java " + p.programName + p.getAllArgNames() + "\n" + p.programName +".java: error: argument height: invalid boolean value: 2");
 		p.parse(s);
