@@ -56,7 +56,16 @@ public class ArgumentParser{
 		}
 		
 		else if(cla.length > args.size()) {
-				throw new TooManyArgsException("usage: java " + programName + getAllArgNames() +"\n" + programName + ".java: error: unrecognized arguments: " + cla[cla.length - 1]);
+			String message = "usage: java " + programName + getAllArgNames() +"\n" + programName + ".java: error: unrecognized arguments:";
+				for(int i = args.size(); i < cla.length; i++){
+					if(i < cla.length-1){
+						message = message + " " + cla[i] + ",";
+					}
+					else{
+						message = message + " " + cla[i];
+					}
+				}
+				throw new TooManyArgsException(message);
 			}
 		else{
 			for(int i = 0; i < cla.length; i++){
