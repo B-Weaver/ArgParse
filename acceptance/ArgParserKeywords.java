@@ -55,6 +55,15 @@ public class ArgParserKeywords{
 		return output;
 	}
 	
+	public int getDigits(){
+		int numDigits = Integer.parseInt(parser.getArg("digits"));
+		return numDigits;
+	}
+	
+	public String getType(){
+		return parser.getArg("type");
+	}
+	
 	public void StartAbsurdProgramWithArguments(String[] args){
 		parser2.addArg("Pet", "Animal", "string");
 		parser2.addArg("Number", "random", "int");

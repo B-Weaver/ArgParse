@@ -70,14 +70,14 @@ public class ArgsParserTest {
 	
 	@Test
 	public void testTooManyArguments(){
-			String[] s = {"7", "5", "2", "4"};
-			ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
-			p.addArg("length", "the length of the box", "float");
+		String[] s = {"7", "5", "2", "4"};
+		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
+		p.addArg("length", "the length of the box", "float");
 		p.addArg("width", "the width of the box", "float");
 		p.addArg("height", "the height of the box", "float");
-			thrown.expect(TooManyArgsException.class);
-			thrown.expectMessage("usage: java "+ p.programName + " length width height"+"\n"+"VolumeCalculator.java: error: unrecognized arguments: " + s[3]);
-			p.parse(s);		
+		thrown.expect(TooManyArgsException.class);
+		thrown.expectMessage("usage: java "+ p.programName + " length width height"+"\n"+"VolumeCalculator.java: error: unrecognized arguments: " + s[3]);
+		p.parse(s);		
 	}
 
 	@Test
@@ -174,5 +174,23 @@ public class ArgsParserTest {
 		thrown.expect(ArgumentNotFoundException.class);
 		thrown.expectMessage("The argument depth was not found");
 		p.getArg("depth");
+	}
+	
+	@Test
+	public void testCanUseNamedArguments(){
+		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of an ellipsoid.");
+		String[] s = {"7", "5", "2", "--type", "ellipsoid", "--digits", "1"};
+		p.addArg("length", "the length of the box", "float");
+		p.addArg("width", "the width of the box", "float");
+		p.addArg("height", "the height of the box", "float");
+		p.parse(s);
+		String len = p.getArg("length");
+		String wid = p.getArg("width");
+		String hgt = p.getArg("height");
+		float length = Float.parseFloat(len);
+		float width = Float.parseFloat(wid);
+		float height = Float.parseFloat(hgt);
+		assertEquals(70.0, length * width * height, 0.00001);
+		assertEquals("ellipsoid", p.getArg("type"));
 	}
 }
