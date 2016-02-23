@@ -6,11 +6,13 @@ public class ArgumentParser{
 	protected String programName;
 	protected String programPurpose;
 	protected String datatype;
+	private boolean hasTwoDashes;
 	
 	public ArgumentParser(){
 		args = new ArrayList<Argument>();
 		programName = "";
 		programPurpose = "";
+		hasTwoDashes = false;
 	}
 	
 	public ArgumentParser(String n, String p){
@@ -37,13 +39,15 @@ public class ArgumentParser{
 	}
 	
 	public void parse(String[] cla){
-		if(cla.length < args.size()){
-			if(cla.length > 0 && cla[0].equals("-h")){
+		String[] tempArray = cla;
+		List<String> tempList = new ArrayList<String>();
+		if(tempArray.length < args.size()){
+			if(tempArray.length > 0 && tempArray[0].equals("-h")){
 				throw new GetHelpException(getHelp());
 			}
 			else{
 				String message = "usage: java " + programName + getAllArgNames() +"\n" + programName + ".java: error: the following arguments are required:";
-				for(int i = cla.length; i < args.size(); i++){
+				for(int i = tempArray.length; i < args.size(); i++){
 					if(i < args.size()-1){
 						message = message + " " + args.get(i).getName() + ",";
 					}
@@ -56,17 +60,25 @@ public class ArgumentParser{
 		}
 		
 		else if(cla.length > args.size()) {
-			String message = "usage: java " + programName + getAllArgNames() +"\n" + programName + ".java: error: unrecognized arguments:";
-				for(int i = args.size(); i < cla.length; i++){
-					if(i < cla.length-1){
-						message = message + " " + cla[i] + ",";
-					}
-					else{
-						message = message + " " + cla[i];
-					}
+			String[] newTempArray = new String[tempArray.length - 1];
+			for(int i = 0; i < cla.length; i++){
+				if(checkForDashes(cla[i])){
+					args.add(new Argument(tempArray[i].substring(2, cla[i].length() - 1)));
+					tempArray[i] = tempArray[i + 1];
+					parse(newTempArray);
 				}
-				throw new TooManyArgsException(message);
 			}
+			String message = "usage: java " + programName + getAllArgNames() +"\n" + programName + ".java: error: unrecognized arguments:";
+			for(int i = args.size(); i < cla.length; i++){
+				if(i < cla.length-1){
+					message = message + " " + cla[i] + ",";
+				}
+				else{
+					message = message + " " + cla[i];
+				}
+			}
+			throw new TooManyArgsException(message);
+		}
 		else{
 			for(int i = 0; i < cla.length; i++){
 				if(args.get(i).getArgType() == Argument.Type.FLOAT){
@@ -151,6 +163,14 @@ public class ArgumentParser{
 		
 		h = h + "\n" +programName + ".java: error: argument ";
 		return h;
+	}
+	
+	public boolean checkForDashes(String s){
+		if(s.substring(0).equals("-") && s.substring(1).equals("-")){
+			hasTwoDashes = true;
+		}
+		else hasTwoDashes = false;
+		return hasTwoDashes;
 	}
 	
 }
