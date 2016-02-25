@@ -60,24 +60,33 @@ public class ArgumentParser{
 		}
 		
 		else if(cla.length > args.size()) {
-			String[] newTempArray = new String[tempArray.length - 1];
+			String[] newTempArray = new String[tempArray.length-1];
+			String[] finalTempArray;
 			for(int i = 0; i < cla.length; i++){
 				if(checkForDashes(cla[i])){
 					args.add(new Argument(tempArray[i].substring(2, cla[i].length() - 1)));
-					tempArray[i] = tempArray[i + 1];
-					parse(newTempArray);
+					newTempArray[i] = tempArray[i + 1];
 				}
-			}
-			String message = "usage: java " + programName + getAllArgNames() +"\n" + programName + ".java: error: unrecognized arguments:";
-			for(int i = args.size(); i < cla.length; i++){
-				if(i < cla.length-1){
-					message = message + " " + cla[i] + ",";
+				else if(!checkForDashes(cla[i]) && tempArray.length > i + 1){
+					tempList.add(tempArray[i]);
 				}
 				else{
-					message = message + " " + cla[i];
+					String message = "usage: java " + programName + getAllArgNames() +"\n" + programName + ".java: error: unrecognized arguments:";
+					for(int j = args.size(); i < cla.length; i++){
+						if(i < cla.length-1){
+							message = message + " " + cla[i] + ",";
+						}
+						else{
+							message = message + " " + cla[i];
+						}
+					}
+					throw new TooManyArgsException(message);
 				}
 			}
-			throw new TooManyArgsException(message);
+			finalTempArray = new String[tempList.size()];
+			finalTempArray = (String[]) tempList.toArray();
+			parse(newTempArray);
+			
 		}
 		else{
 			for(int i = 0; i < cla.length; i++){
