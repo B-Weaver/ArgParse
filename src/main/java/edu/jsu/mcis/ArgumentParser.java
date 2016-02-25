@@ -60,19 +60,12 @@ public class ArgumentParser{
 		}
 		
 		else if(cla.length > args.size()) {
-			String[] newTempArray = new String[tempArray.length-1];
-			String[] finalTempArray;
-			for(int i = 0; i < cla.length; i++){
-				if(checkForDashes(cla[i])){
-					args.add(new Argument(tempArray[i].substring(2, cla[i].length() - 1)));
-					newTempArray[i] = tempArray[i + 1];
-				}
-				else if(!checkForDashes(cla[i]) && tempArray.length > i + 1){
-					tempList.add(tempArray[i]);
-				}
-				else{
-					String message = "usage: java " + programName + getAllArgNames() +"\n" + programName + ".java: error: unrecognized arguments:";
-					for(int j = args.size(); i < cla.length; i++){
+			
+			String[] newTempArray = checkForDashes(cla);
+			
+			if(newTempArray.length > args.size()){
+				String message = "usage: java " + programName + getAllArgNames() +"\n" + programName + ".java: error: unrecognized arguments:";
+					for(int i = args.size(); i < cla.length; i++){
 						if(i < cla.length-1){
 							message = message + " " + cla[i] + ",";
 						}
@@ -81,12 +74,11 @@ public class ArgumentParser{
 						}
 					}
 					throw new TooManyArgsException(message);
-				}
 			}
-			finalTempArray = new String[tempList.size()];
-			finalTempArray = (String[]) tempList.toArray();
-			parse(newTempArray);
 			
+			else{
+				parse(newTempArray);
+			}
 		}
 		else{
 			for(int i = 0; i < cla.length; i++){
@@ -147,6 +139,15 @@ public class ArgumentParser{
 		return s;
 	}
 	
+	public String getAllArgValues(){
+		String s = "";
+		for(int i = 0; i < args.size(); i++){
+			s = s + " " + args.get(i).getValue() ;
+		}
+		
+		return s;
+	}
+	
 	public String getHelp(){
 		String h = "";
 		h = "usage: java " + programName + getAllArgNames();
@@ -174,12 +175,19 @@ public class ArgumentParser{
 		return h;
 	}
 	
-	public boolean checkForDashes(String s){
-		if(s.substring(0).equals("-") && s.substring(1).equals("-")){
-			hasTwoDashes = true;
+	public String[] checkForDashes(String[] arr){
+		ArrayList<String> tempList = new ArrayList<String>(Arrays.asList(arr));
+		for(int i = 0; i < tempList.size(); i++){
+			if(tempList.get(i).contains("--")){
+				String a = tempList.get(i).substring(2, tempList.get(i).length());
+				addArg(a);
+				tempList.remove(i);
+			}
 		}
-		else hasTwoDashes = false;
-		return hasTwoDashes;
+		
+		String[] tempArr = new String[tempList.size()];
+		tempArr = tempList.toArray(tempArr);
+		return tempArr;
 	}
 	
 }

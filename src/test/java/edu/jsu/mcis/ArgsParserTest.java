@@ -184,13 +184,10 @@ public class ArgsParserTest {
 		p.addArg("width", "the width of the box", "float");
 		p.addArg("height", "the height of the box", "float");
 		p.parse(s);
-		String len = p.getArg("length");
-		String wid = p.getArg("width");
-		String hgt = p.getArg("height");
-		float length = Float.parseFloat(len);
-		float width = Float.parseFloat(wid);
-		float height = Float.parseFloat(hgt);
-		assertEquals(70.0, length * width * height, 0.00001);
+		
+		System.out.println(p.getAllArgNames());
+		System.out.println(p.getAllArgValues());
+		
 		assertEquals("ellipsoid", p.getArg("type"));
 	}
 }
