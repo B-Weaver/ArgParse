@@ -183,7 +183,9 @@ public class ArgsParserTest {
 		p.addArg("length", "the length of the box", "float");
 		p.addArg("width", "the width of the box", "float");
 		p.addArg("height", "the height of the box", "float");
-		p.parse(s);
+		p.addArg("type");
+		p.addArg("digits");
+		p.checkArgsThenParse(s);
 		
 		System.out.println(p.getAllArgNames());
 		System.out.println(p.getAllArgValues());

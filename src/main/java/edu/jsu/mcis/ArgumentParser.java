@@ -6,13 +6,11 @@ public class ArgumentParser{
 	protected String programName;
 	protected String programPurpose;
 	protected String datatype;
-	private boolean hasTwoDashes;
 	
 	public ArgumentParser(){
 		args = new ArrayList<Argument>();
 		programName = "";
 		programPurpose = "";
-		hasTwoDashes = false;
 	}
 	
 	public ArgumentParser(String n, String p){
@@ -39,32 +37,24 @@ public class ArgumentParser{
 	}
 	
 	public void parse(String[] cla){
-		String[] tempArray = cla;
-		List<String> tempList = new ArrayList<String>();
-		if(tempArray.length < args.size()){
-			if(tempArray.length > 0 && tempArray[0].equals("-h")){
+		if(cla.length > 0 && (cla[0].equals("-h") || cla[0].equals("--help"))){
 				throw new GetHelpException(getHelp());
-			}
-			else{
-				String message = "usage: java " + programName + getAllArgNames() +"\n" + programName + ".java: error: the following arguments are required:";
-				for(int i = tempArray.length; i < args.size(); i++){
-					if(i < args.size()-1){
-						message = message + " " + args.get(i).getName() + ",";
-					}
-					else{
-						message = message + " " + args.get(i).getName();
-					}
+		}
+		if(cla.length < args.size()){
+			String message = "usage: java " + programName + getAllArgNames() +"\n" + programName + ".java: error: the following arguments are required:";
+			for(int i = cla.length; i < args.size(); i++){
+				if(i < args.size()-1){
+					message = message + " " + args.get(i).getName() + ",";
 				}
-				throw new TooFewArgsException(message);
+				else{
+					message = message + " " + args.get(i).getName();
+				}
 			}
+			throw new TooFewArgsException(message);
 		}
 		
 		else if(cla.length > args.size()) {
-			
-			String[] newTempArray = checkForDashes(cla);
-			
-			if(newTempArray.length > args.size()){
-				String message = "usage: java " + programName + getAllArgNames() +"\n" + programName + ".java: error: unrecognized arguments:";
+			String message = "usage: java " + programName + getAllArgNames() +"\n" + programName + ".java: error: unrecognized arguments:";
 					for(int i = args.size(); i < cla.length; i++){
 						if(i < cla.length-1){
 							message = message + " " + cla[i] + ",";
@@ -74,11 +64,6 @@ public class ArgumentParser{
 						}
 					}
 					throw new TooManyArgsException(message);
-			}
-			
-			else{
-				parse(newTempArray);
-			}
 		}
 		else{
 			for(int i = 0; i < cla.length; i++){
@@ -119,13 +104,11 @@ public class ArgumentParser{
 	
 	public String getArg(String unit){
 		Argument a = new Argument(unit);
-		if(!args.contains(a)){
-			throw new ArgumentNotFoundException("The argument " + unit + " was not found");
-			
-			
-		}
-		else {
+		try{
 			return args.get(args.indexOf(a)).getValue();
+		}
+		catch(RuntimeException e){
+			throw new ArgumentNotFoundException("The argument " + unit + " was not found");
 		}
 			
 	}
@@ -175,19 +158,28 @@ public class ArgumentParser{
 		return h;
 	}
 	
-	public String[] checkForDashes(String[] arr){
+	public void checkArgsThenParse(String[] arr){
 		ArrayList<String> tempList = new ArrayList<String>(Arrays.asList(arr));
 		for(int i = 0; i < tempList.size(); i++){
 			if(tempList.get(i).contains("--")){
-				String a = tempList.get(i).substring(2, tempList.get(i).length());
-				addArg(a);
-				tempList.remove(i);
+				if(tempList.get(i).equals("--type")){
+					tempList.remove(i);
+				}
+				else if(tempList.get(i).equals("--digits")){
+					tempList.remove(i);
+				}
+				else{
+					String a = tempList.get(i).substring(2, tempList.get(i).length());
+					addArg(a);
+					tempList.remove(i);
+				}
+				
 			}
 		}
 		
 		String[] tempArr = new String[tempList.size()];
 		tempArr = tempList.toArray(tempArr);
-		return tempArr;
+		parse(tempArr);
 	}
 	
 }

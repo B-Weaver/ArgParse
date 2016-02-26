@@ -1,16 +1,37 @@
 import edu.jsu.mcis.*;
 
 public class ArgParserKeywords{
-	private ArgumentParser parser = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
+	private ArgumentParser parser;
 	private ArgumentParser parser2 = new ArgumentParser();
 	private String output;
 					
 	public void StartVolumeCalculatorWithArguments(String[] args){
+		parser = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
 		parser.addArg("length", "the length of the box (float)", "float");
 		parser.addArg("width", "the width of the box (float)", "float");
 		parser.addArg("height", "the height of the box (float)", "float");
 		try {
-			parser.parse(args);
+			parser.checkArgsThenParse(args);
+			int l = Integer.parseInt(parser.getArg("length"));
+			int w = Integer.parseInt(parser.getArg("width"));
+			int h = Integer.parseInt(parser.getArg("height"));
+			int v = l*w*h;
+			output = v + "";
+		}
+		catch(Exception e) {
+			output = e.getMessage();
+		}
+	}
+	
+	public void StartVolumeCalcuatorWithArguments(String[] args){
+		parser = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
+		parser.addArg("length", "the length of the box (float)", "float");
+		parser.addArg("width", "the width of the box (float)", "float");
+		parser.addArg("height", "the height of the box (float)", "float");
+		parser.addArg("type");
+		parser.addArg("digits");
+		try {
+			parser.checkArgsThenParse(args);
 			int l = Integer.parseInt(parser.getArg("length"));
 			int w = Integer.parseInt(parser.getArg("width"));
 			int h = Integer.parseInt(parser.getArg("height"));
@@ -23,6 +44,7 @@ public class ArgParserKeywords{
 	}
 	
 	public void StartProgramWithArguments(String[] args){
+		parser = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
 		parser.addArg("length", "the length of the box (float)", "float");
 		parser.addArg("width", "the width of the box (float)", "float");
 		parser.addArg("height", "the height of the box (float)", "float");
@@ -55,9 +77,8 @@ public class ArgParserKeywords{
 		return output;
 	}
 	
-	public int getDigits(){
-		int numDigits = Integer.parseInt(parser.getArg("digits"));
-		return numDigits;
+	public String getDigits(){
+		return parser.getArg("digits");
 	}
 	
 	public String getType(){
