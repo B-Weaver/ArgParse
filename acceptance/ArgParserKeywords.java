@@ -28,8 +28,6 @@ public class ArgParserKeywords{
 		parser.addArg("length", "the length of the box (float)", "float");
 		parser.addArg("width", "the width of the box (float)", "float");
 		parser.addArg("height", "the height of the box (float)", "float");
-		parser.addArg("type");
-		parser.addArg("digits");
 		try {
 			parser.checkArgsThenParse(args);
 			int l = Integer.parseInt(parser.getArg("length"));

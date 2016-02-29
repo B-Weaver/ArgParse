@@ -187,9 +187,6 @@ public class ArgsParserTest {
 		p.addArg("digits");
 		p.checkArgsThenParse(s);
 		
-		System.out.println(p.getAllArgNames());
-		System.out.println(p.getAllArgValues());
-		
-		assertEquals("ellipsoid", p.getArg("type"));
+		assertEquals("1", p.getArg("digits"));
 	}
 }

@@ -67,7 +67,7 @@ public class Argument{
 	public boolean equals(Object o){
 		if(o instanceof Argument) {
 			Argument a = (Argument)o;
-			return argName == a.getName();
+			return argName.equals(a.getName());
 		}
 		else return false;
 	}
