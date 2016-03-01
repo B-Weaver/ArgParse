@@ -45,11 +45,11 @@ public class ArgumentParser{
 		Argument type = new Argument("type");
 		Argument digits = new Argument("digits");
 		
-		if(cla.length > 0 && (cla[0].equals("-h") || cla[0].equals("--help"))){
+		if(cla.length > 0 && cla[0].equals("-h")){
 				throw new GetHelpException(getHelp());
 		}
 		if(cla.length < args.size() && (!args.contains(type) || !args.contains(digits))){
-			String message = "usage: java " + programName + getAllArgNames() +"\n" + programName + ".java: error: the following arguments are required:";
+			String message = "usage: java " + programName + getAllPosArgNames() +"\n" + programName + ".java: error: the following arguments are required:";
 			for(int i = cla.length; i < args.size(); i++){
 				if(i < args.size()-1){
 					message = message + " " + args.get(i).getName() + ",";
@@ -62,7 +62,7 @@ public class ArgumentParser{
 		}
 		
 		else if(cla.length > args.size()) {
-			String message = "usage: java " + programName + getAllArgNames() +"\n" + programName + ".java: error: unrecognized arguments:";
+			String message = "usage: java " + programName + getAllPosArgNames() +"\n" + programName + ".java: error: unrecognized arguments:";
 					for(int i = args.size(); i < cla.length; i++){
 						if(i < cla.length-1){
 							message = message + " " + cla[i] + ",";
@@ -131,10 +131,13 @@ public class ArgumentParser{
 			
 	}
 	
-	public String getAllArgNames(){
+	public String getAllPosArgNames(){
 		String s = "";
 		for(int i = 0; i < args.size(); i++){
-			s = s + " " + args.get(i).getName();
+			if(getArg(i).getArgType() != Argument.Type.STRING){
+				s = s + " " + args.get(i).getName();
+			}	
+				
 		}
 		
 		return s;
@@ -142,18 +145,20 @@ public class ArgumentParser{
 	
 	public String getHelp(){
 		String h = "";
-		h = "usage: java " + programName + getAllArgNames();
+		h = "usage: java " + programName + getAllPosArgNames();
 		
 		h = h + "\n" + programPurpose + "\npositional arguments:\n";
 		
 		for(int j = 0; j < args.size(); j++){
-			if(j < args.size()-1){
-				String nd = getArg(j).getNameAndDescription();
-				h = h + nd +"\n";
-			}
-			else{
-				String nd = getArg(j).getNameAndDescription();
-				h = h + nd;
+			if(getArg(j).getArgType() != Argument.Type.STRING){	
+				if(j == 0){
+					String nd = getArg(j).getNameAndDescription();
+					h = h + nd;
+				}
+				else{
+					String nd = "\n" + getArg(j).getNameAndDescription();
+					h = h + nd;
+				}
 			}
 		}
 		return h;
@@ -161,7 +166,7 @@ public class ArgumentParser{
 	
 	public String invalidValueMessage(){
 		String h = "";
-		h = "usage: java " + programName + getAllArgNames();
+		h = "usage: java " + programName + getAllPosArgNames();
 		
 		h = h + "\n" +programName + ".java: error: argument ";
 		return h;
@@ -169,28 +174,37 @@ public class ArgumentParser{
 	
 	public void checkArgsThenParse(String[] arr){
 		ArrayList<String> tempList = new ArrayList<String>(Arrays.asList(arr));
-		for(int i = 0; i < tempList.size(); i++){
-			if(tempList.get(i).contains("--")){
-				String s = tempList.get(i).substring(2, tempList.get(i).length());
-				String v = tempList.get(i+1);
-				
-				Argument a = new Argument(s);
-				if(s.equals("digits")){
-					args.get(args.indexOf(a)).setValue(v);
+		
+		if(tempList.contains("--help")){
+			tempList.remove(tempList.indexOf("--help"));
+			throw new GetHelpException(getHelp());
+			
+		}
+		else{
+			for(int i = 0; i < tempList.size(); i++){
+				if(tempList.get(i).contains("--")){
+					String s = tempList.get(i).substring(2, tempList.get(i).length());
+					String v = tempList.get(i+1);
+					
+					Argument a = new Argument(s);
+					if(s.equals("digits")){
+						args.get(args.indexOf(a)).setValue(v);
+					}
+					
+					else if(s.equals("type")){
+						args.get(args.indexOf(a)).setValue(v);
+					}
+					tempList.remove(tempList.get(i));
+					tempList.remove(tempList.get(i));
+					i--;
 				}
-				
-				else if(s.equals("type")){
-					args.get(args.indexOf(a)).setValue(v);
-				}
-				tempList.remove(tempList.get(i));
-				tempList.remove(tempList.get(i));
-				i--;
 			}
+			
+			String[] tempArr = new String[tempList.size()];
+			tempArr = tempList.toArray(tempArr);
+			parse(tempArr);
 		}
 		
-		String[] tempArr = new String[tempList.size()];
-		tempArr = tempList.toArray(tempArr);
-		parse(tempArr);
 	}
 	
 }

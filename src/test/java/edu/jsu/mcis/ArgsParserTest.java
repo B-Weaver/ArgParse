@@ -18,7 +18,7 @@ public class ArgsParserTest {
 	@Test
 	public void testArgumentIsAddedCorrectly() {
 		ArgumentParser p = new ArgumentParser();
-		p.addArg("length");
+		p.addArg("length", "the length of the box", "float");
 		assertEquals(1, p.getNumArguments());
 	}
 	
@@ -120,9 +120,9 @@ public class ArgsParserTest {
 	public void testTooFewArgumentsForTwoArguments(){
 		String[] s = {"7", "5"};
 		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
-		p.addArg("length", "the length of the box");
-		p.addArg("width", "the width of the box");
-		p.addArg("height", "the height of the box");
+		p.addArg("length", "the length of the box (float)", "float");
+		p.addArg("width", "the width of the box (float)", "float");
+		p.addArg("height", "the height of the box (float)", "int");
 		thrown.expect(TooFewArgsException.class);
 		thrown.expectMessage("usage: java "+ p.programName + " length width height\nVolumeCalculator.java: error: the following arguments are required: height");
 		p.parse(s);
@@ -133,7 +133,7 @@ public class ArgsParserTest {
 		String [] s = {"-h"};
 		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
 		p.addArg("length", "the length of the box (float)", "float");
-		p.addArg("width", "the width of the box (float)", "string");
+		p.addArg("width", "the width of the box (float)", "float");
 		p.addArg("height", "the height of the box (float)", "int");
 		thrown.expect(GetHelpException.class);
 		thrown.expectMessage("usage: java "+ p.programName + " length width height\n" + p.programPurpose + "\npositional arguments:\nlength the length of the box (float)\nwidth the width of the box (float)\nheight the height of the box (float)");
@@ -142,14 +142,17 @@ public class ArgsParserTest {
 	
 	@Test
 	public void testNamedHelpMessage(){
-		String [] s = {"--help"};
+		String[] s = {"7", "--help", "2", "5", "8"};
 		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
 		p.addArg("length", "the length of the box (float)", "float");
-		p.addArg("width", "the width of the box (float)", "string");
+		p.addArg("width", "the width of the box (float)", "float");
 		p.addArg("height", "the height of the box (float)", "int");
+		p.addArg("type");
+		p.addArg("digits");
+		
 		thrown.expect(GetHelpException.class);
 		thrown.expectMessage("usage: java "+ p.programName + " length width height\n" + p.programPurpose + "\npositional arguments:\nlength the length of the box (float)\nwidth the width of the box (float)\nheight the height of the box (float)");
-		p.parse(s);
+		p.checkArgsThenParse(s);
 	}
 	
 	@Test
@@ -160,7 +163,7 @@ public class ArgsParserTest {
 		p.addArg("width", "the width of the box", "FLOAT");
 		p.addArg("height", "the height of the box", "int");
 		thrown.expect(InvalidValueException.class);
-		thrown.expectMessage("usage: java " + p.programName + p.getAllArgNames() + "\n" + p.programName +".java: error: argument width: invalid float value: something");
+		thrown.expectMessage("usage: java " + p.programName + p.getAllPosArgNames() + "\n" + p.programName +".java: error: argument width: invalid float value: something");
 		p.parse(s);
 	}
 	
@@ -172,7 +175,7 @@ public class ArgsParserTest {
 		p.addArg("width", "the width of the box", "int");
 		p.addArg("height", "the height of the box", "float");
 		thrown.expect(InvalidValueException.class);
-		thrown.expectMessage("usage: java " + p.programName + p.getAllArgNames() + "\n" + p.programName +".java: error: argument width: invalid int value: something");
+		thrown.expectMessage("usage: java " + p.programName + p.getAllPosArgNames() + "\n" + p.programName +".java: error: argument width: invalid int value: something");
 		p.parse(s);
 	}
 	
@@ -184,7 +187,7 @@ public class ArgsParserTest {
 		p.addArg("width", "the width of the box", "boolean");
 		p.addArg("height", "the height of the box", "BOOLEAN");
 		thrown.expect(InvalidValueException.class);
-		thrown.expectMessage("usage: java " + p.programName + p.getAllArgNames() + "\n" + p.programName +".java: error: argument height: invalid boolean value: 2");
+		thrown.expectMessage("usage: java " + p.programName + p.getAllPosArgNames() + "\n" + p.programName +".java: error: argument height: invalid boolean value: 2");
 		p.parse(s);
 	}
 	

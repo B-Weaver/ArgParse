@@ -30,7 +30,13 @@ public class ArgParserKeywords{
 		parser.addArg("height", "the height of the box (float)", "float");
 		parser.addArg("type");
 		parser.addArg("digits");
-		parser.checkArgsThenParse(args);
+		
+		try {
+			parser.checkArgsThenParse(args);
+		}
+		catch(Exception e) {
+			output = e.getMessage();
+		}
 		
 	}
 	
@@ -39,8 +45,10 @@ public class ArgParserKeywords{
 		parser.addArg("length", "the length of the box (float)", "float");
 		parser.addArg("width", "the width of the box (float)", "float");
 		parser.addArg("height", "the height of the box (float)", "float");
+		parser.addArg("type");
+		parser.addArg("digits");
 		try {
-			parser.parse(args);
+			parser.checkArgsThenParse(args);
 			int l = Integer.parseInt(parser.getArg("length"));
 			int w = Integer.parseInt(parser.getArg("width"));
 			int h = Integer.parseInt(parser.getArg("height"));
