@@ -172,17 +172,19 @@ public class ArgumentParser{
 		for(int i = 0; i < tempList.size(); i++){
 			if(tempList.get(i).contains("--")){
 				String s = tempList.get(i).substring(2, tempList.get(i).length());
+				String v = tempList.get(i+1);
 				
 				Argument a = new Argument(s);
 				if(s.equals("digits")){
-					args.get(args.indexOf(a)).setValue(tempList.get(i+1));
-					tempList.remove(tempList.get(i));
+					args.get(args.indexOf(a)).setValue(v);
 				}
 				
 				else if(s.equals("type")){
-					args.get(args.indexOf(a)).setValue(tempList.get(i+1));
-					tempList.remove(tempList.get(i));
+					args.get(args.indexOf(a)).setValue(v);
 				}
+				tempList.remove(tempList.get(i));
+				tempList.remove(tempList.get(i));
+				i--;
 			}
 		}
 		
