@@ -28,17 +28,10 @@ public class ArgParserKeywords{
 		parser.addArg("length", "the length of the box (float)", "float");
 		parser.addArg("width", "the width of the box (float)", "float");
 		parser.addArg("height", "the height of the box (float)", "float");
-		try {
-			parser.checkArgsThenParse(args);
-			int l = Integer.parseInt(parser.getArg("length"));
-			int w = Integer.parseInt(parser.getArg("width"));
-			int h = Integer.parseInt(parser.getArg("height"));
-			int v = l*w*h;
-			output = v + "";
-		}
-		catch(Exception e) {
-			output = e.getMessage();
-		}
+		parser.addArg("type");
+		parser.addArg("digits");
+		parser.checkArgsThenParse(args);
+		
 	}
 	
 	public void StartProgramWithArguments(String[] args){

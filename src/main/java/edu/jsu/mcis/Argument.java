@@ -13,12 +13,16 @@ public class Argument{
 		argName = n;
 		argDescription = "";
 		type = Type.STRING;
+		argValue = null;
+		
 	}
 	
 	public Argument(String n, String d){
 		argName = n;
 		argDescription = d;	
 		type = Type.STRING;
+		argValue = null;
+
 	}
 	
 	public Argument(String n, String d, String t){
@@ -31,7 +35,8 @@ public class Argument{
 		else{
 			throw new InvalidArgumentTypeException(t + " is not a valid argument type.");
 		}
-		
+		argValue = null;
+
 	}
 	
 	public void setValue(String v){

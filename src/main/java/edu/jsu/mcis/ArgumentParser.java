@@ -41,10 +41,14 @@ public class ArgumentParser{
 	}
 	
 	public void parse(String[] cla){
+		
+		Argument type = new Argument("type");
+		Argument digits = new Argument("digits");
+		
 		if(cla.length > 0 && (cla[0].equals("-h") || cla[0].equals("--help"))){
 				throw new GetHelpException(getHelp());
 		}
-		if(cla.length < args.size()){
+		if(cla.length < args.size() && (!args.contains(type) || !args.contains(digits))){
 			String message = "usage: java " + programName + getAllArgNames() +"\n" + programName + ".java: error: the following arguments are required:";
 			for(int i = cla.length; i < args.size(); i++){
 				if(i < args.size()-1){
@@ -70,8 +74,18 @@ public class ArgumentParser{
 					throw new TooManyArgsException(message);
 		}
 		else{
-			for(int i = 0; i < cla.length; i++){
-				if(args.get(i).getArgType() == Argument.Type.FLOAT){
+			for(int i = 0; i < args.size(); i++){
+				if(args.get(i).getName().equals("type") || args.get(i).getName().equals("digits")){	
+					if(args.get(i).getName().equals("type") && args.get(i).getValue() == null){
+						args.get(i).setValue("box");
+					}
+					
+					else if(args.get(i).getName().equals("digits") && args.get(i).getValue() == null){
+						args.get(i).setValue("4");
+					}
+				}
+				
+				else if(args.get(i).getArgType() == Argument.Type.FLOAT){
 					try{
 						args.get(i).setValue(cla[i]);
 						float num = Float.parseFloat(args.get(i).getValue());
@@ -126,15 +140,6 @@ public class ArgumentParser{
 		return s;
 	}
 	
-	public String getAllArgValues(){
-		String s = "";
-		for(int i = 0; i < args.size(); i++){
-			s = s + " " + args.get(i).getValue() ;
-		}
-		
-		return s;
-	}
-	
 	public String getHelp(){
 		String h = "";
 		h = "usage: java " + programName + getAllArgNames();
@@ -143,11 +148,11 @@ public class ArgumentParser{
 		
 		for(int j = 0; j < args.size(); j++){
 			if(j < args.size()-1){
-				String nd = args.get(j).getNameAndDescription();
+				String nd = getArg(j).getNameAndDescription();
 				h = h + nd +"\n";
 			}
 			else{
-				String nd = args.get(j).getNameAndDescription();
+				String nd = getArg(j).getNameAndDescription();
 				h = h + nd;
 			}
 		}
@@ -165,35 +170,24 @@ public class ArgumentParser{
 	public void checkArgsThenParse(String[] arr){
 		ArrayList<String> tempList = new ArrayList<String>(Arrays.asList(arr));
 		for(int i = 0; i < tempList.size(); i++){
-			System.out.println("************"+i+"************");
 			if(tempList.get(i).contains("--")){
 				String s = tempList.get(i).substring(2, tempList.get(i).length());
 				
 				Argument a = new Argument(s);
 				if(s.equals("digits")){
-					System.out.println(s);
 					args.get(args.indexOf(a)).setValue(tempList.get(i+1));
-					tempList.remove(i);
-					tempList.remove(i+1);
-					//i--;
+					tempList.remove(tempList.get(i));
 				}
 				
 				else if(s.equals("type")){
-					System.out.println(s);
 					args.get(args.indexOf(a)).setValue(tempList.get(i+1));
-					tempList.remove(i);
-					tempList.remove(i+1);
-					//i--;
+					tempList.remove(tempList.get(i));
 				}
 			}
 		}
-						System.out.println("\n\n");
-
+		
 		String[] tempArr = new String[tempList.size()];
 		tempArr = tempList.toArray(tempArr);
-		for(int t = 0; t < tempArr.length; t++){
-			System.out.println(tempArr[t]);
-		}
 		parse(tempArr);
 	}
 	
