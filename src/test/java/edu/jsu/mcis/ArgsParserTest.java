@@ -218,6 +218,20 @@ public class ArgsParserTest {
 	}
 	
 	@Test
+	public void testCanUseShortNamedArguments(){
+		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of an ellipsoid.");
+		String[] s = {"7", "5", "2", "-t", "ellipsoid", "-d", "1"};
+		p.addArg("length", "the length of the box", "float");
+		p.addArg("width", "the width of the box", "float");
+		p.addArg("height", "the height of the box", "float");
+		p.addArg("type");
+		p.addArg("digits");
+		p.checkArgsThenParse(s);
+		
+		assertEquals("1", p.getArg("digits"));
+	}
+	
+	@Test
 	public void testOneNamedArguments(){
 		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of an ellipsoid.");
 		String[] s = {"7", "5", "2", "--type", "ellipsoid"};
@@ -246,9 +260,37 @@ public class ArgsParserTest {
 	}
 	
 	@Test
+	public void testOneDigitShortNamedArguments(){
+		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of an ellipsoid.");
+		String[] s = {"7", "5", "2", "-d", "8"};
+		p.addArg("length", "the length of the box", "float");
+		p.addArg("width", "the width of the box", "float");
+		p.addArg("height", "the height of the box", "float");
+		p.addArg("type");
+		p.addArg("digits");
+		p.checkArgsThenParse(s);
+		
+		assertEquals("8", p.getArg("digits"));
+	}
+	
+	@Test
 	public void testOneTypeNamedArguments(){
 		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of an ellipsoid.");
 		String[] s = {"7", "5", "2", "--type", "triangle"};
+		p.addArg("length", "the length of the box", "float");
+		p.addArg("width", "the width of the box", "float");
+		p.addArg("height", "the height of the box", "float");
+		p.addArg("type");
+		p.addArg("digits");
+		p.checkArgsThenParse(s);
+		
+		assertEquals("triangle", p.getArg("type"));
+	}
+	
+	@Test
+	public void testOneTypeShortNamedArguments(){
+		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of an ellipsoid.");
+		String[] s = {"7", "5", "2", "-t", "triangle"};
 		p.addArg("length", "the length of the box", "float");
 		p.addArg("width", "the width of the box", "float");
 		p.addArg("height", "the height of the box", "float");

@@ -198,10 +198,38 @@ public class ArgumentParser{
 					tempList.remove(tempList.get(i));
 					i--;
 				}
+				
+				else if(tempList.get(i).contains("-") && !tempList.get(i).equals("-h")){
+					String s = "";
+					if(tempList.get(i).equals("-d")){
+						s = "digits";
+					}
+					else if(tempList.get(i).equals("-t")){
+						s = "type";
+					}
+					String v = tempList.get(i+1);
+					
+					Argument a = new Argument(s);
+					if(s.equals("digits")){
+						args.get(args.indexOf(a)).setValue(v);
+						tempList.remove(tempList.get(i));
+						tempList.remove(tempList.get(i));
+						i--;
+					}
+					
+					else if(s.equals("type")){
+						args.get(args.indexOf(a)).setValue(v);
+						tempList.remove(tempList.get(i));
+						tempList.remove(tempList.get(i));
+						i--;
+					}
+					
+				}
 			}
 			
 			String[] tempArr = new String[tempList.size()];
 			tempArr = tempList.toArray(tempArr);
+			System.out.println("index 1 : "+tempArr[0]);
 			parse(tempArr);
 		}
 		
