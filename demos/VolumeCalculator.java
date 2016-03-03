@@ -2,12 +2,12 @@ import edu.jsu.mcis.*;
 
 public class VolumeCalculator{
 	public static void main(String[] args) {
-		ArgumentParser parser = new ArgumentParser();
-		parser.addArg("length","the length of the box");
-		parser.addArg("width", "the width of the box");
-		parser.addArg("height", "the height of the box");
+		ArgumentParser parser = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
+		parser.addArg("length","the length of the box", "int");
+		parser.addArg("width", "the width of the box", "int");
+		parser.addArg("height", "the height of the box", "int");
 		try {
-			parser.parse(args);
+			parser.checkArgsThenParse(args);
 			int l = Integer.parseInt(parser.getArg("length"));
 			int w = Integer.parseInt(parser.getArg("width"));
 			int h = Integer.parseInt(parser.getArg("height"));

@@ -137,7 +137,7 @@ public class ArgsParserTest {
 		p.addArg("height", "the height of the box (float)", "int");
 		thrown.expect(GetHelpException.class);
 		thrown.expectMessage("usage: java "+ p.programName + " length width height\n" + p.programPurpose + "\npositional arguments:\nlength the length of the box (float)\nwidth the width of the box (float)\nheight the height of the box (float)");
-		p.parse(s);
+		p.checkArgsThenParse(s);
 	}
 	
 	@Test

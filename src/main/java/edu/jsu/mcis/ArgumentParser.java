@@ -45,9 +45,6 @@ public class ArgumentParser{
 		Argument type = new Argument("type");
 		Argument digits = new Argument("digits");
 		
-		if(cla.length > 0 && cla[0].equals("-h")){
-				throw new GetHelpException(getHelp());
-		}
 		if(cla.length < args.size() && (!args.contains(type) || !args.contains(digits))){
 			String message = "usage: java " + programName + getAllPosArgNames() +"\n" + programName + ".java: error: the following arguments are required:";
 			for(int i = cla.length; i < args.size(); i++){
@@ -179,6 +176,10 @@ public class ArgumentParser{
 			tempList.remove(tempList.indexOf("--help"));
 			throw new GetHelpException(getHelp());
 			
+		}
+		else if(tempList.contains("-h")){
+			tempList.remove(tempList.indexOf("-h"));
+			throw new GetHelpException(getHelp());
 		}
 		else{
 			for(int i = 0; i < tempList.size(); i++){
