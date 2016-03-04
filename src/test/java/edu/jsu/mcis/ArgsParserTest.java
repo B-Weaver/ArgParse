@@ -18,7 +18,7 @@ public class ArgsParserTest {
 	@Test
 	public void testArgumentIsAddedCorrectly() {
 		ArgumentParser p = new ArgumentParser();
-		p.addArg("length", "the length of the box", "float");
+		p.addArg("length", "the length of the box", Argument.Type.FLOAT);
 		assertEquals(1, p.getNumArguments());
 	}
 	
@@ -26,7 +26,7 @@ public class ArgsParserTest {
 	public void testArgumentValueIsParsedCorrectly() {
 		String[] s = {"17"};
 		ArgumentParser p = new ArgumentParser();
-		p.addArg("length", "the length of the box", "float");
+		p.addArg("length", "the length of the box", Argument.Type.FLOAT);
 		p.parse(s);
 		assertEquals("17", p.getArg("length"));
 	}
@@ -35,9 +35,9 @@ public class ArgsParserTest {
 	public void testCalculateVolume(){
 		String[] s = {"7", "5", "2"};
 		ArgumentParser p = new ArgumentParser();
-		p.addArg("length", "the length of the box", "float");
-		p.addArg("width", "the width of the box", "float");
-		p.addArg("height", "the height of the box", "float");
+		p.addArg("length", "the length of the box", Argument.Type.FLOAT);
+		p.addArg("width", "the width of the box", Argument.Type.FLOAT);
+		p.addArg("height", "the height of the box", Argument.Type.FLOAT);
 		p.parse(s);
 		String len = p.getArg("length");
 		String wid = p.getArg("width");
@@ -52,9 +52,9 @@ public class ArgsParserTest {
 	public void testsizeEquals(){
 		String[] s = {"7", "5", "2"};
 		ArgumentParser p = new ArgumentParser();
-		p.addArg("length", "the length of the box", "float");
-		p.addArg("width", "the width of the box", "float");
-		p.addArg("height", "the height of the box", "float");
+		p.addArg("length", "the length of the box", Argument.Type.FLOAT);
+		p.addArg("width", "the width of the box", Argument.Type.FLOAT);
+		p.addArg("height", "the height of the box", Argument.Type.FLOAT);
 		p.parse(s);
 		String len = p.getArg("length");
 		String wid = p.getArg("width");
@@ -72,9 +72,9 @@ public class ArgsParserTest {
 	public void testTooManyArguments(){
 		String[] s = {"7", "5", "2", "4"};
 		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
-		p.addArg("length", "the length of the box", "float");
-		p.addArg("width", "the width of the box", "float");
-		p.addArg("height", "the height of the box", "float");
+		p.addArg("length", "the length of the box", Argument.Type.FLOAT);
+		p.addArg("width", "the width of the box", Argument.Type.FLOAT);
+		p.addArg("height", "the height of the box", Argument.Type.FLOAT);
 		thrown.expect(TooManyArgsException.class);
 		thrown.expectMessage("usage: java "+ p.programName + " length width height"+"\n"+"VolumeCalculator.java: error: unrecognized arguments: " + s[3]);
 		p.parse(s);		
@@ -84,9 +84,9 @@ public class ArgsParserTest {
 	public void testTooManyArguments3ExtraArguments(){
 		String[] s = {"7", "5", "2", "4", "55", "16"};
 		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
-		p.addArg("length", "the length of the box", "float");
-		p.addArg("width", "the width of the box", "float");
-		p.addArg("height", "the height of the box", "float");
+		p.addArg("length", "the length of the box", Argument.Type.FLOAT);
+		p.addArg("width", "the width of the box", Argument.Type.FLOAT);
+		p.addArg("height", "the height of the box", Argument.Type.FLOAT);
 		thrown.expect(TooManyArgsException.class);
 		thrown.expectMessage("usage: java "+ p.programName + " length width height"+"\n"+"VolumeCalculator.java: error: unrecognized arguments: " + s[3]);
 		p.parse(s);		
@@ -96,9 +96,9 @@ public class ArgsParserTest {
 	public void testTooFewArgumentsForZeroArguments(){
 		String[] s = new String[0];
 		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
-		p.addArg("length", "the length of the box", "float");
-		p.addArg("width", "the width of the box", "float");
-		p.addArg("height", "the height of the box", "float");
+		p.addArg("length", "the length of the box", Argument.Type.FLOAT);
+		p.addArg("width", "the width of the box", Argument.Type.FLOAT);
+		p.addArg("height", "the height of the box", Argument.Type.FLOAT);
 		thrown.expect(TooFewArgsException.class);
 		thrown.expectMessage("usage: java "+ p.programName + " length width height\nVolumeCalculator.java: error: the following arguments are required: length, width, height");
 		p.parse(s);
@@ -108,9 +108,9 @@ public class ArgsParserTest {
 	public void testTooFewArgumentsForOneArgument(){
 		String[] s = {"7"};
 		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
-		p.addArg("length", "the length of the box", "float");
-		p.addArg("width", "the width of the box", "float");
-		p.addArg("height", "the height of the box", "float");
+		p.addArg("length", "the length of the box", Argument.Type.FLOAT);
+		p.addArg("width", "the width of the box", Argument.Type.FLOAT);
+		p.addArg("height", "the height of the box", Argument.Type.FLOAT);
 		thrown.expect(TooFewArgsException.class);
 		thrown.expectMessage("usage: java "+ p.programName + " length width height\nVolumeCalculator.java: error: the following arguments are required: width, height");
 		p.parse(s);
@@ -120,9 +120,9 @@ public class ArgsParserTest {
 	public void testTooFewArgumentsForTwoArguments(){
 		String[] s = {"7", "5"};
 		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
-		p.addArg("length", "the length of the box (float)", "float");
-		p.addArg("width", "the width of the box (float)", "float");
-		p.addArg("height", "the height of the box (float)", "int");
+		p.addArg("length", "the length of the box", Argument.Type.FLOAT);
+		p.addArg("width", "the width of the box", Argument.Type.FLOAT);
+		p.addArg("height", "the height of the box", Argument.Type.FLOAT);
 		thrown.expect(TooFewArgsException.class);
 		thrown.expectMessage("usage: java "+ p.programName + " length width height\nVolumeCalculator.java: error: the following arguments are required: height");
 		p.parse(s);
@@ -132,9 +132,9 @@ public class ArgsParserTest {
 	public void testHelpMessage(){
 		String [] s = {"-h"};
 		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
-		p.addArg("length", "the length of the box (float)", "float");
-		p.addArg("width", "the width of the box (float)", "float");
-		p.addArg("height", "the height of the box (float)", "int");
+		p.addArg("length", "the length of the box (float)", Argument.Type.FLOAT);
+		p.addArg("width", "the width of the box (float)", Argument.Type.FLOAT);
+		p.addArg("height", "the height of the box (float)", Argument.Type.INT);
 		thrown.expect(GetHelpException.class);
 		thrown.expectMessage("usage: java "+ p.programName + " length width height\n" + p.programPurpose + "\npositional arguments:\nlength the length of the box (float)\nwidth the width of the box (float)\nheight the height of the box (float)");
 		p.checkArgsThenParse(s);
@@ -144,9 +144,9 @@ public class ArgsParserTest {
 	public void testNamedHelpMessage(){
 		String[] s = {"7", "--help", "2", "5", "8"};
 		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
-		p.addArg("length", "the length of the box (float)", "float");
-		p.addArg("width", "the width of the box (float)", "float");
-		p.addArg("height", "the height of the box (float)", "int");
+		p.addArg("length", "the length of the box (float)", Argument.Type.FLOAT);
+		p.addArg("width", "the width of the box (float)", Argument.Type.FLOAT);
+		p.addArg("height", "the height of the box (float)", Argument.Type.INT);
 		p.addArg("type");
 		p.addArg("digits");
 		
@@ -159,9 +159,9 @@ public class ArgsParserTest {
 	public void testInvalidValueMessageFloat(){
 		String[] s = {"7", "something", "2"};
 		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
-		p.addArg("length", "the length of the box", "STRING");
-		p.addArg("width", "the width of the box", "FLOAT");
-		p.addArg("height", "the height of the box", "int");
+		p.addArg("length", "the length of the box");
+		p.addArg("width", "the width of the box", Argument.Type.FLOAT);
+		p.addArg("height", "the height of the box", Argument.Type.INT);
 		thrown.expect(InvalidValueException.class);
 		thrown.expectMessage("usage: java " + p.programName + p.getAllPosArgNames() + "\n" + p.programName +".java: error: argument width: invalid float value: something");
 		p.parse(s);
@@ -171,9 +171,9 @@ public class ArgsParserTest {
 	public void testInvalidValueMessageInt(){
 		String[] s = {"7", "something", "2"};
 		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
-		p.addArg("length", "the length of the box", "INT");
-		p.addArg("width", "the width of the box", "int");
-		p.addArg("height", "the height of the box", "float");
+		p.addArg("length", "the length of the box", Argument.Type.INT);
+		p.addArg("width", "the width of the box", Argument.Type.INT);
+		p.addArg("height", "the height of the box", Argument.Type.FLOAT);
 		thrown.expect(InvalidValueException.class);
 		thrown.expectMessage("usage: java " + p.programName + p.getAllPosArgNames() + "\n" + p.programName +".java: error: argument width: invalid int value: something");
 		p.parse(s);
@@ -183,9 +183,9 @@ public class ArgsParserTest {
 	public void testInvalidValueMessageBoolean(){
 		String[] s = {"true", "false", "2"};
 		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
-		p.addArg("length", "the length of the box", "boolean");
-		p.addArg("width", "the width of the box", "boolean");
-		p.addArg("height", "the height of the box", "BOOLEAN");
+		p.addArg("length", "the length of the box", Argument.Type.BOOLEAN);
+		p.addArg("width", "the width of the box", Argument.Type.BOOLEAN);
+		p.addArg("height", "the height of the box", Argument.Type.BOOLEAN);
 		thrown.expect(InvalidValueException.class);
 		thrown.expectMessage("usage: java " + p.programName + p.getAllPosArgNames() + "\n" + p.programName +".java: error: argument height: invalid boolean value: 2");
 		p.parse(s);
@@ -195,9 +195,9 @@ public class ArgsParserTest {
 	@Test
 	public void testArgumentNotFoundException(){
 		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
-		p.addArg("length", "the length of the box", "boolean");
-		p.addArg("width", "the width of the box", "boolean");
-		p.addArg("height", "the height of the box", "boolean");
+		p.addArg("length", "the length of the box", Argument.Type.BOOLEAN);
+		p.addArg("width", "the width of the box", Argument.Type.BOOLEAN);
+		p.addArg("height", "the height of the box", Argument.Type.BOOLEAN);
 		thrown.expect(ArgumentNotFoundException.class);
 		thrown.expectMessage("The argument depth was not found");
 		p.getArg("depth");
@@ -207,9 +207,9 @@ public class ArgsParserTest {
 	public void testCanUseNamedArguments(){
 		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of an ellipsoid.");
 		String[] s = {"7", "5", "2", "--type", "ellipsoid", "--digits", "1"};
-		p.addArg("length", "the length of the box", "float");
-		p.addArg("width", "the width of the box", "float");
-		p.addArg("height", "the height of the box", "float");
+		p.addArg("length", "the length of the box", Argument.Type.FLOAT);
+		p.addArg("width", "the width of the box", Argument.Type.FLOAT);
+		p.addArg("height", "the height of the box", Argument.Type.FLOAT);
 		p.addArg("type");
 		p.addArg("digits");
 		p.checkArgsThenParse(s);
@@ -221,9 +221,9 @@ public class ArgsParserTest {
 	public void testCanUseShortNamedArguments(){
 		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of an ellipsoid.");
 		String[] s = {"7", "5", "2", "-t", "ellipsoid", "-d", "1"};
-		p.addArg("length", "the length of the box", "float");
-		p.addArg("width", "the width of the box", "float");
-		p.addArg("height", "the height of the box", "float");
+		p.addArg("length", "the length of the box", Argument.Type.FLOAT);
+		p.addArg("width", "the width of the box", Argument.Type.FLOAT);
+		p.addArg("height", "the height of the box", Argument.Type.FLOAT);
 		p.addArg("type");
 		p.addArg("digits");
 		p.checkArgsThenParse(s);
@@ -235,9 +235,9 @@ public class ArgsParserTest {
 	public void testOneNamedArguments(){
 		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of an ellipsoid.");
 		String[] s = {"7", "5", "2", "--type", "ellipsoid"};
-		p.addArg("length", "the length of the box", "float");
-		p.addArg("width", "the width of the box", "float");
-		p.addArg("height", "the height of the box", "float");
+		p.addArg("length", "the length of the box", Argument.Type.FLOAT);
+		p.addArg("width", "the width of the box", Argument.Type.FLOAT);
+		p.addArg("height", "the height of the box", Argument.Type.FLOAT);
 		p.addArg("type");
 		p.addArg("digits");
 		p.checkArgsThenParse(s);
@@ -249,9 +249,9 @@ public class ArgsParserTest {
 	public void testOneDigitNamedArguments(){
 		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of an ellipsoid.");
 		String[] s = {"7", "5", "2", "--digits", "8"};
-		p.addArg("length", "the length of the box", "float");
-		p.addArg("width", "the width of the box", "float");
-		p.addArg("height", "the height of the box", "float");
+		p.addArg("length", "the length of the box", Argument.Type.FLOAT);
+		p.addArg("width", "the width of the box", Argument.Type.FLOAT);
+		p.addArg("height", "the height of the box", Argument.Type.FLOAT);
 		p.addArg("type");
 		p.addArg("digits");
 		p.checkArgsThenParse(s);
@@ -263,9 +263,9 @@ public class ArgsParserTest {
 	public void testOneDigitShortNamedArguments(){
 		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of an ellipsoid.");
 		String[] s = {"7", "5", "2", "-d", "8"};
-		p.addArg("length", "the length of the box", "float");
-		p.addArg("width", "the width of the box", "float");
-		p.addArg("height", "the height of the box", "float");
+		p.addArg("length", "the length of the box", Argument.Type.FLOAT);
+		p.addArg("width", "the width of the box", Argument.Type.FLOAT);
+		p.addArg("height", "the height of the box", Argument.Type.FLOAT);
 		p.addArg("type");
 		p.addArg("digits");
 		p.checkArgsThenParse(s);
@@ -277,9 +277,9 @@ public class ArgsParserTest {
 	public void testOneTypeNamedArguments(){
 		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of an ellipsoid.");
 		String[] s = {"7", "5", "2", "--type", "triangle"};
-		p.addArg("length", "the length of the box", "float");
-		p.addArg("width", "the width of the box", "float");
-		p.addArg("height", "the height of the box", "float");
+		p.addArg("length", "the length of the box", Argument.Type.FLOAT);
+		p.addArg("width", "the width of the box", Argument.Type.FLOAT);
+		p.addArg("height", "the height of the box", Argument.Type.FLOAT);
 		p.addArg("type");
 		p.addArg("digits");
 		p.checkArgsThenParse(s);
@@ -291,9 +291,9 @@ public class ArgsParserTest {
 	public void testOneTypeShortNamedArguments(){
 		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of an ellipsoid.");
 		String[] s = {"7", "5", "2", "-t", "triangle"};
-		p.addArg("length", "the length of the box", "float");
-		p.addArg("width", "the width of the box", "float");
-		p.addArg("height", "the height of the box", "float");
+		p.addArg("length", "the length of the box", Argument.Type.FLOAT);
+		p.addArg("width", "the width of the box", Argument.Type.FLOAT);
+		p.addArg("height", "the height of the box", Argument.Type.FLOAT);
 		p.addArg("type");
 		p.addArg("digits");
 		p.checkArgsThenParse(s);
@@ -305,9 +305,9 @@ public class ArgsParserTest {
 	public void testDefaultsNamedArguments(){
 		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of an ellipsoid.");
 		String[] s = {"7", "5", "2"};
-		p.addArg("length", "the length of the box", "float");
-		p.addArg("width", "the width of the box", "float");
-		p.addArg("height", "the height of the box", "float");
+		p.addArg("length", "the length of the box", Argument.Type.FLOAT);
+		p.addArg("width", "the width of the box", Argument.Type.FLOAT);
+		p.addArg("height", "the height of the box", Argument.Type.FLOAT);
 		p.addArg("type");
 		p.addArg("digits");
 		p.checkArgsThenParse(s);

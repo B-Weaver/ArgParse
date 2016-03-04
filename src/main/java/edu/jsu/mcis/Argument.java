@@ -10,33 +10,19 @@ public class Argument{
 	private Type type;
 	
 	public Argument(String n){
-		argName = n;
-		argDescription = "";
-		type = Type.STRING;
-		argValue = null;
-		
+		this(n, "", Type.STRING);
 	}
 	
 	public Argument(String n, String d){
-		argName = n;
-		argDescription = d;	
-		type = Type.STRING;
-		argValue = null;
+		this(n, d, Type.STRING);
 
 	}
 	
-	public Argument(String n, String d, String t){
+	public Argument(String n, String d, Type t){
 		argName = n;
 		argDescription = d;
-		if(t.equals("STRING") || t.equals("string")) type = Type.STRING;
-		else if(t.equals("boolean") || t.equals("BOOLEAN")) type = Type.BOOLEAN;
-		else if(t.equals("int") || t.equals("INT")) type = Type.INT;
-		else if(t.equals("float") || t.equals("FLOAT")) type = Type.FLOAT;
-		else{
-			throw new InvalidArgumentTypeException(t + " is not a valid argument type.");
-		}
+		type = t;
 		argValue = null;
-
 	}
 	
 	public void setValue(String v){

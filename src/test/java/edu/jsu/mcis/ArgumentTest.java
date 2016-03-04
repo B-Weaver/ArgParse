@@ -47,42 +47,42 @@ public class ArgumentTest{
 	
 	@Test
 	public void testGetArgTypeFloat(){
-		Argument s = new Argument("length", "the length of the box", "FLOAT");
+		Argument s = new Argument("length", "the length of the box", Argument.Type.FLOAT);
 		assertEquals(Argument.Type.FLOAT, s.getArgType());
 	}
 	
 	@Test
 	public void testGetArgTypeString(){
-		Argument s = new Argument("length", "the length of the box", "string");
+		Argument s = new Argument("length", "the length of the box");
 		assertEquals(Argument.Type.STRING, s.getArgType());
 	}
 	
 	@Test
 	public void testGetArgTypeInt(){
-		Argument s = new Argument("length", "the length of the box", "int");
+		Argument s = new Argument("length", "the length of the box", Argument.Type.INT);
 		assertEquals(Argument.Type.INT, s.getArgType());
 	}
 	
 	@Test
 	public void testGetArgTypeBoolean(){
-		Argument s = new Argument("length", "the length of the box", "boolean");
+		Argument s = new Argument("length", "the length of the box", Argument.Type.BOOLEAN);
 		assertEquals(Argument.Type.BOOLEAN, s.getArgType());
 	}
 	
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
 	
-	@Test
+	/*@Test
 	public void testInvalidArgumentTypeException(){
 		thrown.expect(InvalidArgumentTypeException.class);
 		thrown.expectMessage("spoon is not a valid argument type.");
-		Argument s = new Argument("length", "the length of the box", "spoon");
+		Argument s = new Argument("length", "the length of the box", Argument.Type.SPOON);
 		
-	}
+	}*/
 	
 	@Test
 	public void testGetArgFails(){
-		Argument s = new Argument("length", "the length of the box", "FLOAT");
+		Argument s = new Argument("length", "the length of the box", Argument.Type.FLOAT);
 		assertEquals(false, s.equals("hat"));
 	}
 }

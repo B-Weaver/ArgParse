@@ -29,14 +29,14 @@ public class ArgumentParser{
 	
 	public void addArg(String name)
 	{
-		args.add(new Argument(name));
+		addArg(name, "", Argument.Type.STRING);
 	}
 	
 	public void addArg(String name, String description){
-		args.add(new Argument(name, description));
+		addArg(name, description, Argument.Type.STRING);
 	}
 	
-	public void addArg(String name, String description, String type){
+	public void addArg(String name, String description, Argument.Type type){
 		args.add(new Argument(name, description, type));
 	}
 	
