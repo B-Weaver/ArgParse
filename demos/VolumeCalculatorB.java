@@ -3,9 +3,9 @@ import edu.jsu.mcis.*;
 public class VolumeCalculatorB{
 	public static void main(String[] args) {
 		ArgumentParser parser = new ArgumentParser("VolumeCalculatorB", "Calculate the volume of whatever.");
-		parser.addArg("length","the length of the box (int)", "int");
-		parser.addArg("width", "the width of the box (int)", "int");
-		parser.addArg("height", "the height of the box (int)", "int");
+		parser.addArg("length","the length of the box (int)", Argument.Type.INT);
+		parser.addArg("width", "the width of the box (int)", Argument.Type.INT);
+		parser.addArg("height", "the height of the box (int)", Argument.Type.INT);
 		parser.addArg("type");
 		parser.addArg("digits");
 		try {
