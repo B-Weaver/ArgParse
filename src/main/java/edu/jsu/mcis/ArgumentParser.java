@@ -190,17 +190,20 @@ public class ArgumentParser{
 					Argument a = new Argument(s);
 					if(s.equals("digits")){
 						args.get(args.indexOf(a)).setValue(v);
+						tempList.remove(tempList.get(i));
+						tempList.remove(tempList.get(i));
+						i--;
 					}
 					
 					else if(s.equals("type")){
 						args.get(args.indexOf(a)).setValue(v);
+						tempList.remove(tempList.get(i));
+						tempList.remove(tempList.get(i));
+						i--;
 					}
-					tempList.remove(tempList.get(i));
-					tempList.remove(tempList.get(i));
-					i--;
 				}
 				
-				else if(tempList.get(i).contains("-") && !tempList.get(i).equals("-h")){
+				else if(tempList.get(i).contains("-")){
 					String s = "";
 					if(tempList.get(i).equals("-d")){
 						s = "digits";

@@ -53,7 +53,6 @@ public class Argument{
 		return type;
 	}
 	
-	
 	@Override
 	public boolean equals(Object o){
 		if(o instanceof Argument) {

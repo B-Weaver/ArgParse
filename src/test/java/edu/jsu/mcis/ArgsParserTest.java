@@ -204,6 +204,17 @@ public class ArgsParserTest {
 	}
 	
 	@Test
+	public void testNamedArgumentNotFoundException(){
+		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
+		p.addArg("length", "the length of the box", Argument.Type.BOOLEAN);
+		p.addArg("width", "the width of the box", Argument.Type.BOOLEAN);
+		p.addArg("height", "the height of the box", Argument.Type.BOOLEAN);
+		thrown.expect(ArgumentNotFoundException.class);
+		thrown.expectMessage("The argument --myarg was not found");
+		p.getArg("--myarg");
+	}
+	
+	@Test
 	public void testCanUseNamedArguments(){
 		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of an ellipsoid.");
 		String[] s = {"7", "5", "2", "--type", "ellipsoid", "--digits", "1"};
@@ -290,7 +301,7 @@ public class ArgsParserTest {
 	@Test
 	public void testOneTypeShortNamedArguments(){
 		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of an ellipsoid.");
-		String[] s = {"7", "5", "2", "-t", "triangle"};
+		String[] s = {"7", "5", "2", "--type", " square", "-t", "triangle"};
 		p.addArg("length", "the length of the box", Argument.Type.FLOAT);
 		p.addArg("width", "the width of the box", Argument.Type.FLOAT);
 		p.addArg("height", "the height of the box", Argument.Type.FLOAT);
