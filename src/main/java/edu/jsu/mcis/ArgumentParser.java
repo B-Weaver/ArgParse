@@ -186,7 +186,7 @@ public class ArgumentParser{
 				if(tempList.get(i).contains("--")){
 					String s = tempList.get(i).substring(2, tempList.get(i).length());
 					String v = tempList.get(i+1);
-					
+					getArg(s);
 					Argument a = new Argument(s);
 					if(s.equals("digits")){
 						args.get(args.indexOf(a)).setValue(v);
@@ -201,6 +201,7 @@ public class ArgumentParser{
 						tempList.remove(tempList.get(i));
 						i--;
 					}
+					
 				}
 				
 				else if(tempList.get(i).contains("-")){
