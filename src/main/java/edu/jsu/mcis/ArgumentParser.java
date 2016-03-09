@@ -1,11 +1,20 @@
 package edu.jsu.mcis;
 import java.util.*;
+import java.io.*;
+import org.w3c.dom.Document;
+import org.w3c.dom.*;
+
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.DocumentBuilder;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
 public class ArgumentParser{
 	private List<Argument> args;
 	protected String programName;
 	protected String programPurpose;
 	protected String datatype;
+	
 	
 	public ArgumentParser(){
 		args = new ArrayList<Argument>();
@@ -35,6 +44,8 @@ public class ArgumentParser{
 	public void addArg(String name, String description){
 		addArg(name, description, Argument.Type.STRING);
 	}
+	
+	
 	
 	public void addArg(String name, String description, Argument.Type type){
 		args.add(new Argument(name, description, type));
@@ -238,6 +249,21 @@ public class ArgumentParser{
 			parse(tempArr);
 		}
 		
+	}
+	
+	public void parseXMLFile(String xml){
+		try{
+			DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+			Document doc = docBuilder.parse(new File(xml));
+			
+			doc.getDocumentElement().normalize();
+			
+			
+		}
+		catch(Throwable t){
+			t.printStackTrace();
+		}
 	}
 	
 }

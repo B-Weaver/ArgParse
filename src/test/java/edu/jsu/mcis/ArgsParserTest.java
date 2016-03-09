@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.Rule;
 import org.junit.rules.ExpectedException;
+import java.io.*;
 
 public class ArgsParserTest {
 	@Test
@@ -324,5 +325,20 @@ public class ArgsParserTest {
 		p.checkArgsThenParse(s);
 		
 		assertEquals("box", p.getArg("type"));
+	}
+	
+	@Test
+	public void testParseXMLFile(){
+		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
+		String[] s = {"7", "5", "2", "-t", "square", "--digits", "6"};
+		String filename = "C:/Users/Owner/Desktop/CS310/ArgParse/ArgParse/ArgParse/src/test/java/edu/jsu/mcis/Feature9Ex.xml";
+		p.parseXMLFile(filename);
+		p.checkArgsThenParse(s);
+		
+		assertEquals("7", p.getArg("length"));
+		assertEquals("5", p.getArg("width"));
+		assertEquals("2", p.getArg("height"));
+		assertEquals("square", p.getArg("type"));
+		assertEquals("6", p.getArg("digits"));
 	}
 }
