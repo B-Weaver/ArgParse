@@ -254,42 +254,42 @@ public class ArgumentParser{
 	public void parseXMLFile(String file){
 		String argName = "";
 		String argType = "";
-		Argument.Type type;
+		String position = "";
+		String argDefault = "";
+		String shortName = "";
 		try{
 			DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
 			Document doc = docBuilder.parse(new File(file));
 			
-			doc.getDocumentElement().normalize();
-			
-			NodeList listOfPositionalArgs = doc.getElementsByTagName("positional");
-			NodeList listOfNamedArgs = doc.getElementsByTagName("named");
-			
-			for(int i = 0; i < listOfPositionalArgs.getLength() + listOfNamedArgs.getLength(); i++){
-				Node newPositionalArgumentNode = listOfPositionalArgs.item(i);
-				Node newNamedArgumentNode = listOfNamedArgs.item(i);
-				if(newPositionalArgumentNode.getNodeType() == Node.ELEMENT_NODE){
-					Element newPositionalArgument = (Element)newPositionalArgumentNode;
-					
-					NodeList firstArgName = newPositionalArgument.getElementsByTagName("name");
-					Element firstArgNameElement = (Element)firstArgName.item(0);
-					
-					NodeList firstArgType = newPositionalArgument.getElementsByTagName("type");
-					Element firstArgTypeElement = (Element) firstArgName.item(0);
+			Element docElement = doc.getDocumentElement();
+			NodeList nl = docElement.getChildNodes();
+			if(nl != null && nl.getLength() > 0){
+				for(int i = 0; i < nl.getLength(); i++){
+					if(nl.item(i).getNodeType() == Node.ELEMENT_NODE){
+						Element newElement = (Element)nl.item(i);
+						if(newElement.getNodeName().contains("positional")){
+							argName = newElement.getElementsByTagName("name").item(0).getTextContent();
+							argType = newElement.getElementsByTagName("type").item(0).getTextContent();
+							position = newElement.getElementsByTagName("position").item(0).getTextContent();
+							if(argType.equals("string")) addArg(argName, " ",Argument.Type.STRING);
+							else if(argType.equals("integer")) addArg(argName, " ", Argument.Type.INT);
+							else if(argType.equals("boolean")) addArg(argName, " ", Argument.Type.BOOLEAN);
+							else if(argType.equals("float")) addArg(argName, " ", Argument.Type.FLOAT);
+						}
+						if(newElement.getNodeName().contains("named")){
+							argName = newElement.getElementsByTagName("name").item(0).getTextContent();
+							shortName = newElement.getElementsByTagName("shortname").item(0).getTextContent();
+							argType = newElement.getElementsByTagName("type").item(0).getTextContent();
+							argDefault = newElement.getElementsByTagName("default").item(0).getTextContent();
+							if(argType.equals("string")) addArg(argName, " ",Argument.Type.STRING);
+							else if(argType.equals("integer")) addArg(argName, " ", Argument.Type.INT);
+							else if(argType.equals("boolean")) addArg(argName, " ", Argument.Type.BOOLEAN);
+							else if(argType.equals("float")) addArg(argName, " ", Argument.Type.FLOAT);
+							args.get(args.indexOf(argName)).setValue(argDefault);
+						}
+					}			
 				}
-				else if(newNamedArgumentNode.getNodeType() == Node.ELEMENT_NODE){
-					Element newNamedArgument = (Element)newNamedArgumentNode;
-					
-					NodeList firstArgName = newNamedArgument.getElementsByTagName("name");
-					Element firstArgNameElement = (Element)firstArgName.item(0);
-					
-					NodeList firstArgType = newNamedArgument.getElementsByTagName("type");
-					Element firstArgTypeElement = (Element)firstArgName.item(0);
-					
-					NodeList firstArgDefault = newNamedArgument.getElementsByTagName("default");
-					Element firstArgDefaultElement = (Element)firstArgDefault.item(0);
-				}
-				
 			}
 		}
 		catch(SAXParseException err){
