@@ -251,15 +251,53 @@ public class ArgumentParser{
 		
 	}
 	
-	public void parseXMLFile(String xml){
+	public void parseXMLFile(String file){
+		String argName = "";
+		String argType = "";
+		Argument.Type type;
 		try{
 			DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
-			Document doc = docBuilder.parse(new File(xml));
+			Document doc = docBuilder.parse(new File(file));
 			
 			doc.getDocumentElement().normalize();
 			
+			NodeList listOfPositionalArgs = doc.getElementsByTagName("positional");
+			NodeList listOfNamedArgs = doc.getElementsByTagName("named");
 			
+			for(int i = 0; i < listOfPositionalArgs.getLength() + listOfNamedArgs.getLength(); i++){
+				Node newPositionalArgumentNode = listOfPositionalArgs.item(i);
+				Node newNamedArgumentNode = listOfNamedArgs.item(i);
+				if(newPositionalArgumentNode.getNodeType() == Node.ELEMENT_NODE){
+					Element newPositionalArgument = (Element)newPositionalArgumentNode;
+					
+					NodeList firstArgName = newPositionalArgument.getElementsByTagName("name");
+					Element firstArgNameElement = (Element)firstArgName.item(0);
+					
+					NodeList firstArgType = newPositionalArgument.getElementsByTagName("type");
+					Element firstArgTypeElement = (Element) firstArgName.item(0);
+				}
+				else if(newNamedArgumentNode.getNodeType() == Node.ELEMENT_NODE){
+					Element newNamedArgument = (Element)newNamedArgumentNode;
+					
+					NodeList firstArgName = newNamedArgument.getElementsByTagName("name");
+					Element firstArgNameElement = (Element)firstArgName.item(0);
+					
+					NodeList firstArgType = newNamedArgument.getElementsByTagName("type");
+					Element firstArgTypeElement = (Element)firstArgName.item(0);
+					
+					NodeList firstArgDefault = newNamedArgument.getElementsByTagName("default");
+					Element firstArgDefaultElement = (Element)firstArgDefault.item(0);
+				}
+				
+			}
+		}
+		catch(SAXParseException err){
+			System.out.println("Something wrong.");
+		}
+		catch(SAXException e){
+			Exception x = e.getException();
+			((x == null)? e:x).printStackTrace();
 		}
 		catch(Throwable t){
 			t.printStackTrace();
