@@ -245,7 +245,6 @@ public class ArgumentParser{
 			
 			String[] tempArr = new String[tempList.size()];
 			tempArr = tempList.toArray(tempArr);
-			System.out.println("index 1 : "+tempArr[0]);
 			parse(tempArr);
 		}
 		
@@ -254,42 +253,53 @@ public class ArgumentParser{
 	public void parseXMLFile(String file){
 		String argName = "";
 		String argType = "";
+		String argValue = "";
 		Argument.Type type;
 		try{
 			DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
 			Document doc = docBuilder.parse(new File(file));
 			
-			doc.getDocumentElement().normalize();
+			Element documentElement = doc.getDocumentElement();
 			
-			NodeList listOfPositionalArgs = doc.getElementsByTagName("positional");
-			NodeList listOfNamedArgs = doc.getElementsByTagName("named");
+			NodeList listOfXMLArgs = documentElement.getChildNodes();
 			
-			for(int i = 0; i < listOfPositionalArgs.getLength() + listOfNamedArgs.getLength(); i++){
-				Node newPositionalArgumentNode = listOfPositionalArgs.item(i);
-				Node newNamedArgumentNode = listOfNamedArgs.item(i);
-				if(newPositionalArgumentNode.getNodeType() == Node.ELEMENT_NODE){
-					Element newPositionalArgument = (Element)newPositionalArgumentNode;
+			if(listOfXMLArgs != null && listOfXMLArgs.getLength() > 0){
+				for(int i = 0; i < listOfXMLArgs.getLength(); i++){
+					if(listOfXMLArgs.item(i).getNodeType() == Node.ELEMENT_NODE){
+						Element el = (Element) listOfXMLArgs.item(i);
+						if(el.getNodeName().contains("positional")){
+							argName = el.getElementsByTagName("name").item(0).getTextContent();
+							argType = el.getElementsByTagName("type").item(0).getTextContent();
+						}
+						else if(el.getNodeName().contains("named")){
+							argName = el.getElementsByTagName("name").item(0).getTextContent();
+							argType = el.getElementsByTagName("type").item(0).getTextContent();
+							argValue = el.getElementsByTagName("default").item(0).getTextContent();
+						}
+						switch(argType.toLowerCase()){
+							case "integer":
+								type = Argument.Type.INT;
+								break;
+							case "boolean":
+								type = Argument.Type.BOOLEAN;
+								break;
+							case "float":
+								type = Argument.Type.FLOAT;
+								break;
+							default:
+								type = Argument.Type.STRING;
+								break;
+							
+						}
+						addArg(argName, "", type);
+						if(!argValue.equals("")){
+							Argument ta = new Argument(argName);
+							args.get(args.indexOf(ta)).setValue(argValue);
+						}
+					}
 					
-					NodeList firstArgName = newPositionalArgument.getElementsByTagName("name");
-					Element firstArgNameElement = (Element)firstArgName.item(0);
-					
-					NodeList firstArgType = newPositionalArgument.getElementsByTagName("type");
-					Element firstArgTypeElement = (Element) firstArgName.item(0);
 				}
-				else if(newNamedArgumentNode.getNodeType() == Node.ELEMENT_NODE){
-					Element newNamedArgument = (Element)newNamedArgumentNode;
-					
-					NodeList firstArgName = newNamedArgument.getElementsByTagName("name");
-					Element firstArgNameElement = (Element)firstArgName.item(0);
-					
-					NodeList firstArgType = newNamedArgument.getElementsByTagName("type");
-					Element firstArgTypeElement = (Element)firstArgName.item(0);
-					
-					NodeList firstArgDefault = newNamedArgument.getElementsByTagName("default");
-					Element firstArgDefaultElement = (Element)firstArgDefault.item(0);
-				}
-				
 			}
 		}
 		catch(SAXParseException err){

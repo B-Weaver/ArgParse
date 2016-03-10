@@ -16,5 +16,5 @@ javac -cp .;..\build\libs\ArgParse-1.0.jar VolumeCalculatorC.java
 pause
 cls
 
-java -cp .;..\build\libs\ArgParse-1.0.jar VolumeCalculatorC 7 5 2
+java -cp .;..\build\libs\ArgParse-1.0.jar VolumeCalculatorC 7 5 2 -t rectangle --digits 8
 pause

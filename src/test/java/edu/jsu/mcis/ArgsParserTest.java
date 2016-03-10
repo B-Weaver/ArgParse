@@ -331,7 +331,7 @@ public class ArgsParserTest {
 	public void testParseXMLFile(){
 		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
 		String[] s = {"7", "5", "2", "-t", "square", "--digits", "6"};
-		String filename = "C:/Users/Owner/Desktop/CS310/ArgParse/ArgParse/ArgParse/src/test/java/edu/jsu/mcis/Feature9Ex.xml";
+		String filename = "C:/Users/Barry/CS310/ArgParse/src/test/java/edu/jsu/mcis/Feature9Ex.xml";
 		p.parseXMLFile(filename);
 		p.checkArgsThenParse(s);
 		
