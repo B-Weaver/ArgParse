@@ -333,12 +333,42 @@ public class ArgsParserTest {
 		String[] s = {"7", "5", "2", "-t", "square", "--digits", "6"};
 		String filename = "C:/Users/Barry/CS310/ArgParse/src/test/java/edu/jsu/mcis/Feature9Ex.xml";
 		p.parseXMLFile(filename);
+		System.out.println(p.getAllPosArgNames());
 		p.checkArgsThenParse(s);
-		
 		assertEquals("7", p.getArg("length"));
 		assertEquals("5", p.getArg("width"));
 		assertEquals("2", p.getArg("height"));
 		assertEquals("square", p.getArg("type"));
 		assertEquals("6", p.getArg("digits"));
 	}
+	/*
+	@Test
+	public void testParseXMLFileNoNamedArgs(){
+		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
+		String[] s = {"7", "5", "2"};
+		String filename = "C:/Users/Owner/Desktop/CS310/ArgParse/ArgParse/ArgParse/src/test/java/edu/jsu/mcis/Feature9Ex.xml";
+		p.parseXMLFile(filename);
+		System.out.println(p.getAllPosArgNames());
+		p.checkArgsThenParse(s);
+		assertEquals("7", p.getArg("length"));
+		assertEquals("5", p.getArg("width"));
+		assertEquals("2", p.getArg("height"));
+		assertEquals("box", p.getArg("type"));
+		assertEquals("4", p.getArg("digits"));
+	}
+	@Test
+	public void testParseXMLFileSpecifyType(){
+		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
+		String[] s = {"7", "5", "2","--type", "ellipsoid"};
+		String filename = "C:/Users/Owner/Desktop/CS310/ArgParse/ArgParse/ArgParse/src/test/java/edu/jsu/mcis/Feature9Ex.xml";
+		p.parseXMLFile(filename);
+		System.out.println(p.getAllPosArgNames());
+		p.checkArgsThenParse(s);
+		
+		assertEquals("7", p.getArg("length"));
+		assertEquals("5", p.getArg("width"));
+		assertEquals("2", p.getArg("height"));
+		assertEquals("ellipsoid", p.getArg("type"));
+		assertEquals("6", p.getArg("digits"));
+	}*/
 }

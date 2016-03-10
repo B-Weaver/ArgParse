@@ -259,7 +259,7 @@ public class ArgumentParser{
 			DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
 			Document doc = docBuilder.parse(new File(file));
-			
+
 			Element documentElement = doc.getDocumentElement();
 			
 			NodeList listOfXMLArgs = documentElement.getChildNodes();
@@ -298,8 +298,7 @@ public class ArgumentParser{
 							args.get(args.indexOf(ta)).setValue(argValue);
 						}
 					}
-					
-				}
+				}	
 			}
 		}
 		catch(SAXParseException err){
