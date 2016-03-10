@@ -312,5 +312,4 @@ public class ArgumentParser{
 			t.printStackTrace();
 		}
 	}
-	
 }
