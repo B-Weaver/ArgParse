@@ -277,7 +277,7 @@ public class ArgumentParser{
 							else if(argType.equals("boolean")) addArg(argName, " ", Argument.Type.BOOLEAN);
 							else if(argType.equals("float")) addArg(argName, " ", Argument.Type.FLOAT);
 						}
-						if(newElement.getNodeName().contains("named")){
+						else if(newElement.getNodeName().contains("named")){
 							argName = newElement.getElementsByTagName("name").item(0).getTextContent();
 							shortName = newElement.getElementsByTagName("shortname").item(0).getTextContent();
 							argType = newElement.getElementsByTagName("type").item(0).getTextContent();
