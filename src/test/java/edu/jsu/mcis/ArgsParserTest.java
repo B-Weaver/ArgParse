@@ -346,7 +346,7 @@ public class ArgsParserTest {
 	public void testParseXMLFileNoNamedArgs(){
 		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
 		String[] s = {"7", "5", "2"};
-		String filename = "C:/Users/Owner/Desktop/CS310/ArgParse/ArgParse/ArgParse/src/test/java/edu/jsu/mcis/Feature9Ex.xml";
+		String filename = "C:/Users/Barry/CS310/ArgParse/src/test/java/edu/jsu/mcis/Feature9Ex.xml";
 		p.parseXMLFile(filename);
 		System.out.println(p.getAllPosArgNames());
 		p.checkArgsThenParse(s);
@@ -360,7 +360,7 @@ public class ArgsParserTest {
 	public void testParseXMLFileSpecifyType(){
 		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
 		String[] s = {"7", "5", "2","--type", "ellipsoid"};
-		String filename = "C:/Users/Owner/Desktop/CS310/ArgParse/ArgParse/ArgParse/src/test/java/edu/jsu/mcis/Feature9Ex.xml";
+		String filename = "C:/Users/Barry/CS310/ArgParse/src/test/java/edu/jsu/mcis/Feature9Ex.xml";
 		p.parseXMLFile(filename);
 		System.out.println(p.getAllPosArgNames());
 		p.checkArgsThenParse(s);

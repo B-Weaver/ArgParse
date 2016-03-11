@@ -313,5 +313,4 @@ public class ArgumentParser{
 			throw new XMLException();
 		}
 	}
-	
 }
