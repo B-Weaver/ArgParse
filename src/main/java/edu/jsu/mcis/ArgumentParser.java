@@ -6,6 +6,7 @@ import org.w3c.dom.*;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
@@ -268,15 +269,16 @@ public class ArgumentParser{
 				for(int i = 0; i < listOfXMLArgs.getLength(); i++){
 					if(listOfXMLArgs.item(i).getNodeType() == Node.ELEMENT_NODE){
 						Element el = (Element) listOfXMLArgs.item(i);
-						if(el.getNodeName().contains("positional")){
-							argName = el.getElementsByTagName("name").item(0).getTextContent();
-							argType = el.getElementsByTagName("type").item(0).getTextContent();
-						}
-						else if(el.getNodeName().contains("named")){
+						if(el.getNodeName().contains("named")){
 							argName = el.getElementsByTagName("name").item(0).getTextContent();
 							argType = el.getElementsByTagName("type").item(0).getTextContent();
 							argValue = el.getElementsByTagName("default").item(0).getTextContent();
 						}
+						else if(el.getNodeName().contains("positional")){
+							argName = el.getElementsByTagName("name").item(0).getTextContent();
+							argType = el.getElementsByTagName("type").item(0).getTextContent();
+						}
+						
 						switch(argType.toLowerCase()){
 							case "integer":
 								type = Argument.Type.INT;
@@ -301,15 +303,14 @@ public class ArgumentParser{
 				}	
 			}
 		}
-		catch(SAXParseException err){
-			System.out.println("Something wrong.");
-		}
 		catch(SAXException e){
-			Exception x = e.getException();
-			((x == null)? e:x).printStackTrace();
+			
 		}
-		catch(Throwable t){
-			t.printStackTrace();
+		catch(ParserConfigurationException e){
+			
+		}
+		catch(IOException e){
+			throw new XMLException();
 		}
 	}
 	
