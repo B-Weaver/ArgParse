@@ -4,7 +4,7 @@ import java.util.*;
 public class NamedArg extends Argument{
 	String shortname;
 	String defaultValue;
-	/*
+	
 	@Override
 	public String stringToXML(){
 		String toXML = "	<named>\n" +"		<name>";
@@ -12,19 +12,19 @@ public class NamedArg extends Argument{
 		toXML = toXML + shortname +"</shortname>\n" +"		<type>";
 		
 		if(type == Type.FLOAT){
-			toXML = toXML + "float</type>" + "		<position>";
+			toXML = toXML + "float</type>" + "		<default>";
 		}
 		else if(type == Type.INT){
-			toXML = toXML + "integer</type>" + "		<position>";
+			toXML = toXML + "integer</type>" + "		<default>";
 		}
 		else if(type == Type.BOOLEAN){
-			toXML = toXML + "boolean</type>" + "		<position>";
+			toXML = toXML + "boolean</type>" + "		<default>";
 		}
 		else{
-			toXML = toXML + "string</type>" + "		<position>";
+			toXML = toXML + "string</type>" + "		<default>";
 		}
 		
-		toXML = toXML + position +"</position>\n" +"	</positional>\n";
+		toXML = toXML + defaultValue +"</default>\n" +"	</named>\n";
 		return toXML;
-	}*/
+	}
 }

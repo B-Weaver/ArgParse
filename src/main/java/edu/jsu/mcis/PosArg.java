@@ -3,7 +3,7 @@ import java.util.*;
 
 public class PosArg extends Argument{
 	int position;
-	/*
+	
 	@Override
 	public String stringToXML(){
 		String toXML = "	<positional>\n" +"		<name>";
@@ -24,5 +24,5 @@ public class PosArg extends Argument{
 		
 		toXML = toXML + position +"</position>\n" +"	</positional>\n";
 		return toXML;
-	}*/
+	}
 }

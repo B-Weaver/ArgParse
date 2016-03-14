@@ -3,11 +3,11 @@ import java.util.*;
 
 public class Argument{
 	
-	private String argName;
-	private String argValue;
-	private String argDescription;
+	protected String argName;
+	protected String argValue;
+	protected String argDescription;
 	protected enum Type{ STRING, INT, FLOAT, BOOLEAN };
-	private Type type;
+	protected Type type;
 	
 	
 	public Argument(){
