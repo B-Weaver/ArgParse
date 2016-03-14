@@ -6,7 +6,7 @@ public class Argument{
 	private String argName;
 	private String argValue;
 	private String argDescription;
-	protected enum Type{ STRING, INT, FLOAT, BOOLEAN };
+	public enum Type{ STRING, INT, FLOAT, BOOLEAN };
 	private Type type;
 	
 	
