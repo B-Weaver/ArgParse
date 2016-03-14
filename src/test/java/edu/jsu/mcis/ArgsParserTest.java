@@ -329,12 +329,18 @@ public class ArgsParserTest {
 	
 	@Test
 	public void testParseXMLFile(){
-		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
+		//ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
 		String[] s = {"7", "5", "2", "-t", "square", "--digits", "6"};
-		String filename = "C:/Users/Owner/Desktop/CS310/ArgParse/ArgParse/ArgParse/src/test/java/edu/jsu/mcis/Feature9Ex.xml";
-		p.parseXMLFile(filename);
-		System.out.println(p.getAllPosArgNames());
-		p.checkArgsThenParse(s);
+		String filename = "C:/Users/Barry/CS310/ArgParse/src/test/java/edu/jsu/mcis/Feature9Ex.xml";
+		ArgumentParser p = XMLTools.load(filename);
+		//p.parseXMLFile(filename);
+		//System.out.println(p.getAllPosArgNames());
+		try {
+			p.checkArgsThenParse(s);
+		}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
 		assertEquals("7", p.getArg("length"));
 		assertEquals("5", p.getArg("width"));
 		assertEquals("2", p.getArg("height"));
@@ -348,7 +354,7 @@ public class ArgsParserTest {
 		String[] s = {"7", "5", "2"};
 		String filename = "C:/Users/Barry/CS310/ArgParse/src/test/java/edu/jsu/mcis/Feature9Ex.xml";
 		p.parseXMLFile(filename);
-		System.out.println(p.getAllPosArgNames());
+		//System.out.println(p.getAllPosArgNames());
 		p.checkArgsThenParse(s);
 		assertEquals("7", p.getArg("length"));
 		assertEquals("5", p.getArg("width"));
@@ -362,7 +368,7 @@ public class ArgsParserTest {
 		String[] s = {"7", "5", "2","--type", "ellipsoid"};
 		String filename = "C:/Users/Barry/CS310/ArgParse/src/test/java/edu/jsu/mcis/Feature9Ex.xml";
 		p.parseXMLFile(filename);
-		System.out.println(p.getAllPosArgNames());
+		//System.out.println(p.getAllPosArgNames());
 		p.checkArgsThenParse(s);
 		
 		assertEquals("7", p.getArg("length"));
@@ -376,9 +382,9 @@ public class ArgsParserTest {
 	public void testParseXMLFileSpecifyTypeBooleanValue(){
 		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
 		String[] s = {"7", "true", "2","-t", "ellipsoid"};
-		String filename = "C:/Users/Owner/Desktop/CS310/ArgParse/ArgParse/ArgParse/src/test/java/edu/jsu/mcis/Feature9ExB.xml";
+		String filename = "C:/Users/Barry/CS310/ArgParse/src/test/java/edu/jsu/mcis/Feature9ExB.xml";
 		p.parseXMLFile(filename);
-		System.out.println(p.getAllPosArgNames());
+		//System.out.println(p.getAllPosArgNames());
 		p.checkArgsThenParse(s);
 		
 		assertEquals("7", p.getArg("length"));
@@ -396,7 +402,7 @@ public class ArgsParserTest {
 		
 		thrown.expect(XMLException.class);
 		p.parseXMLFile(filename);
-		System.out.println(p.getAllPosArgNames());
+		//System.out.println(p.getAllPosArgNames());
 		p.checkArgsThenParse(s);
 	}
 }

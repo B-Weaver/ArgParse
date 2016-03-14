@@ -4,7 +4,7 @@ import java.util.*;
 public class NamedArg extends Argument{
 	String shortname;
 	String defaultValue;
-	
+	/*
 	@Override
 	public String stringToXML(){
 		String toXML = "	<named>\n" +"		<name>";
@@ -26,5 +26,5 @@ public class NamedArg extends Argument{
 		
 		toXML = toXML + position +"</position>\n" +"	</positional>\n";
 		return toXML;
-	}
+	}*/
 }

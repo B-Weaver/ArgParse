@@ -10,6 +10,10 @@ public class Argument{
 	private Type type;
 	
 	
+	public Argument(){
+		this("", "", Type.STRING);
+	}
+	
 	public Argument(String n){
 		this(n, "", Type.STRING);
 	}
@@ -51,6 +55,24 @@ public class Argument{
 	
 	public Type getArgType(){
 		return type;
+	}
+	
+	public void setTypeFromString(String t){
+		switch(t.toLowerCase()){
+			case "integer":
+				type = Argument.Type.INT;
+				break;
+			case "boolean":
+				type = Argument.Type.BOOLEAN;
+				break;
+			case "float":
+				type = Argument.Type.FLOAT;
+				break;
+			default:
+				type = Argument.Type.STRING;
+				break;
+			
+		}
 	}
 	
 	@Override

@@ -11,7 +11,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 public class ArgumentParser{
-	private List<Argument> args;
+	protected List<Argument> args;
 	protected String programName;
 	protected String programPurpose;
 	protected String datatype;
@@ -37,8 +37,7 @@ public class ArgumentParser{
 		return args.size();
 	}
 	
-	public void addArg(String name)
-	{
+	public void addArg(String name){
 		addArg(name, "", Argument.Type.STRING);
 	}
 	
@@ -146,6 +145,18 @@ public class ArgumentParser{
 			if(getArg(i).getArgType() != Argument.Type.STRING){
 				s = s + " " + args.get(i).getName();
 			}	
+				
+		}
+		
+		return s;
+	}
+	
+	public String getAllArgNames(){
+		String s = "";
+		for(int i = 0; i < args.size(); i++){
+			//if(getArg(i).getArgType() != Argument.Type.STRING){
+				s = s + " " + args.get(i).getName();
+			//}	
 				
 		}
 		

@@ -2,10 +2,11 @@ import edu.jsu.mcis.*;
 
 public class VolumeCalculatorC{
 	public static void main(String[] args) {
-		ArgumentParser parser = new ArgumentParser("VolumeCalculatorC", "Calculate the volume of any shape.");
+		//ArgumentParser parser = new ArgumentParser("VolumeCalculatorC", "Calculate the volume of any shape.");
 		String filename = "C:/Users/Barry/CS310/ArgParse/src/test/java/edu/jsu/mcis/Feature9Ex.xml";
 		try{
-			parser.parseXMLFile(filename);
+			//parser.parseXMLFile(filename);
+			ArgumentParser parser = XMLTools.load(filename);
 			parser.checkArgsThenParse(args);
 			int l = Integer.parseInt(parser.getArg("length"));
 			int w = Integer.parseInt(parser.getArg("width"));
