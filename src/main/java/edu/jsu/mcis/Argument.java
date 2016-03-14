@@ -6,8 +6,9 @@ public class Argument{
 	private String argName;
 	private String argValue;
 	private String argDescription;
-	public enum Type{ STRING, INT, FLOAT, BOOLEAN };
+	protected enum Type{ STRING, INT, FLOAT, BOOLEAN };
 	private Type type;
+	
 	
 	public Argument(String n){
 		this(n, "", Type.STRING);
@@ -15,7 +16,6 @@ public class Argument{
 	
 	public Argument(String n, String d){
 		this(n, d, Type.STRING);
-
 	}
 	
 	public Argument(String n, String d, Type t){
@@ -60,6 +60,13 @@ public class Argument{
 			return argName.equals(a.getName());
 		}
 		else return false;
+	}
+	
+	public String stringToXML(){
+		String toXML = "<arguments>\n";
+		
+		toXML = toXML +"</arguments>";
+		return toXML;
 	}
 	
 }
