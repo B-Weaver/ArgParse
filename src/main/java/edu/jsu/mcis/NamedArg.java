@@ -5,15 +5,6 @@ public class NamedArg extends Argument{
 	String shortname;
 	String defaultValue;
 	
-	public NamedArg(String n, String d, Type t, String s, String dv){
-		argName = n;
-		argDescription = d;
-		type = t;
-		shortname = s;
-		defaultValue = dv;
-		argValue = null;
-	}
-	
 	@Override
 	public String stringToXML(){
 		String toXML = "	<named>\n" +"		<name>";

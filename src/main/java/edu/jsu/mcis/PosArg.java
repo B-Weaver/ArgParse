@@ -4,14 +4,6 @@ import java.util.*;
 public class PosArg extends Argument{
 	int position;
 	
-	public PosArg(String n, String d, Type t, int pos){
-		argName = n;
-		argDescription = d;
-		type = t;
-		position = pos;
-		argValue = null;
-	}
-	
 	@Override
 	public String stringToXML(){
 		String toXML = "	<positional>\n" +"		<name>";
