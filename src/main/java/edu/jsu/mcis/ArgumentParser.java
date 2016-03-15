@@ -162,12 +162,8 @@ public class ArgumentParser{
 	public String getAllArgNames(){
 		String s = "";
 		for(int i = 0; i < args.size(); i++){
-			//if(getArg(i).getArgType() != Argument.Type.STRING){
-				s = s + " " + args.get(i).getName();
-			//}	
-				
+			s = s + " " + args.get(i).getName();
 		}
-		
 		return s;
 	}
 	
@@ -219,41 +215,20 @@ public class ArgumentParser{
 					String v = tempList.get(i+1);
 					getArg(s);
 					Argument a = new Argument(s);
-					if(s.equals("digits")){
+					if(args.contains(a)){
 						args.get(args.indexOf(a)).setValue(v);
 						tempList.remove(tempList.get(i));
 						tempList.remove(tempList.get(i));
 						i--;
 					}
-					
-					else if(s.equals("type")){
-						args.get(args.indexOf(a)).setValue(v);
-						tempList.remove(tempList.get(i));
-						tempList.remove(tempList.get(i));
-						i--;
-					}
-					
 				}
 				
 				else if(tempList.get(i).contains("-")){
-					String s = "";
-					if(tempList.get(i).equals("-d")){
-						s = "digits";
-					}
-					else if(tempList.get(i).equals("-t")){
-						s = "type";
-					}
+					String s = tempList.get(i).substring(1, tempList.get(i).length());
 					String v = tempList.get(i+1);
 					
-					Argument a = new Argument(s);
-					if(s.equals("digits")){
-						args.get(args.indexOf(a)).setValue(v);
-						tempList.remove(tempList.get(i));
-						tempList.remove(tempList.get(i));
-						i--;
-					}
-					
-					else if(s.equals("type")){
+					NamedArg a = new NamedArg(s);
+					if(args.contains(a.getShort())){
 						args.get(args.indexOf(a)).setValue(v);
 						tempList.remove(tempList.get(i));
 						tempList.remove(tempList.get(i));

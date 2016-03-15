@@ -4,6 +4,11 @@ import java.util.*;
 public class NamedArg extends Argument{
 	String shortName;
 	String defaultValue;
+	
+	public NamedArg(String s){
+		this("", s, "", Argument.Type.STRING, "");
+	}
+	
 	public NamedArg(String n, String s, String d, Argument.Type t, String dV){
 		super(n, d, t);
 		shortName = s;
@@ -16,6 +21,14 @@ public class NamedArg extends Argument{
 	
 	public void setDefaultValue(String dV){
 		defaultValue = dV;
+	}
+	
+	public String getShort(){
+		return shortName;
+	}
+	
+	public String getDefault(){
+		return defaultValue;
 	}
 	
 	@Override

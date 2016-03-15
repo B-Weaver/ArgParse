@@ -222,7 +222,7 @@ public class ArgsParserTest {
 		p.addArg("length", "the length of the box", Argument.Type.FLOAT);
 		p.addArg("width", "the width of the box", Argument.Type.FLOAT);
 		p.addArg("height", "the height of the box", Argument.Type.FLOAT);
-		p.addArg("type");
+		p.addNamedArg("type", "t", "type of shape", Argument.Type.STRING, "box");
 		p.addArg("digits");
 		p.checkArgsThenParse(s);
 		
@@ -240,7 +240,7 @@ public class ArgsParserTest {
 		p.addArg("digits");
 		p.checkArgsThenParse(s);
 		
-		assertEquals("1", p.getArg("digits"));
+		assertEquals("ellipsoid", p.getArg("type"));
 	}
 	
 	@Test
