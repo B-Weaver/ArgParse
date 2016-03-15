@@ -14,7 +14,7 @@ public class VolumeCalculatorC{
 			System.out.println("Digits: " +parser.getArg("digits"));
 			System.out.println("Type: " +parser.getArg("type"));
 			
-			System.out.println(parser.testPrintXML());
+			XMLTools.save(parser, "C:/Users/Barry/CS310/ArgParse/src/test/java/edu/jsu/mcis/Feature10.xml");
 		}
 		catch(Exception e) {
 			System.out.println(e.getMessage());

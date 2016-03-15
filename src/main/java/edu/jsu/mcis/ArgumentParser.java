@@ -270,7 +270,7 @@ public class ArgumentParser{
 		
 	}
 	
-	public String testPrintXML(){
+	public String writeArgsAsXML(){
 		String s = "<arguments>\n";
 		for(Argument a : args){
 			s += a.stringToXML();

@@ -13,8 +13,17 @@ import org.xml.sax.SAXParseException;
 
 public final class XMLTools{
 	
-	public static void save(ArgumentParser parser){
-		
+	public static void save(ArgumentParser parser, String fileName){
+		try{
+			File file = new File(fileName);
+			file.createNewFile();
+			PrintWriter writer = new PrintWriter(file);
+			writer.print(parser.writeArgsAsXML());
+			writer.close();
+		}
+		catch(Exception e){
+			
+		}
 	}
 
 	public static ArgumentParser load(String file){
