@@ -4,11 +4,11 @@ import java.util.*;
 public class Argument{
 	
 
-	private String argName;
-	private String argValue;
-	private String argDescription;
-	public enum Type{ STRING, INT, FLOAT, BOOLEAN };
-	private Type type;
+	protected String argName;
+	protected String argValue;
+	protected String argDescription;
+	protected enum Type{ STRING, INT, FLOAT, BOOLEAN };
+	protected Type type;
 	
 	
 	public Argument(){
