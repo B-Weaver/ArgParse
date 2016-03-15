@@ -13,7 +13,7 @@ import org.xml.sax.SAXParseException;
 
 public final class XMLTools{
 	
-	public static void save(List<Argument> args){
+	public static void save(ArgumentParser parser){
 		
 	}
 
@@ -32,18 +32,20 @@ public final class XMLTools{
 				for(int i = 0; i < listOfXMLArgs.getLength(); i++){
 					if(listOfXMLArgs.item(i).getNodeType() == Node.ELEMENT_NODE){
 						Element el = (Element) listOfXMLArgs.item(i);
+						String argName = "";
+						String argShortName = "";
+						String argDescription = "";
+						String argType = "";
+						String argValue = "";
+						String argPosition = "";
+						
+						
 						if(el.getNodeName().contains("named")){
-							String argName = "";
 							argName = el.getElementsByTagName("name").item(0).getTextContent();
-							String argShortName ="";
 							argShortName = el.getElementsByTagName("shortname").item(0).getTextContent();
-							String argDescription = "";
-							//argDescription = el.getElementsByTagName("description").item(0).getTextContent();
-							String argType = "";
+							if(el.getNodeName().contains("description")) argDescription = el.getElementsByTagName("description").item(0).getTextContent();
 							argType = el.getElementsByTagName("type").item(0).getTextContent();
-							String argValue ="";
 							argValue = el.getElementsByTagName("default").item(0).getTextContent();
-							//switchType(argType);
 							p.addArg(argName, argDescription);
 							Argument ta = new Argument(argName);
 							//p.args.get(p.args.indexOf(ta)).setShortName(argShortName);
@@ -51,13 +53,9 @@ public final class XMLTools{
 							p.args.get(p.args.indexOf(ta)).setValue(argValue);
 						}
 						else if(el.getNodeName().contains("positional")){
-							String argName = "";
 							argName = el.getElementsByTagName("name").item(0).getTextContent();
-							String argDescription = "";
 							//argDescription = el.getElementsByTagName("description").item(0).getTextContent();
-							String argType = "";
 							argType = el.getElementsByTagName("type").item(0).getTextContent();
-							String argPosition = "";
 							argPosition = el.getElementsByTagName("position").item(0).getTextContent();
 							p.addArg(argName, argDescription);
 							Argument ta = new Argument(argName);
@@ -77,7 +75,7 @@ public final class XMLTools{
 			
 		}
 		catch(IOException e){
-			throw new XMLException();
+			throw new XMLException(file);
 		}
 		return p;
 	}
