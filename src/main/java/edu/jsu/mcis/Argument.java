@@ -7,7 +7,7 @@ public class Argument{
 	protected String argName;
 	protected String argValue;
 	protected String argDescription;
-	protected enum Type{ STRING, INT, FLOAT, BOOLEAN };
+	public enum Type{ STRING, INT, FLOAT, BOOLEAN };
 	protected Type type;
 	
 	
