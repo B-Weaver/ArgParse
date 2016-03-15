@@ -51,6 +51,14 @@ public class ArgumentParser{
 		args.add(new Argument(name, description, type));
 	}
 	
+	public void addNamedArg(String name, String shortName, String description, Argument.Type type, String defaultValue){
+		args.add(new NamedArg(name, shortName, description, type, defaultValue));
+	}
+	
+	public void addPosArg(String name, String description, Argument.Type type, String position){
+		args.add(new PosArg(name, description, type, position));
+	}
+	
 	public void parse(String[] cla){
 		
 		Argument type = new Argument("type");
@@ -262,4 +270,12 @@ public class ArgumentParser{
 		
 	}
 	
+	public String testPrintXML(){
+		String s = "<arguments>\n";
+		for(Argument a : args){
+			s += a.stringToXML();
+		}
+		s += "</arguments>";
+		return s;
+	}
 }

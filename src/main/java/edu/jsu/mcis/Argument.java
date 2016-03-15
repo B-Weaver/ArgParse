@@ -58,6 +58,17 @@ public class Argument{
 		return type;
 	}
 	
+	public String getArgTypeAsString(){
+		if(type == Type.FLOAT)
+			return "float";
+		else if(type == Type.INT)
+			return "integer";
+		else if(type == Type.BOOLEAN)
+			return "boolean";
+		else
+			return "string";
+	}
+	
 	public void setTypeFromString(String t){
 		switch(t.toLowerCase()){
 			case "integer":
@@ -86,9 +97,8 @@ public class Argument{
 	}
 	
 	public String stringToXML(){
-		String toXML = "<arguments>\n";
+		String toXML = "\t<argument>\n\t\t<name>"+argName+"</name>\n\t\t<type>"+getArgTypeAsString()+"</type>\n\t</argument>\n";
 		
-		toXML = toXML +"</arguments>";
 		return toXML;
 	}
 	

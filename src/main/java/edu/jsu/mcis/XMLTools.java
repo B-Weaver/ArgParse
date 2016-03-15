@@ -38,6 +38,7 @@ public final class XMLTools{
 						String argType = "";
 						String argValue = "";
 						String argPosition = "";
+						Argument.Type t;
 						
 						
 						if(el.getNodeName().contains("named")){
@@ -46,21 +47,45 @@ public final class XMLTools{
 							if(el.getNodeName().contains("description")) argDescription = el.getElementsByTagName("description").item(0).getTextContent();
 							argType = el.getElementsByTagName("type").item(0).getTextContent();
 							argValue = el.getElementsByTagName("default").item(0).getTextContent();
-							p.addArg(argName, argDescription);
-							Argument ta = new Argument(argName);
-							//p.args.get(p.args.indexOf(ta)).setShortName(argShortName);
-							p.args.get(p.args.indexOf(ta)).setTypeFromString(argType);
-							p.args.get(p.args.indexOf(ta)).setValue(argValue);
+							switch(argType.toLowerCase()){
+								case "integer":
+									t = Argument.Type.INT;
+									break;
+								case "boolean":
+									t = Argument.Type.BOOLEAN;
+									break;
+								case "float":
+									t = Argument.Type.FLOAT;
+									break;
+								default:
+									t = Argument.Type.STRING;
+									break;
+								
+							}
+							p.addNamedArg(argName, argShortName, argDescription, t, argValue);
+							
 						}
 						else if(el.getNodeName().contains("positional")){
 							argName = el.getElementsByTagName("name").item(0).getTextContent();
-							//argDescription = el.getElementsByTagName("description").item(0).getTextContent();
+							if(el.getNodeName().contains("description")) argDescription = el.getElementsByTagName("description").item(0).getTextContent();
 							argType = el.getElementsByTagName("type").item(0).getTextContent();
 							argPosition = el.getElementsByTagName("position").item(0).getTextContent();
-							p.addArg(argName, argDescription);
-							Argument ta = new Argument(argName);
-							p.args.get(p.args.indexOf(ta)).setTypeFromString(argType);
-							//p.args.get(p.args.indexOf(ta)).setPosition(argPosition);
+							switch(argType.toLowerCase()){
+								case "integer":
+									t = Argument.Type.INT;
+									break;
+								case "boolean":
+									t = Argument.Type.BOOLEAN;
+									break;
+								case "float":
+									t = Argument.Type.FLOAT;
+									break;
+								default:
+									t = Argument.Type.STRING;
+									break;
+								
+							}
+							p.addPosArg(argName, argDescription, t, argPosition);
 						}
 						
 					}

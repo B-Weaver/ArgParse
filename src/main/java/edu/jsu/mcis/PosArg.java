@@ -4,25 +4,45 @@ import java.util.*;
 public class PosArg extends Argument{
 	int position;
 	
+	public PosArg(String n, String d, Argument.Type t, String p){
+		super(n, d, t);
+		position = Integer.parseInt(p);
+	}
+	
 	@Override
 	public String stringToXML(){
-		String toXML = "	<positional>\n" +"		<name>";
-		toXML = toXML + argName + "</name>\n" +"		<type>";
-		
-		if(type == Type.FLOAT){
-			toXML = toXML + "float</type>" + "		<position>";
-		}
-		else if(type == Type.INT){
-			toXML = toXML + "integer</type>" + "		<position>";
-		}
-		else if(type == Type.BOOLEAN){
-			toXML = toXML + "boolean</type>" + "		<position>";
-		}
-		else{
-			toXML = toXML + "string</type>" + "		<position>";
-		}
-		
-		toXML = toXML + position +"</position>\n" +"	</positional>\n";
+		String toXML = "\t<positional>\n\t\t<name>"+argName+"</name>\n\t\t<type>"+getArgTypeAsString()+"</type>\n\t\t<position>"+position+"</position>\n\t</positional>\n";
 		return toXML;
 	}
 }
+/*
+<arguments>
+    <positional>
+        <name>length</name>
+        <type>float</type>
+        <position>1</position>
+    </positional>
+    <positional>
+        <name>width</name>
+        <type>float</type>
+        <position>2</position>
+    </positional>
+    <positional>
+        <name>height</name>
+        <type>float</type>
+        <position>3</position>
+    </positional>
+    <named>
+        <name>type</name>
+        <shortname>t</shortname>
+        <type>string</type>
+        <default>box</default>
+    </named>
+    <named>
+        <name>digits</name>
+        <shortname>d</shortname>
+        <type>integer</type>
+        <default>4</default>
+    </named>
+</arguments>
+*/

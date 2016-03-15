@@ -2,29 +2,26 @@ package edu.jsu.mcis;
 import java.util.*;
 
 public class NamedArg extends Argument{
-	String shortname;
+	String shortName;
 	String defaultValue;
+	public NamedArg(String n, String s, String d, Argument.Type t, String dV){
+		super(n, d, t);
+		shortName = s;
+		defaultValue = dV;
+	}
+	
+	public void setShortName(String s){
+		shortName = s;
+	}
+	
+	public void setDefaultValue(String dV){
+		defaultValue = dV;
+	}
 	
 	@Override
 	public String stringToXML(){
-		String toXML = "	<named>\n" +"		<name>";
-		toXML = toXML + argName + "</name>\n" +"		<shortname>";
-		toXML = toXML + shortname +"</shortname>\n" +"		<type>";
+		String toXML = "\t<named>\n\t\t<name>"+argName+"</name>\n\t\t<shortname>"+shortName+"</shortname>\n\t\t<type>"+getArgTypeAsString()+"</type>\n\t\t<default>"+defaultValue+"</default>\n\t</named>\n";
 		
-		if(type == Type.FLOAT){
-			toXML = toXML + "float</type>" + "		<default>";
-		}
-		else if(type == Type.INT){
-			toXML = toXML + "integer</type>" + "		<default>";
-		}
-		else if(type == Type.BOOLEAN){
-			toXML = toXML + "boolean</type>" + "		<default>";
-		}
-		else{
-			toXML = toXML + "string</type>" + "		<default>";
-		}
-		
-		toXML = toXML + defaultValue +"</default>\n" +"	</named>\n";
 		return toXML;
 	}
 }
