@@ -12,6 +12,8 @@ import org.xml.sax.SAXParseException;
 
 public class ArgumentParser{
 	protected List<Argument> args;
+	private List<NamedArg> namedArgs;
+	private List<PosArg> posArgs;
 	protected String programName;
 	protected String programPurpose;
 	protected String datatype;
@@ -19,12 +21,16 @@ public class ArgumentParser{
 	
 	public ArgumentParser(){
 		args = new ArrayList<Argument>();
+		namedArgs = new ArrayList<NamedArg>();
+		posArgs = new ArrayList<PosArg>();
 		programName = "";
 		programPurpose = "";
 	}
 	
 	public ArgumentParser(String n, String p){
 		args = new ArrayList<Argument>();
+		namedArgs = new ArrayList<NamedArg>();
+		posArgs = new ArrayList<PosArg>();
 		programName = n;
 		programPurpose = p;
 	}
@@ -45,18 +51,19 @@ public class ArgumentParser{
 		addArg(name, description, Argument.Type.STRING);
 	}
 	
-	
-	
 	public void addArg(String name, String description, Argument.Type type){
 		args.add(new Argument(name, description, type));
 	}
 	
 	public void addNamedArg(String name, String shortName, String description, Argument.Type type, String defaultValue){
 		args.add(new NamedArg(name, shortName, description, type, defaultValue));
+		namedArgs.add(new NamedArg(name, shortName, description, type, defaultValue));
 	}
 	
 	public void addPosArg(String name, String description, Argument.Type type, String position){
 		args.add(new PosArg(name, description, type, position));
+		posArgs.add(new PosArg(name, description, type, position));
+
 	}
 	
 	public void parse(String[] cla){
@@ -227,14 +234,15 @@ public class ArgumentParser{
 					String s = tempList.get(i).substring(1, tempList.get(i).length());
 					String v = tempList.get(i+1);
 					
-					NamedArg a = new NamedArg(s);
-					if(args.contains(a.getShort())){
-						args.get(args.indexOf(a)).setValue(v);
-						tempList.remove(tempList.get(i));
-						tempList.remove(tempList.get(i));
-						i--;
+					for(NamedArg n : namedArgs){
+						if(n.getShort().equals(s)){
+							Argument b = new Argument(n.getName());
+							args.get(args.indexOf(b)).setValue(v);
+							tempList.remove(tempList.get(i));
+							tempList.remove(tempList.get(i));
+							i--;
+						}
 					}
-					
 				}
 			}
 			

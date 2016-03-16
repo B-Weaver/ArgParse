@@ -223,7 +223,7 @@ public class ArgsParserTest {
 		p.addArg("width", "the width of the box", Argument.Type.FLOAT);
 		p.addArg("height", "the height of the box", Argument.Type.FLOAT);
 		p.addNamedArg("type", "t", "type of shape", Argument.Type.STRING, "box");
-		p.addArg("digits");
+		p.addNamedArg("digits", "d", "digits of type", Argument.Type.STRING, "4");
 		p.checkArgsThenParse(s);
 		
 		assertEquals("1", p.getArg("digits"));
@@ -236,8 +236,8 @@ public class ArgsParserTest {
 		p.addArg("length", "the length of the box", Argument.Type.FLOAT);
 		p.addArg("width", "the width of the box", Argument.Type.FLOAT);
 		p.addArg("height", "the height of the box", Argument.Type.FLOAT);
-		p.addArg("type");
-		p.addArg("digits");
+		p.addNamedArg("type", "t", "type of shape", Argument.Type.STRING, "box");
+		p.addNamedArg("digits", "d", "digits of type", Argument.Type.STRING, "4");
 		p.checkArgsThenParse(s);
 		
 		assertEquals("ellipsoid", p.getArg("type"));
@@ -250,8 +250,8 @@ public class ArgsParserTest {
 		p.addArg("length", "the length of the box", Argument.Type.FLOAT);
 		p.addArg("width", "the width of the box", Argument.Type.FLOAT);
 		p.addArg("height", "the height of the box", Argument.Type.FLOAT);
-		p.addArg("type");
-		p.addArg("digits");
+		p.addNamedArg("type", "t", "type of shape", Argument.Type.STRING, "box");
+		p.addNamedArg("digits", "d", "digits of type", Argument.Type.STRING, "4");
 		p.checkArgsThenParse(s);
 		
 		assertEquals("4", p.getArg("digits"));
@@ -264,8 +264,8 @@ public class ArgsParserTest {
 		p.addArg("length", "the length of the box", Argument.Type.FLOAT);
 		p.addArg("width", "the width of the box", Argument.Type.FLOAT);
 		p.addArg("height", "the height of the box", Argument.Type.FLOAT);
-		p.addArg("type");
-		p.addArg("digits");
+		p.addNamedArg("type", "t", "type of shape", Argument.Type.STRING, "box");
+		p.addNamedArg("digits", "d", "digits of type", Argument.Type.STRING, "4");
 		p.checkArgsThenParse(s);
 		
 		assertEquals("8", p.getArg("digits"));
@@ -278,8 +278,8 @@ public class ArgsParserTest {
 		p.addArg("length", "the length of the box", Argument.Type.FLOAT);
 		p.addArg("width", "the width of the box", Argument.Type.FLOAT);
 		p.addArg("height", "the height of the box", Argument.Type.FLOAT);
-		p.addArg("type");
-		p.addArg("digits");
+		p.addNamedArg("type", "t", "type of shape", Argument.Type.STRING, "box");
+		p.addNamedArg("digits", "d", "digits of type", Argument.Type.STRING, "4");
 		p.checkArgsThenParse(s);
 		
 		assertEquals("8", p.getArg("digits"));
@@ -292,8 +292,8 @@ public class ArgsParserTest {
 		p.addArg("length", "the length of the box", Argument.Type.FLOAT);
 		p.addArg("width", "the width of the box", Argument.Type.FLOAT);
 		p.addArg("height", "the height of the box", Argument.Type.FLOAT);
-		p.addArg("type");
-		p.addArg("digits");
+		p.addNamedArg("type", "t", "type of shape", Argument.Type.STRING, "box");
+		p.addNamedArg("digits", "d", "digits of type", Argument.Type.STRING, "4");
 		p.checkArgsThenParse(s);
 		
 		assertEquals("triangle", p.getArg("type"));
@@ -306,8 +306,8 @@ public class ArgsParserTest {
 		p.addArg("length", "the length of the box", Argument.Type.FLOAT);
 		p.addArg("width", "the width of the box", Argument.Type.FLOAT);
 		p.addArg("height", "the height of the box", Argument.Type.FLOAT);
-		p.addArg("type");
-		p.addArg("digits");
+		p.addNamedArg("type", "t", "type of shape", Argument.Type.STRING, "box");
+		p.addNamedArg("digits", "d", "digits of type", Argument.Type.STRING, "4");
 		p.checkArgsThenParse(s);
 		
 		assertEquals("triangle", p.getArg("type"));
@@ -320,8 +320,8 @@ public class ArgsParserTest {
 		p.addArg("length", "the length of the box", Argument.Type.FLOAT);
 		p.addArg("width", "the width of the box", Argument.Type.FLOAT);
 		p.addArg("height", "the height of the box", Argument.Type.FLOAT);
-		p.addArg("type");
-		p.addArg("digits");
+		p.addNamedArg("type", "t", "type of shape", Argument.Type.STRING, "box");
+		p.addNamedArg("digits", "d", "digits of type", Argument.Type.STRING, "4");
 		p.checkArgsThenParse(s);
 		
 		assertEquals("box", p.getArg("type"));

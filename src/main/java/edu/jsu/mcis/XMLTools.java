@@ -100,7 +100,7 @@ public final class XMLTools{
 					}
 				}	
 			}
-			System.out.println(p.getAllArgNames());
+			//System.out.println(p.getAllArgNames());
 		}
 		catch(SAXException e){
 			

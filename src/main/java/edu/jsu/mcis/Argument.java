@@ -10,7 +10,6 @@ public class Argument{
 	public enum Type{ STRING, INT, FLOAT, BOOLEAN };
 	protected Type type;
 	
-	
 	public Argument(){
 		this("", "", Type.STRING);
 	}
