@@ -28,8 +28,8 @@ public class ArgParserKeywords{
 		parser.addArg("length", "the length of the box (float)", Argument.Type.FLOAT);
 		parser.addArg("width", "the width of the box (float)", Argument.Type.FLOAT);
 		parser.addArg("height", "the height of the box (float)", Argument.Type.FLOAT);
-		parser.addArg("type");
-		parser.addArg("digits");
+		parser.addNamedArg("type", "t", "type of shape", Argument.Type.STRING, "box");
+		parser.addNamedArg("digits", "d", "digits of type", Argument.Type.STRING, "4");
 		
 		try {
 			parser.checkArgsThenParse(args);

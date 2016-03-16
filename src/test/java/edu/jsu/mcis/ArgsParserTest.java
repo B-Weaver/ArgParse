@@ -330,7 +330,7 @@ public class ArgsParserTest {
 	@Test
 	public void testParseXMLFile(){
 		String[] s = {"7", "5", "2", "-t", "square", "--digits", "6"};
-		String filename = "C:/Users/Barry/CS310/ArgParse/src/test/java/edu/jsu/mcis/Feature9Ex.xml";
+		String filename = "C:/Users/Owner/Desktop/CS310/ArgParse/ArgParse/ArgParse/src/test/java/edu/jsu/mcis/Feature9Ex.xml";
 		ArgumentParser p = XMLTools.load(filename);
 		try {
 			p.checkArgsThenParse(s);
@@ -348,7 +348,7 @@ public class ArgsParserTest {
 	@Test
 	public void testParseXMLFileNoNamedArgs(){
 		String[] s = {"7", "5", "2"};
-		String filename = "C:/Users/Barry/CS310/ArgParse/src/test/java/edu/jsu/mcis/Feature9Ex.xml";
+		String filename = "C:/Users/Owner/Desktop/CS310/ArgParse/ArgParse/ArgParse/src/test/java/edu/jsu/mcis/Feature9Ex.xml";
 		ArgumentParser p = XMLTools.load(filename);
 		p.checkArgsThenParse(s);
 		assertEquals("7", p.getArg("length"));
@@ -360,7 +360,7 @@ public class ArgsParserTest {
 	@Test
 	public void testParseXMLFileSpecifyType(){
 		String[] s = {"7", "5", "2","--type", "ellipsoid"};
-		String filename = "C:/Users/Barry/CS310/ArgParse/src/test/java/edu/jsu/mcis/Feature9Ex.xml";
+		String filename = "C:/Users/Owner/Desktop/CS310/ArgParse/ArgParse/ArgParse/src/test/java/edu/jsu/mcis/Feature9Ex.xml";
 		ArgumentParser p = XMLTools.load(filename);
 		p.checkArgsThenParse(s);
 		
@@ -374,10 +374,11 @@ public class ArgsParserTest {
 	@Test
 	public void testParseXMLFileSpecifyTypeBooleanValue(){
 		String[] s = {"7", "true", "2","-t", "ellipsoid"};
-		String filename = "C:/Users/Barry/CS310/ArgParse/src/test/java/edu/jsu/mcis/Feature9ExB.xml";
+		String filename = "C:/Users/Owner/Desktop/CS310/ArgParse/ArgParse/ArgParse/src/test/java/edu/jsu/mcis/Feature9ExB.xml";
+		String saveFile = "C:/Users/Owner/Desktop/CS310/ArgParse/ArgParse/ArgParse/src/test/java/edu/jsu/mcis/Feature10Ex.xml";
 		ArgumentParser p = XMLTools.load(filename);
 		p.checkArgsThenParse(s);
-		
+		XMLTools.save(p, saveFile);
 		assertEquals("7", p.getArg("length"));
 		assertEquals("true", p.getArg("width"));
 		assertEquals("2", p.getArg("height"));
