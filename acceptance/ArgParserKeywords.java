@@ -7,9 +7,9 @@ public class ArgParserKeywords{
 					
 	public void StartVolumeCalculatorWithArguments(String[] args){
 		parser = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
-		parser.addArg("length", "the length of the box (float)", Argument.Type.FLOAT);
-		parser.addArg("width", "the width of the box (float)", Argument.Type.FLOAT);
-		parser.addArg("height", "the height of the box (float)", Argument.Type.FLOAT);
+		parser.addPosArg("length", "the length of the box (float)", Argument.Type.FLOAT, "1");
+		parser.addPosArg("width", "the width of the box (float)", Argument.Type.FLOAT, "2");
+		parser.addPosArg("height", "the height of the box (float)", Argument.Type.FLOAT, "3");
 		try {
 			parser.checkArgsThenParse(args);
 			int l = Integer.parseInt(parser.getArg("length"));
@@ -25,9 +25,9 @@ public class ArgParserKeywords{
 	
 	public void StartVolumeCalcuatorWithArguments(String[] args){
 		parser = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
-		parser.addArg("length", "the length of the box (float)", Argument.Type.FLOAT);
-		parser.addArg("width", "the width of the box (float)", Argument.Type.FLOAT);
-		parser.addArg("height", "the height of the box (float)", Argument.Type.FLOAT);
+		parser.addPosArg("length", "the length of the box (float)", Argument.Type.FLOAT, "1");
+		parser.addPosArg("width", "the width of the box (float)", Argument.Type.FLOAT, "2");
+		parser.addPosArg("height", "the height of the box (float)", Argument.Type.FLOAT, "3");
 		parser.addNamedArg("type", "t", "type of shape", Argument.Type.STRING, "box");
 		parser.addNamedArg("digits", "d", "digits of type", Argument.Type.STRING, "4");
 		
@@ -42,11 +42,11 @@ public class ArgParserKeywords{
 	
 	public void StartProgramWithArguments(String[] args){
 		parser = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
-		parser.addArg("length", "the length of the box (float)", Argument.Type.FLOAT);
-		parser.addArg("width", "the width of the box (float)", Argument.Type.FLOAT);
-		parser.addArg("height", "the height of the box (float)", Argument.Type.FLOAT);
-		parser.addArg("type");
-		parser.addArg("digits");
+		parser.addPosArg("length", "the length of the box (float)", Argument.Type.FLOAT, "1");
+		parser.addPosArg("width", "the width of the box (float)", Argument.Type.FLOAT, "2");
+		parser.addPosArg("height", "the height of the box (float)", Argument.Type.FLOAT, "3");
+		parser.addNamedArg("type", "t", "type of shape", Argument.Type.STRING, "box");
+		parser.addNamedArg("digits", "d", "digits of type", Argument.Type.STRING, "4");
 		try {
 			parser.checkArgsThenParse(args);
 			int l = Integer.parseInt(parser.getArg("length"));
@@ -85,10 +85,10 @@ public class ArgParserKeywords{
 	}
 	
 	public void StartAbsurdProgramWithArguments(String[] args){
-		parser2.addArg("Pet", "Animal", Argument.Type.STRING);
-		parser2.addArg("Number", "random", Argument.Type.INT);
-		parser2.addArg("Rainy", "weahter", Argument.Type.BOOLEAN);
-		parser2.addArg("Bathrooms", "number of bathrooms", Argument.Type.FLOAT);
+		parser2.addPosArg("Pet", "Animal", Argument.Type.STRING, "1");
+		parser2.addPosArg("Number", "random", Argument.Type.INT, "2");
+		parser2.addPosArg("Rainy", "weahter", Argument.Type.BOOLEAN, "3");
+		parser2.addPosArg("Bathrooms", "number of bathrooms", Argument.Type.FLOAT, "4");
 		parser2.parse(args);
 	}
 	
