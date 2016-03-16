@@ -13,6 +13,7 @@ public class NamedArg extends Argument{
 		super(n, d, t);
 		shortName = s;
 		defaultValue = dV;
+		this.argValue = dV;
 	}
 	
 	public void setShortName(String s){

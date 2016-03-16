@@ -1,0 +1,29 @@
+<arguments>
+	<positional>
+		<name>length</name>
+		<type>integer</type>
+		<position>1</position>
+	</positional>
+	<positional>
+		<name>width</name>
+		<type>float</type>
+		<position>2</position>
+	</positional>
+	<positional>
+		<name>height</name>
+		<type>string</type>
+		<position>3</position>
+	</positional>
+	<named>
+		<name>type</name>
+		<shortname>t</shortname>
+		<type>boolean</type>
+		<default>true</default>
+	</named>
+	<named>
+		<name>digits</name>
+		<shortname>d</shortname>
+		<type>float</type>
+		<default>4</default>
+	</named>
+</arguments>

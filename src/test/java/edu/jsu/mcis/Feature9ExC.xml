@@ -1,7 +1,7 @@
 <arguments>
     <positional>
         <name>length</name>
-        <type>int</type>
+        <type>integer</type>
         <position>1</position>
     </positional>
     <positional>

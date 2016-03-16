@@ -71,7 +71,7 @@ public class ArgumentParser{
 		Argument type = new Argument("type");
 		Argument digits = new Argument("digits");
 		
-		if(cla.length < args.size() && (!args.contains(type) || !args.contains(digits))){
+		if(cla.length < posArgs.size()){
 			String message = "usage: java " + programName + getAllPosArgNames() +"\n" + programName + ".java: error: the following arguments are required:";
 			for(int i = cla.length; i < args.size(); i++){
 				if(i < args.size()-1){
@@ -84,7 +84,7 @@ public class ArgumentParser{
 			throw new TooFewArgsException(message);
 		}
 		
-		else if(cla.length > args.size()) {
+		else if(cla.length > posArgs.size()) {
 			String message = "usage: java " + programName + getAllPosArgNames() +"\n" + programName + ".java: error: unrecognized arguments:";
 					for(int i = args.size(); i < cla.length; i++){
 						if(i < cla.length-1){
@@ -97,20 +97,11 @@ public class ArgumentParser{
 					throw new TooManyArgsException(message);
 		}
 		else{
-			for(int i = 0; i < args.size(); i++){
-				if(args.get(i).getName().equals("type") || args.get(i).getName().equals("digits")){	
-					if(args.get(i).getName().equals("type") && args.get(i).getValue() == null){
-						args.get(i).setValue("box");
-					}
-					
-					else if(args.get(i).getName().equals("digits") && args.get(i).getValue() == null){
-						args.get(i).setValue("4");
-					}
-				}
-				
-				else if(args.get(i).getArgType() == Argument.Type.FLOAT){
+			for(int i = 0; i < posArgs.size(); i++){
+				Argument c = new Argument(posArgs.get(i).getName());
+				if(posArgs.get(i).getArgType() == Argument.Type.FLOAT){
 					try{
-						args.get(i).setValue(cla[i]);
+						args.get(args.indexOf(c)).setValue(cla[i]);
 						float num = Float.parseFloat(args.get(i).getValue());
 					}
 					catch(RuntimeException e){
@@ -118,25 +109,25 @@ public class ArgumentParser{
 					}
 				}
 					
-				else if(args.get(i).getArgType() == Argument.Type.INT){
+				else if(posArgs.get(i).getArgType() == Argument.Type.INT){
 					try{
-						args.get(i).setValue(cla[i]);
+						args.get(args.indexOf(c)).setValue(cla[i]);
 						int num = Integer.parseInt(args.get(i).getValue());
 					}
 					catch(RuntimeException e){
 						throw new InvalidValueException(invalidValueMessage() + args.get(i).getName() + ": invalid int value: " + args.get(i).getValue());
 					}
 				}
-				else if(args.get(i).getArgType() == Argument.Type.BOOLEAN){
+				else if(posArgs.get(i).getArgType() == Argument.Type.BOOLEAN){
 					if(cla[i].equals("true") || cla[i].equals("false")){
-						args.get(i).setValue(cla[i]);
+						args.get(args.indexOf(c)).setValue(cla[i]);
 					}
 					else{
 						throw new InvalidValueException(invalidValueMessage() + args.get(i).getName() + ": invalid boolean value: " + cla[i]);
 					}
 				}
 				else{
-					args.get(i).setValue(cla[i]);					
+					args.get(args.indexOf(c)).setValue(cla[i]);					
 										
 				}
 			}
@@ -163,14 +154,6 @@ public class ArgumentParser{
 				
 		}
 		
-		return s;
-	}
-	
-	public String getAllArgNames(){
-		String s = "";
-		for(int i = 0; i < args.size(); i++){
-			s = s + " " + args.get(i).getName();
-		}
 		return s;
 	}
 	

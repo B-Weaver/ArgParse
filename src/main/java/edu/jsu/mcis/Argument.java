@@ -68,24 +68,6 @@ public class Argument{
 			return "string";
 	}
 	
-	public void setTypeFromString(String t){
-		switch(t.toLowerCase()){
-			case "integer":
-				type = Argument.Type.INT;
-				break;
-			case "boolean":
-				type = Argument.Type.BOOLEAN;
-				break;
-			case "float":
-				type = Argument.Type.FLOAT;
-				break;
-			default:
-				type = Argument.Type.STRING;
-				break;
-			
-		}
-	}
-	
 	@Override
 	public boolean equals(Object o){
 		if(o instanceof Argument) {
