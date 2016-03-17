@@ -53,7 +53,6 @@ public final class XMLTools{
 						if(el.getNodeName().contains("named")){
 							argName = el.getElementsByTagName("name").item(0).getTextContent();
 							argShortName = el.getElementsByTagName("shortname").item(0).getTextContent();
-							if(el.getNodeName().contains("description")) argDescription = el.getElementsByTagName("description").item(0).getTextContent();
 							argType = el.getElementsByTagName("type").item(0).getTextContent();
 							argValue = el.getElementsByTagName("default").item(0).getTextContent();
 							switch(argType.toLowerCase()){
@@ -76,7 +75,6 @@ public final class XMLTools{
 						}
 						else if(el.getNodeName().contains("positional")){
 							argName = el.getElementsByTagName("name").item(0).getTextContent();
-							if(el.getNodeName().contains("description")) argDescription = el.getElementsByTagName("description").item(0).getTextContent();
 							argType = el.getElementsByTagName("type").item(0).getTextContent();
 							argPosition = el.getElementsByTagName("position").item(0).getTextContent();
 							switch(argType.toLowerCase()){
@@ -100,7 +98,6 @@ public final class XMLTools{
 					}
 				}	
 			}
-			//System.out.println(p.getAllArgNames());
 		}
 		catch(SAXException e){
 			

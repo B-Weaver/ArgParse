@@ -69,20 +69,15 @@ public class ArgumentTest{
 		assertEquals(Argument.Type.BOOLEAN, s.getArgType());
 	}
 	
-	@Rule
-	public ExpectedException thrown = ExpectedException.none();
-	
-	/*@Test
-	public void testInvalidArgumentTypeException(){
-		thrown.expect(InvalidArgumentTypeException.class);
-		thrown.expectMessage("spoon is not a valid argument type.");
-		Argument s = new Argument("length", "the length of the box", Argument.Type.SPOON);
-		
-	}*/
-	
 	@Test
 	public void testGetArgFails(){
 		Argument s = new Argument("length", "the length of the box", Argument.Type.FLOAT);
 		assertEquals(false, s.equals("hat"));
+	}
+	
+	@Test
+	public void testGetDefaultOfNamedArgument(){
+		NamedArg n = new NamedArg("type", "t", "the type of shape", Argument.Type.STRING, "box");
+		assertEquals("box", n.getDefault());
 	}
 }

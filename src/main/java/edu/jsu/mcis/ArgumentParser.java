@@ -211,11 +211,15 @@ public class ArgumentParser{
 						tempList.remove(tempList.get(i));
 						i--;
 					}
+					else{
+						throw new ArgumentNotFoundException("The argument " + s + " was not found");
+					}
 				}
 				
 				else if(tempList.get(i).contains("-")){
 					String s = tempList.get(i).substring(1, tempList.get(i).length());
 					String v = tempList.get(i+1);
+					boolean shortFound = false;
 					
 					for(NamedArg n : namedArgs){
 						if(n.getShort().equals(s)){
@@ -224,7 +228,12 @@ public class ArgumentParser{
 							tempList.remove(tempList.get(i));
 							tempList.remove(tempList.get(i));
 							i--;
+							shortFound = true;
+							break;
 						}
+					}
+					if(!shortFound){
+						throw new ArgumentNotFoundException("No argument found with short name " + s);
 					}
 				}
 			}

@@ -5,23 +5,11 @@ public class NamedArg extends Argument{
 	String shortName;
 	String defaultValue;
 	
-	public NamedArg(String s){
-		this("", s, "", Argument.Type.STRING, "");
-	}
-	
 	public NamedArg(String n, String s, String d, Argument.Type t, String dV){
 		super(n, d, t);
 		shortName = s;
 		defaultValue = dV;
 		this.argValue = dV;
-	}
-	
-	public void setShortName(String s){
-		shortName = s;
-	}
-	
-	public void setDefaultValue(String dV){
-		defaultValue = dV;
 	}
 	
 	public String getShort(){

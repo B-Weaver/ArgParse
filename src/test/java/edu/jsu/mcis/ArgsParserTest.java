@@ -205,11 +205,40 @@ public class ArgsParserTest {
 	}
 	
 	@Test
+	public void testArgumentNotFoundExceptionOnNamed(){
+		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
+		String[] s = {"7", "5", "2", "-t", "ellipsoid", "--hope", "1"};
+		p.addPosArg("length", "the length of the box", Argument.Type.FLOAT, "1");
+		p.addPosArg("width", "the width of the box", Argument.Type.FLOAT, "2");
+		p.addPosArg("height", "the height of the box", Argument.Type.FLOAT, "3");
+		p.addNamedArg("type", "t", "type of shape", Argument.Type.STRING, "box");
+		p.addNamedArg("digits", "d", "digits of type", Argument.Type.STRING, "4");
+		thrown.expect(ArgumentNotFoundException.class);
+		thrown.expectMessage("The argument hope was not found");
+		p.checkArgsThenParse(s);
+	}
+	
+	@Test
+	public void testArgumentNotFoundExceptionOnShortname(){
+		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
+		String[] s = {"7", "5", "2", "-t", "ellipsoid", "-p", "1"};
+		p.addPosArg("length", "the length of the box", Argument.Type.FLOAT, "1");
+		p.addPosArg("width", "the width of the box", Argument.Type.FLOAT, "2");
+		p.addPosArg("height", "the height of the box", Argument.Type.FLOAT, "3");
+		p.addNamedArg("type", "t", "type of shape", Argument.Type.STRING, "box");
+		p.addNamedArg("digits", "d", "digits of type", Argument.Type.STRING, "4");
+		thrown.expect(ArgumentNotFoundException.class);
+		thrown.expectMessage("No argument found with short name p");
+		p.checkArgsThenParse(s);
+	}
+	
+	@Test
 	public void testNamedArgumentNotFoundException(){
 		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of a box.");
 		p.addPosArg("length", "the length of the box", Argument.Type.FLOAT, "1");
 		p.addPosArg("width", "the width of the box", Argument.Type.FLOAT, "2");
 		p.addPosArg("height", "the height of the box", Argument.Type.FLOAT, "3");
+		
 		thrown.expect(ArgumentNotFoundException.class);
 		thrown.expectMessage("The argument --myarg was not found");
 		p.getArg("--myarg");
