@@ -10,6 +10,16 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
+/**
+ *@author Barry Weaver
+ *@author Gary Hastert
+ *@author Jonathon Beecham
+ *@author Matthew Arbuckle
+ *@author Oladiran Ojuolape
+ *@author Christopher Abercrombie
+ *This class allows for the user to create arguments and set their values by parsing through their inputs.
+ */
+
 public class ArgumentParser{
 	protected List<Argument> args;
 	private List<NamedArg> namedArgs;
@@ -18,6 +28,9 @@ public class ArgumentParser{
 	protected String programPurpose;
 	protected String datatype;
 	
+	/**
+	*This is the default constructor. The user calls this if they do not specify a name and purpose for the program they are using.
+	*/
 	
 	public ArgumentParser(){
 		args = new ArrayList<Argument>();
@@ -27,6 +40,12 @@ public class ArgumentParser{
 		programPurpose = "";
 	}
 	
+	/**
+	*This constructor creates a new instance of the ArgumentParser class when called.
+	*@param n  specifies the name of the program, as provided by the user.
+	*@param p  specifies the description of the program, as provided by the user.
+	*/
+	
 	public ArgumentParser(String n, String p){
 		args = new ArrayList<Argument>();
 		namedArgs = new ArrayList<NamedArg>();
@@ -35,30 +54,79 @@ public class ArgumentParser{
 		programPurpose = p;
 	}
 	
+	/**
+	*This method returns the name of the argument from the args list with at the specified index.
+	*@param index  the index of the argument being returned.
+	*@return       the argument at the index.
+	*/
+	
 	public Argument getArg(int index) {
 		return args.get(index);
 	}
+	
+	/**
+	*This method returns the size of the args list, which represents the number of total arguments provided by the user.
+	*@return          the size of the args list.
+	*/
 	
 	public int getNumArguments(){
 		return args.size();
 	}
 	
+	/**
+	*This method adds the argument provided to the list by calling the main constructor by providing a blank string for a description and 
+	*defaulting the argument to type string.
+	*@param name   the name of the argument.
+	*/
+	
 	public void addArg(String name){
 		addArg(name, "", Argument.Type.STRING);
 	}
+	
+	/**
+	*This method adds the argument provided to the list by calling main constructor by providing the name and description, provided by the user, and
+	*defaulting the type to string.
+	*@param name   the name of the argument.
+	*@param description   the description of said argument.
+	*/
 	
 	public void addArg(String name, String description){
 		addArg(name, description, Argument.Type.STRING);
 	}
 	
+	/**
+	*This method adds the argument provided to the list by calling main constructor by providing the name, description, and type of argument,
+	*as provided by the user.
+	*@param name   the name of the argument.
+	*@param description   the description of said argument.
+	*@param type   the type of argument.
+	*/
+	
 	public void addArg(String name, String description, Argument.Type type){
 		args.add(new Argument(name, description, type));
 	}
+	
+	/**
+	*This method adds a named argument by adding it to the args list and to the NamedArgs class.
+	*@param name   the name of the argument.
+	*@param shortname   the short name version of the argument, such as 't' instead of "type."
+	*@param description   the description of said argument.
+	*@param type   the type of argument.
+	*@param defaultValue   the user specified default value of the named argument.
+	*/
 	
 	public void addNamedArg(String name, String shortName, String description, Argument.Type type, String defaultValue){
 		args.add(new NamedArg(name, shortName, description, type, defaultValue));
 		namedArgs.add(new NamedArg(name, shortName, description, type, defaultValue));
 	}
+	
+	/**
+	*This method adds a positional argument by adding it to the args list and to the PosArgs class.
+	*@param name   the name of the argument.
+	*@param description   the description of said argument.
+	*@param type   the type of argument.
+	*@param position   the position in the args list the argument goes
+	*/
 	
 	public void addPosArg(String name, String description, Argument.Type type, String position){
 		args.add(new PosArg(name, description, type, position));
