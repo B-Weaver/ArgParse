@@ -134,11 +134,15 @@ public class ArgumentParser{
 
 	}
 	
+	/**
+	*This method parses through the values provided by the user and assigns these values to the positional arguments.
+	*@param cla   the values to be assigned to the positional arguments.
+	*@exception TooFewArgsException   this exception is thrown when too few arguments are provided by the user.
+	*@exception TooManyArgsException  this exception is thrown when too many arguments are provided by the user.
+	*@exception InvalidValueException  this exception is thrown when the user provides a value of the wrong type for an argument.
+	*/
+	
 	public void parse(String[] cla){
-		
-		Argument type = new Argument("type");
-		Argument digits = new Argument("digits");
-		
 		if(cla.length < posArgs.size()){
 			String message = "usage: java " + programName + getAllPosArgNames() +"\n" + programName + ".java: error: the following arguments are required:";
 			for(int i = cla.length; i < args.size(); i++){
@@ -195,12 +199,18 @@ public class ArgumentParser{
 					}
 				}
 				else{
-					args.get(args.indexOf(c)).setValue(cla[i]);					
-										
+					args.get(args.indexOf(c)).setValue(cla[i]);														
 				}
 			}
 		}
 	}
+	
+	/**
+	*This method is called by the user and is used to return the value of an argument.
+	*@param unit   the name of the argument to search for.
+	*@return       the value of the argument.
+	*@exception ArgumentNotFoundException  thrown when the argument doesn't exist.
+	*/
 	
 	public String getArg(String unit){
 		Argument a = new Argument(unit);
@@ -213,6 +223,11 @@ public class ArgumentParser{
 			
 	}
 	
+	/**
+	*This method is called by various methods to return the names of all the positional arguments in the list.
+	*@return  the names of all positional arguments.
+	*/
+	
 	public String getAllPosArgNames(){
 		String s = "";
 		for(int i = 0; i < args.size(); i++){
@@ -224,6 +239,11 @@ public class ArgumentParser{
 		
 		return s;
 	}
+	
+	/**
+	*This method is called when the user enters --help or -h. When called, a message with information on the program is displayed.
+	*@return   the help message.
+	*/
 	
 	public String getHelp(){
 		String h = "";
@@ -246,6 +266,11 @@ public class ArgumentParser{
 		return h;
 	}
 	
+	/**
+	*This method is called when the user enters an invalid value for an argument.
+	*@return   the error message for the InvalidValueException.
+	*/
+	
 	public String invalidValueMessage(){
 		String h = "";
 		h = "usage: java " + programName + getAllPosArgNames();
@@ -253,6 +278,14 @@ public class ArgumentParser{
 		h = h + "\n" +programName + ".java: error: argument ";
 		return h;
 	}
+	
+	/**
+	*This method is to be called by the user. It should be called by the user instead of parse. This method checks for the named arguments, assigns their default values,
+	*and removes the arguments from the array of arguments. It then calls parse for the positional arguments left to be assigned values.
+	*@param arr   an array with values for arguments provided by the user.
+	*@exception GetHelpException  an exception called when the user wants the help message. Thrown when --help or -h is provided by the user.
+	*@exception ArgumentNotFoundException  an exception thrown when the user provides a long-form or a short-name argument that doesn't exist in the list of arguments.
+	*/
 	
 	public void checkArgsThenParse(String[] arr){
 		ArrayList<String> tempList = new ArrayList<String>(Arrays.asList(arr));
@@ -312,6 +345,11 @@ public class ArgumentParser{
 		}
 		
 	}
+	
+	/**
+	*This method is used in the save method of XMLTools. This method converts the arguments and their values into a format to be used in an XML file.
+	*@return   a string containing the arguments and their info in a format suitable for an XML file.
+	*/
 	
 	public String writeArgsAsXML(){
 		String s = "<arguments>\n";

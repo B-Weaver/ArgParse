@@ -1,13 +1,25 @@
 package edu.jsu.mcis;
 import java.util.*;
 
+/**
+*
+*/
+
 public class PosArg extends Argument{
 	int position;
+	
+	/**
+	*
+	*/
 	
 	public PosArg(String n, String d, Argument.Type t, String p){
 		super(n, d, t);
 		position = Integer.parseInt(p);
 	}
+	
+	/**
+	*
+	*/
 	
 	@Override
 	public String stringToXML(){

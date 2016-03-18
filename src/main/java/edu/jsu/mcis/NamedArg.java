@@ -1,9 +1,17 @@
 package edu.jsu.mcis;
 import java.util.*;
 
+/**
+*
+*/
+
 public class NamedArg extends Argument{
 	String shortName;
 	String defaultValue;
+	
+	/**
+	*
+	*/
 	
 	public NamedArg(String n, String s, String d, Argument.Type t, String dV){
 		super(n, d, t);
@@ -12,13 +20,25 @@ public class NamedArg extends Argument{
 		this.argValue = dV;
 	}
 	
+	/**
+	*
+	*/
+	
 	public String getShort(){
 		return shortName;
 	}
 	
+	/**
+	*
+	*/
+	
 	public String getDefault(){
 		return defaultValue;
 	}
+	
+	/**
+	*
+	*/
 	
 	@Override
 	public String stringToXML(){

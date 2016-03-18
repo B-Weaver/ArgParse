@@ -10,8 +10,15 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
+/**
+*
+*/
 
 public final class XMLTools{
+	
+	/**
+	*
+	*/
 	
 	public static void save(ArgumentParser parser, String fileName){
 		try{
@@ -25,6 +32,10 @@ public final class XMLTools{
 			
 		}
 	}
+	
+	/**
+	*
+	*/
 
 	public static ArgumentParser load(String file){
 		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of an ellipsoid.");
