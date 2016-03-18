@@ -138,7 +138,7 @@ public class ArgsParserTest {
 		p.addPosArg("height", "the height of the box (float)", Argument.Type.FLOAT, "3");
 		thrown.expect(GetHelpException.class);
 		thrown.expectMessage("usage: java "+ p.programName + " length width height\n" + p.programPurpose + "\npositional arguments:\nlength the length of the box (float)\nwidth the width of the box (float)\nheight the height of the box (float)");
-		p.checkArgsThenParse(s);
+		p.parseArgs(s);
 	}
 	
 	@Test
@@ -153,7 +153,7 @@ public class ArgsParserTest {
 		
 		thrown.expect(GetHelpException.class);
 		thrown.expectMessage("usage: java "+ p.programName + " length width height\n" + p.programPurpose + "\npositional arguments:\nlength the length of the box (float)\nwidth the width of the box (float)\nheight the height of the box (float)");
-		p.checkArgsThenParse(s);
+		p.parseArgs(s);
 	}
 	
 	@Test
@@ -215,7 +215,7 @@ public class ArgsParserTest {
 		p.addNamedArg("digits", "d", "digits of type", Argument.Type.STRING, "4");
 		thrown.expect(ArgumentNotFoundException.class);
 		thrown.expectMessage("The argument hope was not found");
-		p.checkArgsThenParse(s);
+		p.parseArgs(s);
 	}
 	
 	@Test
@@ -229,7 +229,7 @@ public class ArgsParserTest {
 		p.addNamedArg("digits", "d", "digits of type", Argument.Type.STRING, "4");
 		thrown.expect(ArgumentNotFoundException.class);
 		thrown.expectMessage("No argument found with short name p");
-		p.checkArgsThenParse(s);
+		p.parseArgs(s);
 	}
 	
 	@Test
@@ -253,7 +253,7 @@ public class ArgsParserTest {
 		p.addPosArg("height", "the height of the box", Argument.Type.FLOAT, "3");
 		p.addNamedArg("type", "t", "type of shape", Argument.Type.STRING, "box");
 		p.addNamedArg("digits", "d", "digits of type", Argument.Type.STRING, "4");
-		p.checkArgsThenParse(s);
+		p.parseArgs(s);
 		
 		assertEquals("1", p.getArg("digits"));
 	}
@@ -267,7 +267,7 @@ public class ArgsParserTest {
 		p.addPosArg("height", "the height of the box", Argument.Type.FLOAT, "3");
 		p.addNamedArg("type", "t", "type of shape", Argument.Type.STRING, "box");
 		p.addNamedArg("digits", "d", "digits of type", Argument.Type.STRING, "4");
-		p.checkArgsThenParse(s);
+		p.parseArgs(s);
 		
 		assertEquals("ellipsoid", p.getArg("type"));
 	}
@@ -281,7 +281,7 @@ public class ArgsParserTest {
 		p.addPosArg("height", "the height of the box", Argument.Type.FLOAT, "3");
 		p.addNamedArg("type", "t", "type of shape", Argument.Type.STRING, "box");
 		p.addNamedArg("digits", "d", "digits of type", Argument.Type.STRING, "4");
-		p.checkArgsThenParse(s);
+		p.parseArgs(s);
 		
 		assertEquals("4", p.getArg("digits"));
 	}
@@ -295,7 +295,7 @@ public class ArgsParserTest {
 		p.addPosArg("height", "the height of the box", Argument.Type.FLOAT, "3");
 		p.addNamedArg("type", "t", "type of shape", Argument.Type.STRING, "box");
 		p.addNamedArg("digits", "d", "digits of type", Argument.Type.STRING, "4");
-		p.checkArgsThenParse(s);
+		p.parseArgs(s);
 		
 		assertEquals("8", p.getArg("digits"));
 	}
@@ -309,7 +309,7 @@ public class ArgsParserTest {
 		p.addPosArg("height", "the height of the box", Argument.Type.FLOAT, "3");
 		p.addNamedArg("type", "t", "type of shape", Argument.Type.STRING, "box");
 		p.addNamedArg("digits", "d", "digits of type", Argument.Type.STRING, "4");
-		p.checkArgsThenParse(s);
+		p.parseArgs(s);
 		
 		assertEquals("8", p.getArg("digits"));
 	}
@@ -323,7 +323,7 @@ public class ArgsParserTest {
 		p.addPosArg("height", "the height of the box", Argument.Type.FLOAT, "3");
 		p.addNamedArg("type", "t", "type of shape", Argument.Type.STRING, "box");
 		p.addNamedArg("digits", "d", "digits of type", Argument.Type.STRING, "4");
-		p.checkArgsThenParse(s);
+		p.parseArgs(s);
 		
 		assertEquals("triangle", p.getArg("type"));
 	}
@@ -337,7 +337,7 @@ public class ArgsParserTest {
 		p.addPosArg("height", "the height of the box", Argument.Type.FLOAT, "3");
 		p.addNamedArg("type", "t", "type of shape", Argument.Type.STRING, "box");
 		p.addNamedArg("digits", "d", "digits of type", Argument.Type.STRING, "4");
-		p.checkArgsThenParse(s);
+		p.parseArgs(s);
 		
 		assertEquals("triangle", p.getArg("type"));
 	}
@@ -351,7 +351,7 @@ public class ArgsParserTest {
 		p.addPosArg("height", "the height of the box", Argument.Type.FLOAT, "3");
 		p.addNamedArg("type", "t", "type of shape", Argument.Type.STRING, "box");
 		p.addNamedArg("digits", "d", "digits of type", Argument.Type.STRING, "4");
-		p.checkArgsThenParse(s);
+		p.parseArgs(s);
 		
 		assertEquals("box", p.getArg("type"));
 	}
@@ -362,7 +362,7 @@ public class ArgsParserTest {
 		String filename = "src/test/java/edu/jsu/mcis/Feature9Ex.xml";
 		ArgumentParser p = XMLTools.load(filename);
 		try {
-			p.checkArgsThenParse(s);
+			p.parseArgs(s);
 		}
 		catch(Exception e) {
 			System.out.println(e.getMessage());
@@ -379,7 +379,7 @@ public class ArgsParserTest {
 		String[] s = {"7", "5", "2"};
 		String filename = "src/test/java/edu/jsu/mcis/Feature9Ex.xml";
 		ArgumentParser p = XMLTools.load(filename);
-		p.checkArgsThenParse(s);
+		p.parseArgs(s);
 		assertEquals("7", p.getArg("length"));
 		assertEquals("5", p.getArg("width"));
 		assertEquals("2", p.getArg("height"));
@@ -391,7 +391,7 @@ public class ArgsParserTest {
 		String[] s = {"7", "5", "2","--type", "ellipsoid"};
 		String filename = "src/test/java/edu/jsu/mcis/Feature9Ex.xml";
 		ArgumentParser p = XMLTools.load(filename);
-		p.checkArgsThenParse(s);
+		p.parseArgs(s);
 		
 		assertEquals("7", p.getArg("length"));
 		assertEquals("5", p.getArg("width"));
@@ -406,7 +406,7 @@ public class ArgsParserTest {
 		String filename = "src/test/java/edu/jsu/mcis/Feature9ExB.xml";
 		String saveFile = "src/test/java/edu/jsu/mcis/Feature10Ex.xml";
 		ArgumentParser p = XMLTools.load(filename);
-		p.checkArgsThenParse(s);
+		p.parseArgs(s);
 		XMLTools.save(p, saveFile);
 		assertEquals("7", p.getArg("length"));
 		assertEquals("true", p.getArg("width"));
@@ -421,7 +421,7 @@ public class ArgsParserTest {
 		String filename = "src/test/java/edu/jsu/mcis/Feature9ExC.xml";
 		String saveFile = "src/test/java/edu/jsu/mcis/Feature10ExB.xml";
 		ArgumentParser p = XMLTools.load(filename);
-		p.checkArgsThenParse(s);
+		p.parseArgs(s);
 		XMLTools.save(p, saveFile);
 		assertEquals("7", p.getArg("length"));
 		assertEquals("5", p.getArg("width"));
@@ -437,6 +437,6 @@ public class ArgsParserTest {
 		
 		thrown.expect(XMLException.class);
 		ArgumentParser p = XMLTools.load(filename);
-		p.checkArgsThenParse(s);
+		p.parseArgs(s);
 	}
 }

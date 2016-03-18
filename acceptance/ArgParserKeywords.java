@@ -11,7 +11,7 @@ public class ArgParserKeywords{
 		parser.addPosArg("width", "the width of the box (float)", Argument.Type.FLOAT, "2");
 		parser.addPosArg("height", "the height of the box (float)", Argument.Type.FLOAT, "3");
 		try {
-			parser.checkArgsThenParse(args);
+			parser.parseArgs(args);
 			int l = Integer.parseInt(parser.getArg("length"));
 			int w = Integer.parseInt(parser.getArg("width"));
 			int h = Integer.parseInt(parser.getArg("height"));
@@ -32,7 +32,7 @@ public class ArgParserKeywords{
 		parser.addNamedArg("digits", "d", "digits of type", Argument.Type.STRING, "4");
 		
 		try {
-			parser.checkArgsThenParse(args);
+			parser.parseArgs(args);
 		}
 		catch(Exception e) {
 			output = e.getMessage();
@@ -89,7 +89,7 @@ public class ArgParserKeywords{
 		parser2.addPosArg("Number", "random", Argument.Type.INT, "2");
 		parser2.addPosArg("Rainy", "weahter", Argument.Type.BOOLEAN, "3");
 		parser2.addPosArg("Bathrooms", "number of bathrooms", Argument.Type.FLOAT, "4");
-		parser2.parse(args);
+		parser2.parseArgs(args);
 	}
 	
 	public String getPet(){
