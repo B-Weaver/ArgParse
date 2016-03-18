@@ -5,7 +5,7 @@ public class VolumeCalculatorC{
 		String filename = "C:/Users/Barry/CS310/ArgParse/src/test/java/edu/jsu/mcis/Feature9Ex.xml";
 		try{
 			ArgumentParser parser = XMLTools.load(filename);
-			parser.checkArgsThenParse(args);
+			parser.parseArgs(args);
 			int l = Integer.parseInt(parser.getArg("length"));
 			int w = Integer.parseInt(parser.getArg("width"));
 			int h = Integer.parseInt(parser.getArg("height"));

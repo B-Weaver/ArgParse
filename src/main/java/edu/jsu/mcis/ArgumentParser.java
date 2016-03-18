@@ -287,6 +287,10 @@ public class ArgumentParser{
 	*@exception ArgumentNotFoundException  an exception thrown when the user provides a long-form or a short-name argument that doesn't exist in the list of arguments.
 	*/
 	
+	public void parseArgs(String[] arr) {
+		checkArgsThenParse(arr);
+	}
+	
 	public void checkArgsThenParse(String[] arr){
 		ArrayList<String> tempList = new ArrayList<String>(Arrays.asList(arr));
 		
