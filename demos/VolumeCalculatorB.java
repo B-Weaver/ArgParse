@@ -3,11 +3,11 @@ import edu.jsu.mcis.*;
 public class VolumeCalculatorB{
 	public static void main(String[] args) {
 		ArgumentParser parser = new ArgumentParser("VolumeCalculatorB", "Calculate the volume of whatever.");
-		parser.addArg("length","the length of the box (int)", Argument.Type.INT);
-		parser.addArg("width", "the width of the box (int)", Argument.Type.INT);
-		parser.addArg("height", "the height of the box (int)", Argument.Type.INT);
-		parser.addArg("type");
-		parser.addArg("digits");
+		parser.addPosArg("length","the length of the box (int)", Argument.Type.INT, "1");
+		parser.addPosArg("width", "the width of the box (int)", Argument.Type.INT, "2");
+		parser.addPosArg("height", "the height of the box (int)", Argument.Type.INT, "3");
+		parser.addNamedArg("type", "t", "type of shape", Argument.Type.STRING, "box");
+		parser.addNamedArg("digits", "d", "digits of type", Argument.Type.STRING, "4");
 		try {
 			parser.checkArgsThenParse(args);
 			int l = Integer.parseInt(parser.getArg("length"));
