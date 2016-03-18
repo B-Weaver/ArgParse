@@ -1,7 +1,12 @@
 apply plugin: 'java'
+
+task myJavadocs(type: Javadoc){
+	source = sourceSets.main.allJava
+}
+
 apply plugin: 'jacoco'
 
-sourceCompatibility = 1.7
+sourceCompatibility = 1.8
 version = '1.0'
 jar {
     manifest {
