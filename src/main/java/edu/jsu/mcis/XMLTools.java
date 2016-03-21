@@ -38,10 +38,11 @@ public final class XMLTools{
 	*/
 
 	public static ArgumentParser load(String file){
+		String[] program = new String[2];
 		XMLTools x = new XMLTools();
-		String filename = file;
-		String programName = x.programLoadName(filename);
-		String programDescription = x.programLoadDescription(filename);
+		program = x.programLoad(file);
+		String programName = program[0];
+		String programDescription = program[1];
 		ArgumentParser p = new ArgumentParser(programName, programDescription);
 		try{
 			DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
@@ -131,8 +132,8 @@ public final class XMLTools{
 	*
 	*/
 	
-	public String programLoadName(String file){
-		String name = "";
+	public String[] programLoad(String file){
+		String[] prog = new String[2];
 		try{
 			DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
@@ -148,7 +149,8 @@ public final class XMLTools{
 						Element el = (Element) listOfXMLArgs.item(i);
 						
 						if(el.getNodeName().contains("program")){
-							name = el.getElementsByTagName("programname").item(0).getTextContent();
+							prog[0] = el.getElementsByTagName("programname").item(0).getTextContent();
+							prog[1] = el.getElementsByTagName("description").item(0).getTextContent();
 						}
 					}
 				}
@@ -163,46 +165,7 @@ public final class XMLTools{
 		catch(IOException e){
 			throw new XMLException(file);
 		}
-		return name;
-	}
-	
-	/**
-	*
-	*/
-	
-	public String programLoadDescription(String file){
-		String description = "";
-		try{
-			DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
-			Document doc = docBuilder.parse(new File(file));
-
-			Element documentElement = doc.getDocumentElement();
-			
-			NodeList listOfXMLArgs = documentElement.getChildNodes();
-			
-			if(listOfXMLArgs != null && listOfXMLArgs.getLength() > 0){
-				for(int i = 0; i < listOfXMLArgs.getLength(); i++){
-					if(listOfXMLArgs.item(i).getNodeType() == Node.ELEMENT_NODE){
-						Element el = (Element) listOfXMLArgs.item(i);
-						
-						if(el.getNodeName().contains("program")){
-							description = el.getElementsByTagName("description").item(0).getTextContent();
-						}
-					}
-				}
-			}
-		}
-		catch(SAXException e){
-			
-		}
-		catch(ParserConfigurationException e){
-			
-		}
-		catch(IOException e){
-			throw new XMLException(file);
-		}
-		return description;
+		return prog;
 	}
 	
 }
