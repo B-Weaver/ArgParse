@@ -42,7 +42,7 @@ public class NamedArg extends Argument{
 	
 	@Override
 	public String stringToXML(){
-		String toXML = "\t<named>\n\t\t<name>"+argName+"</name>\n\t\t<shortname>"+shortName+"</shortname>\n\t\t<type>"+getArgTypeAsString()+"</type>\n\t\t<default>"+defaultValue+"</default>\n\t</named>\n";
+		String toXML = "\t<named>\n\t\t<name>"+argName+"</name>\n\t\t<argdescription>" + argDescription + "</argdescription>\n\t\t<shortname>"+shortName+"</shortname>\n\t\t<type>"+getArgTypeAsString()+"</type>\n\t\t<default>"+defaultValue+"</default>\n\t</named>\n";
 		
 		return toXML;
 	}
