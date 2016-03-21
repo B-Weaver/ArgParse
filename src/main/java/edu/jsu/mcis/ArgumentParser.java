@@ -11,14 +11,14 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 /**
- *@author Barry Weaver
- *@author Gary Hastert
- *@author Jonathon Beecham
- *@author Matthew Arbuckle
- *@author Oladiran Ojuolape
- *@author Christopher Abercrombie
- *This class allows for the user to create arguments and set their values by parsing through their inputs.
- */
+*@author Barry Weaver
+*@author Gary Hastert
+*@author Jonathon Beecham
+*@author Matthew Arbuckle
+*@author Oladiran Ojuolape
+*@author Christopher Abercrombie
+*This class allows for the user to create arguments and set their values by parsing through their inputs.
+*/
 
 public class ArgumentParser{
 	protected List<Argument> args;
@@ -109,7 +109,7 @@ public class ArgumentParser{
 	/**
 	*This method adds a named argument by adding it to the args list and to the NamedArgs class.
 	*@param name   the name of the argument.
-	*@param shortname   the short name version of the argument, such as 't' instead of "type."
+	*@param shortName   the short name version of the argument, such as 't' instead of "type."
 	*@param description   the description of said argument.
 	*@param type   the type of argument.
 	*@param defaultValue   the user specified default value of the named argument.
@@ -219,8 +219,7 @@ public class ArgumentParser{
 		}
 		catch(RuntimeException e){
 			throw new ArgumentNotFoundException("The argument " + unit + " was not found");
-		}
-			
+		}		
 	}
 	
 	/**
@@ -280,16 +279,22 @@ public class ArgumentParser{
 	}
 	
 	/**
-	*This method is to be called by the user. It should be called by the user instead of parse. This method checks for the named arguments, assigns their default values,
-	*and removes the arguments from the array of arguments. It then calls parse for the positional arguments left to be assigned values.
+	*This method is to be called by the user. It should be called by the user instead of parse. This method calls checkArgsThenParse. It is mainly
+	*here for something the user can call easier instead of checkArgsThenParse because it has a shorter name.
 	*@param arr   an array with values for arguments provided by the user.
-	*@exception GetHelpException  an exception called when the user wants the help message. Thrown when --help or -h is provided by the user.
-	*@exception ArgumentNotFoundException  an exception thrown when the user provides a long-form or a short-name argument that doesn't exist in the list of arguments.
 	*/
 	
 	public void parseArgs(String[] arr) {
 		checkArgsThenParse(arr);
 	}
+	
+	/**
+	*This method checks for the named arguments, assigns their default values, and removes the arguments from the array of arguments. 
+	*It then calls parse for the positional arguments left to be assigned values.
+	*@param arr   an array with values for arguments provided by the user.
+	*@exception GetHelpException  an exception called when the user wants the help message. Thrown when --help or -h is provided by the user.
+	*@exception ArgumentNotFoundException  an exception thrown when the user provides a long-form or a short-name argument that doesn't exist in the list of arguments.
+	*/
 	
 	public void checkArgsThenParse(String[] arr){
 		ArrayList<String> tempList = new ArrayList<String>(Arrays.asList(arr));

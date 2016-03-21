@@ -11,6 +11,12 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 /**
+*@author Barry Weaver
+*@author Gary Hastert
+*@author Jonathon Beecham
+*@author Matthew Arbuckle
+*@author Oladiran Ojuolape
+*@author Christopher Abercrombie
 *
 */
 
