@@ -38,7 +38,11 @@ public final class XMLTools{
 	*/
 
 	public static ArgumentParser load(String file){
-		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of an ellipsoid.");
+		XMLTools x = new XMLTools();
+		String filename = file;
+		String programName = x.programLoadName(filename);
+		String programDescription = x.programLoadDescription(filename);
+		ArgumentParser p = new ArgumentParser(programName, programDescription);
 		try{
 			DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
@@ -60,9 +64,9 @@ public final class XMLTools{
 						String argPosition = "";
 						Argument.Type t;
 						
-						
 						if(el.getNodeName().contains("named")){
 							argName = el.getElementsByTagName("name").item(0).getTextContent();
+							argDescription = el.getElementsByTagName("argdescription").item(0).getTextContent();
 							argShortName = el.getElementsByTagName("shortname").item(0).getTextContent();
 							argType = el.getElementsByTagName("type").item(0).getTextContent();
 							argValue = el.getElementsByTagName("default").item(0).getTextContent();
@@ -86,6 +90,7 @@ public final class XMLTools{
 						}
 						else if(el.getNodeName().contains("positional")){
 							argName = el.getElementsByTagName("name").item(0).getTextContent();
+							argDescription = el.getElementsByTagName("argdescription").item(0).getTextContent();
 							argType = el.getElementsByTagName("type").item(0).getTextContent();
 							argPosition = el.getElementsByTagName("position").item(0).getTextContent();
 							switch(argType.toLowerCase()){
@@ -122,5 +127,82 @@ public final class XMLTools{
 		return p;
 	}
 	
+	/**
+	*
+	*/
+	
+	public String programLoadName(String file){
+		String name = "";
+		try{
+			DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+			Document doc = docBuilder.parse(new File(file));
+
+			Element documentElement = doc.getDocumentElement();
+			
+			NodeList listOfXMLArgs = documentElement.getChildNodes();
+			
+			if(listOfXMLArgs != null && listOfXMLArgs.getLength() > 0){
+				for(int i = 0; i < listOfXMLArgs.getLength(); i++){
+					if(listOfXMLArgs.item(i).getNodeType() == Node.ELEMENT_NODE){
+						Element el = (Element) listOfXMLArgs.item(i);
+						
+						if(el.getNodeName().contains("program")){
+							name = el.getElementsByTagName("programname").item(0).getTextContent();
+						}
+					}
+				}
+			}
+		}
+		catch(SAXException e){
+			
+		}
+		catch(ParserConfigurationException e){
+			
+		}
+		catch(IOException e){
+			throw new XMLException(file);
+		}
+		return name;
+	}
+	
+	/**
+	*
+	*/
+	
+	public String programLoadDescription(String file){
+		String description = "";
+		try{
+			DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+			Document doc = docBuilder.parse(new File(file));
+
+			Element documentElement = doc.getDocumentElement();
+			
+			NodeList listOfXMLArgs = documentElement.getChildNodes();
+			
+			if(listOfXMLArgs != null && listOfXMLArgs.getLength() > 0){
+				for(int i = 0; i < listOfXMLArgs.getLength(); i++){
+					if(listOfXMLArgs.item(i).getNodeType() == Node.ELEMENT_NODE){
+						Element el = (Element) listOfXMLArgs.item(i);
+						
+						if(el.getNodeName().contains("program")){
+							description = el.getElementsByTagName("description").item(0).getTextContent();
+						}
+					}
+				}
+			}
+		}
+		catch(SAXException e){
+			
+		}
+		catch(ParserConfigurationException e){
+			
+		}
+		catch(IOException e){
+			throw new XMLException(file);
+		}
+		return description;
+	}
 	
 }
