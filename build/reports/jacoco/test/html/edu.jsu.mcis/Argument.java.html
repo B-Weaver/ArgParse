@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Argument.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ArgParse</a> &gt; <a href="index.source.html" class="el_package">edu.jsu.mcis</a> &gt; <span class="el_source">Argument.java</span></div><h1>Argument.java</h1><pre class="source lang-java linenums">package edu.jsu.mcis;
+import java.util.*;
+
+/**
+*@author Barry Weaver
+*@author Gary Hastert
+*@author Jonathon Beecham
+*@author Matthew Arbuckle
+*@author Oladiran Ojuolape
+*@author Christopher Abercrombie
+*This class is where the arguments and there values are stored. Each argument's type, description, and value is stored here and can be used later.
+*/
+
+public class Argument{
+	
+
+	protected String argName;
+	protected String argValue;
+	protected String argDescription;
+	
+	/**
+	*The enumeration Type is used to set the type of argument. An argument can be a string, an integer, a float, or a boolean.
+	*When the user creates a new argument and wishes to specify the type they should type the following: Argument.Type.STRING/INT/FLOAT/BOOLEAN.
+	*/
+	
+<span class="pc" id="L26">	public enum Type{ STRING, INT, FLOAT, BOOLEAN };</span>
+	protected Type type;
+	
+	/**
+	*This is the default constructor. If the user provides no name and no description for the argument those values are left blank and the type is defaulted to String.
+	*For example: new Argument().
+	*/
+	
+	public Argument(){
+<span class="nc" id="L35">		this(&quot;&quot;, &quot;&quot;, Type.STRING);</span>
+<span class="nc" id="L36">	}</span>
+	
+	/**
+	*In this constructor the user specifies the name of the argument but no description. The type is defaulted to String as well.
+	*This is done by typing something like this: new Argument(&quot;length&quot;)
+	*@param n   the name of the argument.
+	*/
+	
+	public Argument(String n){
+<span class="fc" id="L45">		this(n, &quot;&quot;, Type.STRING);</span>
+<span class="fc" id="L46">	}</span>
+	
+	/**
+	*In this constructor the user specifies the name and description of the argument. However, the type is defaulted to String.
+	*This is done by typing something like this: new Argument(&quot;length&quot;, &quot;the length of the shape&quot;).
+	*@param n   the name of the argument.
+	*@param d   the description of the argument.
+	*/
+	
+	public Argument(String n, String d){
+<span class="fc" id="L56">		this(n, d, Type.STRING);</span>
+<span class="fc" id="L57">	}</span>
+	
+	/**
+	*In this constructor the user specifies the name, description, and type of argument. The value of the argument is set to null until the user assigns a value
+	*later on in the program. This is called by the addArg method in ArgumentParser.
+	*Usage: new Argument(&quot;length&quot;, &quot;the length of the shape&quot;, Argument.Type.INT).
+	*@param n   the name of the argument.
+	*@param d   the description of the argument.
+	*@param t   the type of argument.
+	*/
+	
+<span class="fc" id="L68">	public Argument(String n, String d, Type t){</span>
+<span class="fc" id="L69">		argName = n;</span>
+<span class="fc" id="L70">		argDescription = d;</span>
+<span class="fc" id="L71">		type = t;</span>
+<span class="fc" id="L72">		argValue = null;</span>
+<span class="fc" id="L73">	}</span>
+	
+	/**
+	*This method is called in the parse methods when the user provides a value for an argument.
+	*@param v   the value to be assigned to an argument.
+	*/
+	
+	public void setValue(String v){
+<span class="fc" id="L81">		argValue = v;</span>
+<span class="fc" id="L82">	}</span>
+	
+	/**
+	*This method returns the name of an argument. Is used for things such as printing out exception messages.
+	*@return    the name of an argument.
+	*/
+	
+	public String getName(){
+<span class="fc" id="L90">		return argName;</span>
+	}
+	
+	/**
+	*This method sets the description of an argument. Typically this is never used by the user.
+	*Usage example: Argument s = new Argument(&quot;length&quot;);
+	*s.setDescription(&quot;the length&quot;);
+	*@param d   the description of the argument.
+	*/
+	
+	public void setDescription(String d){
+<span class="fc" id="L101">		argDescription = d;</span>
+<span class="fc" id="L102">	}</span>
+	
+	/**
+	*This method is used to return the description of an argument. Can be used for things such as exception messages.
+	*@return   the description of the argument.
+	*/
+	
+	public String getDescription(){
+<span class="fc" id="L110">		return argDescription;</span>
+	}
+	
+	/**
+	*This method is used to return the value of an argument. This is called in the parser methods in ArgumentParser.
+	*@return   the value of an argument.
+	*/
+	
+	public String getValue(){
+<span class="fc" id="L119">		return argValue;</span>
+	}
+	
+	/**
+	*This method is used to return the name and description of various arguments. Typically this method is called to help generate exception messages.
+	*@return   a string containting the name and description of an argument.
+	*/
+	
+	public String getNameAndDescription(){
+<span class="fc" id="L128">		return argName + &quot; &quot; + argDescription;</span>
+	}
+	
+	/**
+	*This method returns the type of argument. This is mostly used for generating certain messages.
+	*@return   the argument type.
+	*/
+	
+	public Type getArgType(){
+<span class="fc" id="L137">		return type;</span>
+	}
+	
+	/**
+	*This method returns a the type an argument is as a string. This method is used by the stringToXML methods in PosArg and NamedArg, which is used for the save method
+	*in the XMLTools class.
+	*@return   a string showing the type of object an argument is.
+	*/
+	
+	public String getArgTypeAsString(){
+<span class="fc bfc" id="L147" title="All 2 branches covered.">		if(type == Type.FLOAT)</span>
+<span class="fc" id="L148">			return &quot;float&quot;;</span>
+<span class="fc bfc" id="L149" title="All 2 branches covered.">		else if(type == Type.INT)</span>
+<span class="fc" id="L150">			return &quot;integer&quot;;</span>
+<span class="fc bfc" id="L151" title="All 2 branches covered.">		else if(type == Type.BOOLEAN)</span>
+<span class="fc" id="L152">			return &quot;boolean&quot;;</span>
+		else
+<span class="fc" id="L154">			return &quot;string&quot;;</span>
+	}
+	
+	/**
+	*This method checks to see if an object is an instance of the Argument class. It is rarely used but can be called by saying: if(Argument.equals(&quot;length&quot;)) for example.
+	*@return   whether an object is an argument.
+	*/
+	
+	@Override
+	public boolean equals(Object o){
+<span class="fc bfc" id="L164" title="All 2 branches covered.">		if(o instanceof Argument) {</span>
+<span class="fc" id="L165">			Argument a = (Argument)o;</span>
+<span class="fc" id="L166">			return argName.equals(a.getName());</span>
+		}
+<span class="fc" id="L168">		else return false;</span>
+	}
+	
+	/**
+	*This method returns part of the contents of an XML file to be written. This method is called in the save method of the XMLTools class.
+	*@return   a string that has part of a XML file to be written.
+	*/
+	
+	public String stringToXML(){
+<span class="nc" id="L177">		String toXML = &quot;\t&lt;argument&gt;\n\t\t&lt;name&gt;&quot;+argName+&quot;&lt;/name&gt;\n\t\t&lt;argdescription&gt;&quot; + argDescription + &quot;&lt;/argdescription&gt;\n\t\t&lt;type&gt;&quot;+getArgTypeAsString()+&quot;&lt;/type&gt;\n\t&lt;/argument&gt;\n&quot;;</span>
+		
+<span class="nc" id="L179">		return toXML;</span>
+	}
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

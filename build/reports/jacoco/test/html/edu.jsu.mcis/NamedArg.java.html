@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>NamedArg.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ArgParse</a> &gt; <a href="index.source.html" class="el_package">edu.jsu.mcis</a> &gt; <span class="el_source">NamedArg.java</span></div><h1>NamedArg.java</h1><pre class="source lang-java linenums">package edu.jsu.mcis;
+import java.util.*;
+
+/**
+*@author Barry Weaver
+*@author Gary Hastert
+*@author Jonathon Beecham
+*@author Matthew Arbuckle
+*@author Oladiran Ojuolape
+*@author Christopher Abercrombie
+*This class is responsible for storing named arguments and their values.
+*/
+
+public class NamedArg extends Argument{
+	String shortName;
+	String defaultValue;
+	
+	/**
+	*This constructor is called to create a new named argument. The user specifies the name, shortname, description, type, and the default value of these arguments.
+	*Usage example: new NamedArg(&quot;digits&quot;, &quot;d&quot;, &quot;the number of digits&quot;, Argument.Type.FLOAT, &quot;4&quot;);
+	*@param n   the name of the argument
+	*@param s   the shortname of the argument
+	*@param d   the description of the argument
+	*@param t   the type of object the argument is
+	*@param dV  the default value of the argument
+	*/
+	
+	public NamedArg(String n, String s, String d, Argument.Type t, String dV){
+<span class="fc" id="L29">		super(n, d, t);</span>
+<span class="fc" id="L30">		shortName = s;</span>
+<span class="fc" id="L31">		defaultValue = dV;</span>
+<span class="fc" id="L32">		this.argValue = dV;</span>
+<span class="fc" id="L33">	}</span>
+	
+	/**
+	*This method can be used to return the shortname of a named argument. It's used by the checkArgsThenParse method is ArgumentParser to check for the shortname of a named argument.
+	*@return   the shortname
+	*/
+	
+	public String getShort(){
+<span class="fc" id="L41">		return shortName;</span>
+	}
+	
+	/**
+	*This method can be used to return the default value of a named argument.
+	*@return   the default value of an argument
+	*/
+	
+	public String getDefault(){
+<span class="fc" id="L50">		return defaultValue;</span>
+	}
+	
+	/**
+	*This method is used by the writeArgsAsXML method in ArgumentParser, which is used by the save method in XMLTools, to write the named arguments to an XML file.
+	*@return   a string formatting the named arguments and their values to an XML file.
+	*/
+	
+	@Override
+	public String stringToXML(){
+<span class="fc" id="L60">		String toXML = &quot;\t&lt;named&gt;\n\t\t&lt;name&gt;&quot;+argName+&quot;&lt;/name&gt;\n\t\t&lt;argdescription&gt;&quot; + argDescription + &quot;&lt;/argdescription&gt;\n\t\t&lt;shortname&gt;&quot;+shortName+&quot;&lt;/shortname&gt;\n\t\t&lt;type&gt;&quot;+getArgTypeAsString()+&quot;&lt;/type&gt;\n\t\t&lt;default&gt;&quot;+defaultValue+&quot;&lt;/default&gt;\n\t&lt;/named&gt;\n&quot;;</span>
+		
+<span class="fc" id="L62">		return toXML;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

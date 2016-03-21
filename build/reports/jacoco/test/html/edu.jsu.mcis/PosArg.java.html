@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>PosArg.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ArgParse</a> &gt; <a href="index.source.html" class="el_package">edu.jsu.mcis</a> &gt; <span class="el_source">PosArg.java</span></div><h1>PosArg.java</h1><pre class="source lang-java linenums">package edu.jsu.mcis;
+import java.util.*;
+
+/**
+*@author Barry Weaver
+*@author Gary Hastert
+*@author Jonathon Beecham
+*@author Matthew Arbuckle
+*@author Oladiran Ojuolape
+*@author Christopher Abercrombie
+*This class is responsible for storing positional arguments and their values.
+*/
+
+public class PosArg extends Argument{
+	int position;
+	
+	/**
+	*This constructor is called to create new positional argument. The user specifies the name, description, type, and position of these arguments.
+	*Usage example: new PosArg(&quot;length&quot;, &quot;the length of a shape&quot;, Argument.Type.INT, &quot;1&quot;);
+	*@param n   the name of the argument
+	*@param d   the description of the argument
+	*@param t   the type of object the argument is
+	*@param p   the position of the argument
+	*/
+	
+	public PosArg(String n, String d, Argument.Type t, String p){
+<span class="fc" id="L27">		super(n, d, t);</span>
+<span class="fc" id="L28">		position = Integer.parseInt(p);</span>
+<span class="fc" id="L29">	}</span>
+	
+	/**
+	*This method is used by the writeArgsAsXML method in ArgumentParser, which is called by the save method in XMLTools, to write the positional arguments to an XML file.
+	*@return   a string formatting the positional arguments and their values to be written to an XML file.
+	*/
+	
+	@Override
+	public String stringToXML(){
+<span class="fc" id="L38">		String toXML = &quot;\t&lt;positional&gt;\n\t\t&lt;name&gt;&quot;+argName+&quot;&lt;/name&gt;\n\t\t&lt;argdescription&gt;&quot; + argDescription +&quot;&lt;/argdescription&gt;\n\t\t&lt;type&gt;&quot;+getArgTypeAsString()+&quot;&lt;/type&gt;\n\t\t&lt;position&gt;&quot;+position+&quot;&lt;/position&gt;\n\t&lt;/positional&gt;\n&quot;;</span>
+<span class="fc" id="L39">		return toXML;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

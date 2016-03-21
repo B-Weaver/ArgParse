@@ -17,13 +17,15 @@ import org.xml.sax.SAXParseException;
 *@author Matthew Arbuckle
 *@author Oladiran Ojuolape
 *@author Christopher Abercrombie
-*
+*This class is used to load information from an XML file and to write various arguments and their values to said XML file.
 */
 
 public final class XMLTools{
 	
 	/**
-	*
+	*This method is used to save arguments and their values to a specified XML file. It calls ArgumentParser's writeArgsAsXML method to get the values.
+	*@param parser   an instance of ArgumentParser passed by the user that contains that passes the values of the arguments to this method.
+	*@param fileName the name of the file, passed by the user, that the method will write to.
 	*/
 	
 	public static void save(ArgumentParser parser, String fileName){
@@ -40,7 +42,11 @@ public final class XMLTools{
 	}
 	
 	/**
-	*
+	*This method is used to load the names of arguments, the types of arguments they are, and their values. It then gives these values to the instance of ArgumentParser calling it.
+	*Usage example: ArgumentParser p = XMLTools.load(fileName);
+	*@param file   the name of the file to be read from
+	*@return    an instance of ArgumentParser containing the values read from the file.
+	*@exception XMLException   this exception is thrown when something goes wrong reading from the file, or the file just can't be found.
 	*/
 
 	public static ArgumentParser load(String file){
@@ -135,7 +141,9 @@ public final class XMLTools{
 	}
 	
 	/**
-	*
+	*This method is called by the load method to provide the method the name and description of the file to be given to the instance of ArgumentParser the load method creates.
+	*@param file   the name of the file to be read from.
+	*@return   an String array containing the name and description of the file being read from.
 	*/
 	
 	public String[] programLoad(String file){

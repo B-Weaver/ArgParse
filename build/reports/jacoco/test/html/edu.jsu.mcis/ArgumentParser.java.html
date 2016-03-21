@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ArgumentParser.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ArgParse</a> &gt; <a href="index.source.html" class="el_package">edu.jsu.mcis</a> &gt; <span class="el_source">ArgumentParser.java</span></div><h1>ArgumentParser.java</h1><pre class="source lang-java linenums">package edu.jsu.mcis;
+import java.util.*;
+import java.io.*;
+import org.w3c.dom.Document;
+import org.w3c.dom.*;
+
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.ParserConfigurationException;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
+
+/**
+*@author Barry Weaver
+*@author Gary Hastert
+*@author Jonathon Beecham
+*@author Matthew Arbuckle
+*@author Oladiran Ojuolape
+*@author Christopher Abercrombie
+*This class allows for the user to create arguments and set their values by parsing through their inputs.
+*/
+
+public class ArgumentParser{
+	protected List&lt;Argument&gt; args;
+	private List&lt;NamedArg&gt; namedArgs;
+	private List&lt;PosArg&gt; posArgs;
+	protected String programName;
+	protected String programPurpose;
+	protected String datatype;
+	
+	/**
+	*This is the default constructor. The user calls this if they do not specify a name and purpose for the program they are using.
+	*/
+	
+<span class="fc" id="L35">	public ArgumentParser(){</span>
+<span class="fc" id="L36">		args = new ArrayList&lt;Argument&gt;();</span>
+<span class="fc" id="L37">		namedArgs = new ArrayList&lt;NamedArg&gt;();</span>
+<span class="fc" id="L38">		posArgs = new ArrayList&lt;PosArg&gt;();</span>
+<span class="fc" id="L39">		programName = &quot;&quot;;</span>
+<span class="fc" id="L40">		programPurpose = &quot;&quot;;</span>
+<span class="fc" id="L41">	}</span>
+	
+	/**
+	*This constructor creates a new instance of the ArgumentParser class when called.
+	*@param n  specifies the name of the program, as provided by the user.
+	*@param p  specifies the description of the program, as provided by the user.
+	*/
+	
+<span class="fc" id="L49">	public ArgumentParser(String n, String p){</span>
+<span class="fc" id="L50">		args = new ArrayList&lt;Argument&gt;();</span>
+<span class="fc" id="L51">		namedArgs = new ArrayList&lt;NamedArg&gt;();</span>
+<span class="fc" id="L52">		posArgs = new ArrayList&lt;PosArg&gt;();</span>
+<span class="fc" id="L53">		programName = n;</span>
+<span class="fc" id="L54">		programPurpose = p;</span>
+<span class="fc" id="L55">	}</span>
+	
+	/**
+	*This method returns the name of the argument from the args list with at the specified index.
+	*@param index  the index of the argument being returned.
+	*@return       the argument at the index.
+	*/
+	
+	public Argument getArg(int index) {
+<span class="fc" id="L64">		return args.get(index);</span>
+	}
+	
+	/**
+	*This method returns the size of the args list, which represents the number of total arguments provided by the user.
+	*@return          the size of the args list.
+	*/
+	
+	public int getNumArguments(){
+<span class="fc" id="L73">		return args.size();</span>
+	}
+	
+	/**
+	*This method adds the argument provided to the list by calling the main constructor by providing a blank string for a description and 
+	*defaulting the argument to type string.
+	*@param name   the name of the argument.
+	*/
+	
+	public void addArg(String name){
+<span class="fc" id="L83">		addArg(name, &quot;&quot;, Argument.Type.STRING);</span>
+<span class="fc" id="L84">	}</span>
+	
+	/**
+	*This method adds the argument provided to the list by calling main constructor by providing the name and description, provided by the user, and
+	*defaulting the type to string.
+	*@param name   the name of the argument.
+	*@param description   the description of said argument.
+	*/
+	
+	public void addArg(String name, String description){
+<span class="nc" id="L94">		addArg(name, description, Argument.Type.STRING);</span>
+<span class="nc" id="L95">	}</span>
+	
+	/**
+	*This method adds the argument provided to the list by calling main constructor by providing the name, description, and type of argument,
+	*as provided by the user.
+	*@param name   the name of the argument.
+	*@param description   the description of said argument.
+	*@param type   the type of argument.
+	*/
+	
+	public void addArg(String name, String description, Argument.Type type){
+<span class="fc" id="L106">		args.add(new Argument(name, description, type));</span>
+<span class="fc" id="L107">	}</span>
+	
+	/**
+	*This method adds a named argument by adding it to the args list and to the NamedArgs class.
+	*@param name   the name of the argument.
+	*@param shortName   the short name version of the argument, such as 't' instead of &quot;type.&quot;
+	*@param description   the description of said argument.
+	*@param type   the type of argument.
+	*@param defaultValue   the user specified default value of the named argument.
+	*/
+	
+	public void addNamedArg(String name, String shortName, String description, Argument.Type type, String defaultValue){
+<span class="fc" id="L119">		args.add(new NamedArg(name, shortName, description, type, defaultValue));</span>
+<span class="fc" id="L120">		namedArgs.add(new NamedArg(name, shortName, description, type, defaultValue));</span>
+<span class="fc" id="L121">	}</span>
+	
+	/**
+	*This method adds a positional argument by adding it to the args list and to the PosArgs class.
+	*@param name   the name of the argument.
+	*@param description   the description of said argument.
+	*@param type   the type of argument.
+	*@param position   the position in the args list the argument goes
+	*/
+	
+	public void addPosArg(String name, String description, Argument.Type type, String position){
+<span class="fc" id="L132">		args.add(new PosArg(name, description, type, position));</span>
+<span class="fc" id="L133">		posArgs.add(new PosArg(name, description, type, position));</span>
+
+<span class="fc" id="L135">	}</span>
+	
+	/**
+	*This method parses through the values provided by the user and assigns these values to the positional arguments.
+	*@param cla   the values to be assigned to the positional arguments.
+	*@exception TooFewArgsException   this exception is thrown when too few arguments are provided by the user.
+	*@exception TooManyArgsException  this exception is thrown when too many arguments are provided by the user.
+	*@exception InvalidValueException  this exception is thrown when the user provides a value of the wrong type for an argument.
+	*/
+	
+	public void parse(String[] cla){
+<span class="fc bfc" id="L146" title="All 2 branches covered.">		if(cla.length &lt; posArgs.size()){</span>
+<span class="fc" id="L147">			String message = &quot;usage: java &quot; + programName + getAllPosArgNames() +&quot;\n&quot; + programName + &quot;.java: error: the following arguments are required:&quot;;</span>
+<span class="fc bfc" id="L148" title="All 2 branches covered.">			for(int i = cla.length; i &lt; args.size(); i++){</span>
+<span class="fc bfc" id="L149" title="All 2 branches covered.">				if(i &lt; args.size()-1){</span>
+<span class="fc" id="L150">					message = message + &quot; &quot; + args.get(i).getName() + &quot;,&quot;;</span>
+				}
+				else{
+<span class="fc" id="L153">					message = message + &quot; &quot; + args.get(i).getName();</span>
+				}
+			}
+<span class="fc" id="L156">			throw new TooFewArgsException(message);</span>
+		}
+		
+<span class="fc bfc" id="L159" title="All 2 branches covered.">		else if(cla.length &gt; posArgs.size()) {</span>
+<span class="fc" id="L160">			String message = &quot;usage: java &quot; + programName + getAllPosArgNames() +&quot;\n&quot; + programName + &quot;.java: error: unrecognized arguments:&quot;;</span>
+<span class="fc bfc" id="L161" title="All 2 branches covered.">					for(int i = args.size(); i &lt; cla.length; i++){</span>
+<span class="fc bfc" id="L162" title="All 2 branches covered.">						if(i &lt; cla.length-1){</span>
+<span class="fc" id="L163">							message = message + &quot; &quot; + cla[i] + &quot;,&quot;;</span>
+						}
+						else{
+<span class="fc" id="L166">							message = message + &quot; &quot; + cla[i];</span>
+						}
+					}
+<span class="fc" id="L169">					throw new TooManyArgsException(message);</span>
+		}
+		else{
+<span class="fc bfc" id="L172" title="All 2 branches covered.">			for(int i = 0; i &lt; posArgs.size(); i++){</span>
+<span class="fc" id="L173">				Argument c = new Argument(posArgs.get(i).getName());</span>
+<span class="fc bfc" id="L174" title="All 2 branches covered.">				if(posArgs.get(i).getArgType() == Argument.Type.FLOAT){</span>
+					try{
+<span class="fc" id="L176">						args.get(args.indexOf(c)).setValue(cla[i]);</span>
+<span class="fc" id="L177">						float num = Float.parseFloat(args.get(i).getValue());</span>
+					}
+<span class="fc" id="L179">					catch(RuntimeException e){</span>
+<span class="fc" id="L180">							throw new InvalidValueException(invalidValueMessage() + args.get(i).getName() + &quot;: invalid float value: &quot; + args.get(i).getValue());</span>
+<span class="fc" id="L181">					}</span>
+				}
+					
+<span class="fc bfc" id="L184" title="All 2 branches covered.">				else if(posArgs.get(i).getArgType() == Argument.Type.INT){</span>
+					try{
+<span class="fc" id="L186">						args.get(args.indexOf(c)).setValue(cla[i]);</span>
+<span class="fc" id="L187">						int num = Integer.parseInt(args.get(i).getValue());</span>
+					}
+<span class="fc" id="L189">					catch(RuntimeException e){</span>
+<span class="fc" id="L190">						throw new InvalidValueException(invalidValueMessage() + args.get(i).getName() + &quot;: invalid int value: &quot; + args.get(i).getValue());</span>
+<span class="fc" id="L191">					}</span>
+				}
+<span class="fc bfc" id="L193" title="All 2 branches covered.">				else if(posArgs.get(i).getArgType() == Argument.Type.BOOLEAN){</span>
+<span class="fc bfc" id="L194" title="All 4 branches covered.">					if(cla[i].equals(&quot;true&quot;) || cla[i].equals(&quot;false&quot;)){</span>
+<span class="fc" id="L195">						args.get(args.indexOf(c)).setValue(cla[i]);</span>
+					}
+					else{
+<span class="fc" id="L198">						throw new InvalidValueException(invalidValueMessage() + args.get(i).getName() + &quot;: invalid boolean value: &quot; + cla[i]);</span>
+					}
+				}
+				else{
+<span class="fc" id="L202">					args.get(args.indexOf(c)).setValue(cla[i]);														</span>
+				}
+			}
+		}
+<span class="fc" id="L206">	}</span>
+	
+	/**
+	*This method is called by the user and is used to return the value of an argument.
+	*@param unit   the name of the argument to search for.
+	*@return       the value of the argument.
+	*@exception ArgumentNotFoundException  thrown when the argument doesn't exist.
+	*/
+	
+	public String getArg(String unit){
+<span class="fc" id="L216">		Argument a = new Argument(unit);</span>
+		try{
+<span class="fc" id="L218">			return args.get(args.indexOf(a)).getValue();</span>
+		}
+<span class="fc" id="L220">		catch(RuntimeException e){</span>
+<span class="fc" id="L221">			throw new ArgumentNotFoundException(&quot;The argument &quot; + unit + &quot; was not found&quot;);</span>
+		}		
+	}
+	
+	/**
+	*This method is called by various methods to return the names of all the positional arguments in the list.
+	*@return  the names of all positional arguments.
+	*/
+	
+	public String getAllPosArgNames(){
+<span class="fc" id="L231">		String s = &quot;&quot;;</span>
+<span class="fc bfc" id="L232" title="All 2 branches covered.">		for(int i = 0; i &lt; args.size(); i++){</span>
+<span class="fc bfc" id="L233" title="All 2 branches covered.">			if(getArg(i).getArgType() != Argument.Type.STRING){</span>
+<span class="fc" id="L234">				s = s + &quot; &quot; + args.get(i).getName();</span>
+			}	
+				
+		}
+		
+<span class="fc" id="L239">		return s;</span>
+	}
+	
+	/**
+	*This method is called when the user enters --help or -h. When called, a message with information on the program is displayed.
+	*@return   the help message.
+	*/
+	
+	public String getHelp(){
+<span class="fc" id="L248">		String h = &quot;&quot;;</span>
+<span class="fc" id="L249">		h = &quot;usage: java &quot; + programName + getAllPosArgNames();</span>
+		
+<span class="fc" id="L251">		h = h + &quot;\n&quot; + programPurpose + &quot;\npositional arguments:\n&quot;;</span>
+		
+<span class="fc bfc" id="L253" title="All 2 branches covered.">		for(int j = 0; j &lt; args.size(); j++){</span>
+<span class="fc bfc" id="L254" title="All 2 branches covered.">			if(getArg(j).getArgType() != Argument.Type.STRING){	</span>
+<span class="fc bfc" id="L255" title="All 2 branches covered.">				if(j == 0){</span>
+<span class="fc" id="L256">					String nd = getArg(j).getNameAndDescription();</span>
+<span class="fc" id="L257">					h = h + nd;</span>
+<span class="fc" id="L258">				}</span>
+				else{
+<span class="fc" id="L260">					String nd = &quot;\n&quot; + getArg(j).getNameAndDescription();</span>
+<span class="fc" id="L261">					h = h + nd;</span>
+				}
+			}
+		}
+<span class="fc" id="L265">		return h;</span>
+	}
+	
+	/**
+	*This method is called when the user enters an invalid value for an argument.
+	*@return   the error message for the InvalidValueException.
+	*/
+	
+	public String invalidValueMessage(){
+<span class="fc" id="L274">		String h = &quot;&quot;;</span>
+<span class="fc" id="L275">		h = &quot;usage: java &quot; + programName + getAllPosArgNames();</span>
+		
+<span class="fc" id="L277">		h = h + &quot;\n&quot; +programName + &quot;.java: error: argument &quot;;</span>
+<span class="fc" id="L278">		return h;</span>
+	}
+	
+	/**
+	*This method is to be called by the user. It should be called by the user instead of parse. This method calls checkArgsThenParse. It is mainly
+	*here for something the user can call easier instead of checkArgsThenParse because it has a shorter name.
+	*@param arr   an array with values for arguments provided by the user.
+	*/
+	
+	public void parseArgs(String[] arr) {
+<span class="fc" id="L288">		checkArgsThenParse(arr);</span>
+<span class="fc" id="L289">	}</span>
+	
+	/**
+	*This method checks for the named arguments, assigns their default values, and removes the arguments from the array of arguments. 
+	*It then calls parse for the positional arguments left to be assigned values.
+	*@param arr   an array with values for arguments provided by the user.
+	*@exception GetHelpException  an exception called when the user wants the help message. Thrown when --help or -h is provided by the user.
+	*@exception ArgumentNotFoundException  an exception thrown when the user provides a long-form or a short-name argument that doesn't exist in the list of arguments.
+	*/
+	
+	public void checkArgsThenParse(String[] arr){
+<span class="fc" id="L300">		ArrayList&lt;String&gt; tempList = new ArrayList&lt;String&gt;(Arrays.asList(arr));</span>
+		
+<span class="fc bfc" id="L302" title="All 2 branches covered.">		if(tempList.contains(&quot;--help&quot;)){</span>
+<span class="fc" id="L303">			tempList.remove(tempList.indexOf(&quot;--help&quot;));</span>
+<span class="fc" id="L304">			throw new GetHelpException(getHelp());</span>
+			
+		}
+<span class="fc bfc" id="L307" title="All 2 branches covered.">		else if(tempList.contains(&quot;-h&quot;)){</span>
+<span class="fc" id="L308">			tempList.remove(tempList.indexOf(&quot;-h&quot;));</span>
+<span class="fc" id="L309">			throw new GetHelpException(getHelp());</span>
+		}
+		else{
+<span class="fc bfc" id="L312" title="All 2 branches covered.">			for(int i = 0; i &lt; tempList.size(); i++){</span>
+<span class="fc bfc" id="L313" title="All 2 branches covered.">				if(tempList.get(i).contains(&quot;--&quot;)){</span>
+<span class="fc" id="L314">					String s = tempList.get(i).substring(2, tempList.get(i).length());</span>
+<span class="fc" id="L315">					String v = tempList.get(i+1);</span>
+<span class="fc" id="L316">					getArg(s);</span>
+<span class="fc" id="L317">					Argument a = new Argument(s);</span>
+<span class="pc bpc" id="L318" title="1 of 2 branches missed.">					if(args.contains(a)){</span>
+<span class="fc" id="L319">						args.get(args.indexOf(a)).setValue(v);</span>
+<span class="fc" id="L320">						tempList.remove(tempList.get(i));</span>
+<span class="fc" id="L321">						tempList.remove(tempList.get(i));</span>
+<span class="fc" id="L322">						i--;</span>
+					}
+					else{
+<span class="nc" id="L325">						throw new ArgumentNotFoundException(&quot;The argument &quot; + s + &quot; was not found&quot;);</span>
+					}
+<span class="fc" id="L327">				}</span>
+				
+<span class="fc bfc" id="L329" title="All 2 branches covered.">				else if(tempList.get(i).contains(&quot;-&quot;)){</span>
+<span class="fc" id="L330">					String s = tempList.get(i).substring(1, tempList.get(i).length());</span>
+<span class="fc" id="L331">					String v = tempList.get(i+1);</span>
+<span class="fc" id="L332">					boolean shortFound = false;</span>
+					
+<span class="fc bfc" id="L334" title="All 2 branches covered.">					for(NamedArg n : namedArgs){</span>
+<span class="fc bfc" id="L335" title="All 2 branches covered.">						if(n.getShort().equals(s)){</span>
+<span class="fc" id="L336">							Argument b = new Argument(n.getName());</span>
+<span class="fc" id="L337">							args.get(args.indexOf(b)).setValue(v);</span>
+<span class="fc" id="L338">							tempList.remove(tempList.get(i));</span>
+<span class="fc" id="L339">							tempList.remove(tempList.get(i));</span>
+<span class="fc" id="L340">							i--;</span>
+<span class="fc" id="L341">							shortFound = true;</span>
+<span class="fc" id="L342">							break;</span>
+						}
+<span class="fc" id="L344">					}</span>
+<span class="fc bfc" id="L345" title="All 2 branches covered.">					if(!shortFound){</span>
+<span class="fc" id="L346">						throw new ArgumentNotFoundException(&quot;No argument found with short name &quot; + s);</span>
+					}
+				}
+			}
+			
+<span class="fc" id="L351">			String[] tempArr = new String[tempList.size()];</span>
+<span class="fc" id="L352">			tempArr = tempList.toArray(tempArr);</span>
+<span class="fc" id="L353">			parse(tempArr);</span>
+		}
+		
+<span class="fc" id="L356">	}</span>
+	
+	/**
+	*This method is used in the save method of XMLTools. This method converts the arguments and their values into a format to be used in an XML file.
+	*@return   a string containing the arguments and their info in a format suitable for an XML file.
+	*/
+	
+	public String writeArgsAsXML(){
+<span class="fc" id="L364">		String s = &quot;&lt;ArgParser&gt;\n\t&lt;program&gt;\n\t\t&lt;programname&gt;&quot; + programName + &quot;&lt;/programname&gt;\n\t\t&lt;description&gt;&quot; + programPurpose +&quot;&lt;/description&gt;\n\t&lt;/program&gt;\n&quot;;</span>
+<span class="fc bfc" id="L365" title="All 2 branches covered.">		for(Argument a : args){</span>
+<span class="fc" id="L366">			s += a.stringToXML();</span>
+<span class="fc" id="L367">		}</span>
+<span class="fc" id="L368">		s += &quot;&lt;/ArgParser&gt;&quot;;</span>
+<span class="fc" id="L369">		return s;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

@@ -8,14 +8,19 @@ import java.util.*;
 *@author Matthew Arbuckle
 *@author Oladiran Ojuolape
 *@author Christopher Abercrombie
-*
+*This class is responsible for storing positional arguments and their values.
 */
 
 public class PosArg extends Argument{
 	int position;
 	
 	/**
-	*
+	*This constructor is called to create new positional argument. The user specifies the name, description, type, and position of these arguments.
+	*Usage example: new PosArg("length", "the length of a shape", Argument.Type.INT, "1");
+	*@param n   the name of the argument
+	*@param d   the description of the argument
+	*@param t   the type of object the argument is
+	*@param p   the position of the argument
 	*/
 	
 	public PosArg(String n, String d, Argument.Type t, String p){
@@ -24,7 +29,8 @@ public class PosArg extends Argument{
 	}
 	
 	/**
-	*
+	*This method is used by the writeArgsAsXML method in ArgumentParser, which is called by the save method in XMLTools, to write the positional arguments to an XML file.
+	*@return   a string formatting the positional arguments and their values to be written to an XML file.
 	*/
 	
 	@Override

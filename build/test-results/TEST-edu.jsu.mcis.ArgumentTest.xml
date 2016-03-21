@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.jsu.mcis.ArgumentTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2016-02-17T17:41:53" hostname="LAPTOP-SIE2BR9A" time="0.003">
+<testsuite name="edu.jsu.mcis.ArgumentTest" tests="11" skipped="0" failures="0" errors="0" timestamp="2016-03-21T23:31:41" hostname="Owner-PC" time="0.015">
   <properties/>
-  <testcase name="testSetDescription" classname="edu.jsu.mcis.ArgumentTest" time="0.001"/>
+  <testcase name="testGetDefaultOfNamedArgument" classname="edu.jsu.mcis.ArgumentTest" time="0.0"/>
+  <testcase name="testSetDescription" classname="edu.jsu.mcis.ArgumentTest" time="0.0"/>
   <testcase name="testCreateArgWithNameAndDescription" classname="edu.jsu.mcis.ArgumentTest" time="0.0"/>
+  <testcase name="testGetArgTypeBoolean" classname="edu.jsu.mcis.ArgumentTest" time="0.0"/>
+  <testcase name="testGetArgTypeInt" classname="edu.jsu.mcis.ArgumentTest" time="0.0"/>
+  <testcase name="testGetArgFails" classname="edu.jsu.mcis.ArgumentTest" time="0.0"/>
   <testcase name="testCreateArgWithName" classname="edu.jsu.mcis.ArgumentTest" time="0.0"/>
+  <testcase name="testGetArgTypeString" classname="edu.jsu.mcis.ArgumentTest" time="0.0"/>
+  <testcase name="testGetArgTypeFloat" classname="edu.jsu.mcis.ArgumentTest" time="0.015"/>
   <testcase name="testGetNameAndDescription" classname="edu.jsu.mcis.ArgumentTest" time="0.0"/>
   <testcase name="testSetValue" classname="edu.jsu.mcis.ArgumentTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
