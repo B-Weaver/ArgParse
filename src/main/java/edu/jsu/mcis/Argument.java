@@ -143,7 +143,7 @@ public class Argument{
 	*/
 	
 	public String stringToXML(){
-		String toXML = "\t<argument>\n\t\t<name>"+argName+"</name>\n\t\t<type>"+getArgTypeAsString()+"</type>\n\t</argument>\n";
+		String toXML = "\t<argument>\n\t\t<name>"+argName+"</name>\n\t\t<argdescription>" + argDescription + "</argdescription>\n\t\t<type>"+getArgTypeAsString()+"</type>\n\t</argument>\n";
 		
 		return toXML;
 	}
