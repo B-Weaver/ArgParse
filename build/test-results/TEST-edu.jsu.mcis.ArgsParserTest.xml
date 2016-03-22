@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.jsu.mcis.ArgsParserTest" tests="33" skipped="0" failures="0" errors="0" timestamp="2016-03-21T23:31:41" hostname="Owner-PC" time="0.265">
+<testsuite name="edu.jsu.mcis.ArgsParserTest" tests="33" skipped="0" failures="0" errors="0" timestamp="2016-03-22T16:02:11" hostname="Owner-PC" time="0.281">
   <properties/>
-  <testcase name="testArgumentNotFoundExceptionOnShortname" classname="edu.jsu.mcis.ArgsParserTest" time="0.062"/>
+  <testcase name="testArgumentNotFoundExceptionOnShortname" classname="edu.jsu.mcis.ArgsParserTest" time="0.093"/>
   <testcase name="testOneTypeNamedArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
   <testcase name="testArgumentNotFoundException" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
   <testcase name="testOneTypeShortNamedArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
@@ -10,29 +10,29 @@
   <testcase name="testCalculateVolume" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
   <testcase name="testArgumentValueIsParsedCorrectly" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
   <testcase name="testArgumentNotFoundExceptionOnNamed" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
-  <testcase name="testTooFewArgumentsForOneArgument" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
+  <testcase name="testTooFewArgumentsForOneArgument" classname="edu.jsu.mcis.ArgsParserTest" time="0.016"/>
   <testcase name="testsizeEquals" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
   <testcase name="testTooFewArgumentsForTwoArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
   <testcase name="testCanUseNamedArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
-  <testcase name="testDefaultsNamedArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.016"/>
+  <testcase name="testDefaultsNamedArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
   <testcase name="testNamedHelpMessage" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
   <testcase name="testInvalidValueMessageBoolean" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
   <testcase name="testParseXMLFileNoNamedArgs" classname="edu.jsu.mcis.ArgsParserTest" time="0.109"/>
   <testcase name="testTooManyArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
-  <testcase name="testParseXMLFileSpecifyTypeBooleanValue" classname="edu.jsu.mcis.ArgsParserTest" time="0.015"/>
+  <testcase name="testParseXMLFileSpecifyTypeBooleanValue" classname="edu.jsu.mcis.ArgsParserTest" time="0.016"/>
   <testcase name="testOneDigitShortNamedArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
   <testcase name="testNewInstanceHasNoArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
-  <testcase name="testParseXMLFileSpecifyAllTypes" classname="edu.jsu.mcis.ArgsParserTest" time="0.016"/>
+  <testcase name="testParseXMLFileSpecifyAllTypes" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
   <testcase name="testNamedArgumentNotFoundException" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
-  <testcase name="testParseXMLFileFileNotFound" classname="edu.jsu.mcis.ArgsParserTest" time="0.016"/>
-  <testcase name="testParseXMLFile" classname="edu.jsu.mcis.ArgsParserTest" time="0.015"/>
-  <testcase name="testParseXMLFileSpecifyType" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
+  <testcase name="testParseXMLFileFileNotFound" classname="edu.jsu.mcis.ArgsParserTest" time="0.015"/>
+  <testcase name="testParseXMLFile" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
+  <testcase name="testParseXMLFileSpecifyType" classname="edu.jsu.mcis.ArgsParserTest" time="0.016"/>
   <testcase name="testInvalidValueMessageInt" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
-  <testcase name="testTooFewArgumentsForZeroArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.016"/>
+  <testcase name="testTooFewArgumentsForZeroArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
   <testcase name="testCanUseShortNamedArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
   <testcase name="testHelpMessage" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
   <testcase name="testInvalidValueMessageFloat" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
-  <testcase name="testTooManyArguments3ExtraArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
+  <testcase name="testTooManyArguments3ExtraArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.016"/>
   <testcase name="testOneNamedArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

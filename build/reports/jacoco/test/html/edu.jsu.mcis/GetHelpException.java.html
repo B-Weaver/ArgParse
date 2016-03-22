@@ -8,12 +8,17 @@ import java.util.*;
 *@author Matthew Arbuckle
 *@author Oladiran Ojuolape
 *@author Christopher Abercrombie
-*
+*This exception is thrown when the user types in either --help or -h. When they do, a help message will be printed showing the program's name and description as well as
+*the name and description of all of the arguments in the program.
 */
 
 public class GetHelpException extends RuntimeException{
+	/**
+	*This exception is thrown when the user types in either --help or -h. When they do, a help message will be printed showing the program's name and description as well as
+	*the name and description of all of the arguments in the program.
+	*/
 	public GetHelpException(String message){
-<span class="fc" id="L16">		super(message);</span>
-<span class="fc" id="L17">	}</span>
+<span class="fc" id="L21">		super(message);</span>
+<span class="fc" id="L22">	}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

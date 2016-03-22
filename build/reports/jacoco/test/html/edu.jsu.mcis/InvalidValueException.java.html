@@ -8,12 +8,17 @@ import java.util.*;
 *@author Matthew Arbuckle
 *@author Oladiran Ojuolape
 *@author Christopher Abercrombie
-*
+*This exception is thrown when a user tries to give an argument of a different type of object than the argument takes. For instance, if an argument called length is of type INT
+*and the user tries to pass in a boolean value for the argument, than the exception will be thrown with a message showing the illegal value.
 */
 
 public class InvalidValueException extends RuntimeException{
+	/**
+	*This exception is thrown when a user tries to give an argument of a different type of object than the argument takes. For instance, if an argument called length is of type INT
+	*and the user tries to pass in a boolean value for the argument, than the exception will be thrown with a message showing the illegal value.
+	*/
 	public InvalidValueException(String message){
-<span class="fc" id="L16">		super(message);</span>
-<span class="fc" id="L17">	}</span>
+<span class="fc" id="L21">		super(message);</span>
+<span class="fc" id="L22">	}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>
