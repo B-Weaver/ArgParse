@@ -240,6 +240,19 @@ public class ArgumentParser{
 	}
 	
 	/**
+	*This method is used to return the names of all the named arguments.
+	*@return   the names of all named arguments.
+	*/
+	
+	public String getAllNamedArgNames(){
+		String s = "";
+		for(int i = 0; i < namedArgs.size(); i++){
+			s = s + " " + namedArgs.get(i).getName();
+		}
+		return s;
+	}
+	
+	/**
 	*This method is called when the user enters --help or -h. When called, a message with information on the program is displayed.
 	*@return   the help message.
 	*/
@@ -263,6 +276,19 @@ public class ArgumentParser{
 			}
 		}
 		return h;
+	}
+	
+	/**
+	*This method is called when the UnacceptedValueException is thrown. It generates the error message.
+	*@param v   the unaccepted value.
+	*@return   the error message.
+	*/
+	
+	public String unacceptedValueMessage(String v){
+		String m = "usage: java " + programName + getAllPosArgNames() + " " + getAllNamedArgNames();
+		m = m + "\n" + programName + ".java: unacceptedValue: " + v;
+		
+		return m;
 	}
 	
 	/**
