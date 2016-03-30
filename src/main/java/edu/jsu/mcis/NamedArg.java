@@ -9,11 +9,12 @@ import java.util.*;
 *@author Oladiran Ojuolape
 *@author Christopher Abercrombie
 *This class is responsible for storing named arguments and their values.
-*/
+*/ 
 
 public class NamedArg extends Argument{
 	String shortName;
 	String defaultValue;
+	protected List<String> possVals;
 	
 	/**
 	*This constructor is called to create a new named argument. The user specifies the name, shortname, description, type, and the default value of these arguments.
@@ -30,6 +31,7 @@ public class NamedArg extends Argument{
 		shortName = s;
 		defaultValue = dV;
 		this.argValue = dV;
+		possVals = new ArrayList<String>();
 	}
 	
 	/**
@@ -60,5 +62,9 @@ public class NamedArg extends Argument{
 		String toXML = "\t<named>\n\t\t<name>"+argName+"</name>\n\t\t<argdescription>" + argDescription + "</argdescription>\n\t\t<shortname>"+shortName+"</shortname>\n\t\t<type>"+getArgTypeAsString()+"</type>\n\t\t<default>"+defaultValue+"</default>\n\t</named>\n";
 		
 		return toXML;
+	}
+	
+	protected void setPossVal(ArrayList<String> str){
+		possVals = str;
 	}
 }
