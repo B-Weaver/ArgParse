@@ -400,9 +400,9 @@ public class ArgumentParser{
 	}
 	
 	public void addNamedArgPossValues(String argName, ArrayList<String> list){
-		NamedArg a = (NamedArg) args.get(args.indexOf(argName));
-		a.setPossVal(list);
-		namedArgs.get(namedArgs.indexOf(argName)).setPossVal(list);
+		Argument a = new Argument(argName);
+		NamedArg n = (NamedArg) args.get(args.indexOf(a));
+		namedArgs.get(namedArgs.indexOf(n)).setPossVal(list);
 	}
 	
 	/**

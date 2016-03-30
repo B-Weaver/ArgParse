@@ -1,5 +1,6 @@
 package edu.jsu.mcis;
 
+import java.util.*;
 import org.junit.*;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -439,4 +440,44 @@ public class ArgsParserTest {
 		ArgumentParser p = XMLTools.load(filename);
 		p.parseArgs(s);
 	}
+	
+	@Test
+	public void testNamedArgumentsPossibleValues(){
+		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of an ellipsoid.");
+		ArrayList<String> list = new ArrayList<String>();
+		list.add("box");
+		list.add("ellipsoid");
+		list.add("pyramid");
+		String[] s = {"7", "5", "2", "--type", "ellipsoid", "-t", "pyramid"};
+		p.addPosArg("length", "the length of the box", Argument.Type.FLOAT, "1");
+		p.addPosArg("width", "the width of the box", Argument.Type.FLOAT, "2");
+		p.addPosArg("height", "the height of the box", Argument.Type.FLOAT, "3");
+		p.addNamedArg("type", "t", "type of shape", Argument.Type.STRING, "box");
+		p.addNamedArg("digits", "d", "digits of type", Argument.Type.STRING, "4");
+		p.addNamedArgPossValues("type", list);
+		p.parseArgs(s);
+		
+		assertEquals("pyramid", p.getArg("type"));
+	}
+	
+	
+	@Test
+	public void testUnacceptedValueException(){
+		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of an ellipsoid.");
+		ArrayList<String> list = new ArrayList<String>();
+		list.add("box");
+		list.add("ellipsoid");
+		list.add("pyramid");
+		String[] s = {"7", "5", "2", "--type", "ellipsoid", "-t", "boat"};
+		p.addPosArg("length", "the length of the box", Argument.Type.FLOAT, "1");
+		p.addPosArg("width", "the width of the box", Argument.Type.FLOAT, "2");
+		p.addPosArg("height", "the height of the box", Argument.Type.FLOAT, "3");
+		p.addNamedArg("type", "t", "type of shape", Argument.Type.STRING, "box");
+		p.addNamedArg("digits", "d", "digits of type", Argument.Type.STRING, "4");
+		p.addNamedArgPossValues("type", list);
+		thrown.expect(UnacceptedValueException.class);
+		p.parseArgs(s);
+		
+	}
+		
 }
