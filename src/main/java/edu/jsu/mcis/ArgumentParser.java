@@ -359,13 +359,31 @@ public class ArgumentParser{
 					
 					for(NamedArg n : namedArgs){
 						if(n.getShort().equals(s)){
-							Argument b = new Argument(n.getName());
-							args.get(args.indexOf(b)).setValue(v);
-							tempList.remove(tempList.get(i));
-							tempList.remove(tempList.get(i));
-							i--;
-							shortFound = true;
-							break;
+							if(n.possVals.size() > 0){
+								if(n.possVals.contains(v)){
+									Argument b = new Argument(n.getName());
+									args.get(args.indexOf(b)).setValue(v);
+									tempList.remove(tempList.get(i));
+									tempList.remove(tempList.get(i));
+									i--;
+									shortFound = true;
+									break;
+								}
+								
+								else
+									throw new UnacceptedValueException(unacceptedValueMessage(v));
+							}
+							
+							else{
+								Argument b = new Argument(n.getName());
+								args.get(args.indexOf(b)).setValue(v);
+								tempList.remove(tempList.get(i));
+								tempList.remove(tempList.get(i));
+								i--;
+								shortFound = true;
+								break;
+							}
+							
 						}
 					}
 					if(!shortFound){
@@ -381,10 +399,10 @@ public class ArgumentParser{
 		
 	}
 	
-	public void addNamedArgPossValues(String argName, List<String> list){
+	public void addNamedArgPossValues(String argName, ArrayList<String> list){
 		NamedArg a = (NamedArg) args.get(args.indexOf(argName));
 		a.setPossVal(list);
-		args.get(args.indexOf(argName)) = (Argument) a;
+		namedArgs.get(namedArgs.indexOf(argName)).setPossVal(list);
 	}
 	
 	/**
