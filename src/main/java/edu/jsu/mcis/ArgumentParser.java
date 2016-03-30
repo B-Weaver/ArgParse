@@ -381,6 +381,12 @@ public class ArgumentParser{
 		
 	}
 	
+	public void addNamedArgPossValues(String argName, List<String> list){
+		NamedArg a = (NamedArg) args.get(args.indexOf(argName));
+		a.setPossVal(list);
+		args.get(args.indexOf(argName)) = (Argument) a;
+	}
+	
 	/**
 	*This method is used in the save method of XMLTools. This method converts the arguments and their values into a format to be used in an XML file.
 	*@return   a string containing the arguments and their info in a format suitable for an XML file.
