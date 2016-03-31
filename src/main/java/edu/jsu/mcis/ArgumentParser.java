@@ -229,10 +229,8 @@ public class ArgumentParser{
 	
 	public String getAllPosArgNames(){
 		String s = "";
-		for(int i = 0; i < args.size(); i++){
-			if(getArg(i).getArgType() != Argument.Type.STRING){
-				s = s + " " + args.get(i).getName();
-			}	
+		for(int i = 0; i < posArgs.size(); i++){
+				s = s + " " + posArgs.get(i).getName();	
 				
 		}
 		
@@ -264,7 +262,7 @@ public class ArgumentParser{
 		h = h + "\n" + programPurpose + "\npositional arguments:\n";
 		
 		for(int j = 0; j < args.size(); j++){
-			if(getArg(j).getArgType() != Argument.Type.STRING){	
+			if(getArg(j).getArgType() != Argument.Type.STRING && getArg(j) instanceof PosArg){	
 				if(j == 0){
 					String nd = getArg(j).getNameAndDescription();
 					h = h + nd;
@@ -398,6 +396,12 @@ public class ArgumentParser{
 		}
 		
 	}
+	
+	/**
+	*This method is used to take a list of values and add it to the list of restricted values for an argument in the NamedArg class.
+	*@param argName   the name of the argument whose restricted values are being set.
+	*@param list      the list of restricted values
+	*/
 	
 	public void addNamedArgPossValues(String argName, ArrayList<String> list){
 		Argument a = new Argument(argName);
