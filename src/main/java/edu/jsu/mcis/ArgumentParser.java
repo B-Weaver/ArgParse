@@ -285,8 +285,8 @@ public class ArgumentParser{
 	*/
 	
 	public String unacceptedValueMessage(String v){
-		String m = "usage: java " + programName + getAllPosArgNames() + " " + getAllNamedArgNames();
-		m = m + "\n" + programName + ".java: unacceptedValue: " + v;
+		String m = "usage: java " + programName + getAllPosArgNames() + getAllNamedArgNames();
+		m = m + "\n" + programName + ".java: unaccepted value: " + v;
 		
 		return m;
 	}

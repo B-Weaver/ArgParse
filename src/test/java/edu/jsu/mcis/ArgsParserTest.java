@@ -476,6 +476,7 @@ public class ArgsParserTest {
 		p.addNamedArg("digits", "d", "digits of type", Argument.Type.STRING, "4");
 		p.addNamedArgPossValues("type", list);
 		thrown.expect(UnacceptedValueException.class);
+		thrown.expectMessage("usage: java VolumeCalculator length width height type digits\nVolumeCalculator.java: unaccepted value: boat");
 		p.parseArgs(s);
 		
 	}
