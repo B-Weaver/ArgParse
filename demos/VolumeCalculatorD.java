@@ -3,7 +3,7 @@ import java.util.*;
 
 public class VolumeCalculatorD{
 	public static void main(String[] args) {
-		String filename = "C:/Users/Owner/Desktop/CS310/ArgParse/ArgParse/ArgParse/demos/Feature12Ex.xml";
+		String filename = "C:/Users/Barry/CS310/ArgParse/demos/Feature12Ex.xml";
 		try{
 			ArgumentParser parser = XMLTools.load(filename);
 			parser.parseArgs(args);
@@ -15,7 +15,7 @@ public class VolumeCalculatorD{
 			System.out.println("Digits: " +parser.getArg("digits"));
 			System.out.println("Type: " +parser.getArg("type"));
 			
-			XMLTools.save(parser, "C:/Users/Owner/Desktop/CS310/ArgParse/ArgParse/ArgParse/demos/Feature12Out.xml");
+			XMLTools.save(parser, "C:/Users/Barry/CS310/ArgParse/demos/Feature12Out.xml");
 		}
 		catch(Exception e) {
 			System.out.println(e.getMessage());
