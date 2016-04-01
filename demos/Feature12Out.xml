@@ -27,6 +27,9 @@
 		<shortname>t</shortname>
 		<type>string</type>
 		<default>box</default>
+		<restricted>box</restricted>
+		<restricted>ellipsoid</restricted>
+		<restricted>pyramid</restricted>
 	</named>
 	<named>
 		<name>digits</name>
@@ -34,5 +37,9 @@
 		<shortname>d</shortname>
 		<type>integer</type>
 		<default>4</default>
+		<restricted>2</restricted>
+		<restricted>3</restricted>
+		<restricted>4</restricted>
+		<restricted>8</restricted>
 	</named>
 </ArgParser>

@@ -75,6 +75,7 @@ public final class XMLTools{
 						String argType = "";
 						String argValue = "";
 						String argPosition = "";
+						ArrayList<String> restrictedVals = new ArrayList<String>();
 						Argument.Type t;
 						
 						if(el.getNodeName().contains("named")){
@@ -83,6 +84,11 @@ public final class XMLTools{
 							argShortName = el.getElementsByTagName("shortname").item(0).getTextContent();
 							argType = el.getElementsByTagName("type").item(0).getTextContent();
 							argValue = el.getElementsByTagName("default").item(0).getTextContent();
+							NodeList restrictedList = el.getElementsByTagName("restricted");
+							for(int j = 0; j < restrictedList.getLength(); j++){
+								restrictedVals.add(restrictedList.item(j).getTextContent());
+							}
+							
 							switch(argType.toLowerCase()){
 								case "integer":
 									t = Argument.Type.INT;
@@ -98,8 +104,7 @@ public final class XMLTools{
 									break;
 								
 							}
-							p.addNamedArg(argName, argShortName, argDescription, t, argValue);
-							
+							p.addNamedArg(argName, argShortName, argDescription, t, argValue, restrictedVals);
 						}
 						else if(el.getNodeName().contains("positional")){
 							argName = el.getElementsByTagName("name").item(0).getTextContent();

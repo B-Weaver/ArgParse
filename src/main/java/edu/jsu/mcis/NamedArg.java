@@ -33,6 +33,13 @@ public class NamedArg extends Argument{
 		this.argValue = dV;
 		possVals = new ArrayList<String>();
 	}
+	public NamedArg(String n, String s, String d, Argument.Type t, String dV, ArrayList<String> rV){
+		super(n, d, t);
+		shortName = s;
+		defaultValue = dV;
+		this.argValue = dV;
+		possVals = rV;
+	}
 	
 	/**
 	*This method can be used to return the shortname of a named argument. It's used by the checkArgsThenParse method is ArgumentParser to check for the shortname of a named argument.
@@ -59,7 +66,14 @@ public class NamedArg extends Argument{
 	
 	@Override
 	public String stringToXML(){
-		String toXML = "\t<named>\n\t\t<name>"+argName+"</name>\n\t\t<argdescription>" + argDescription + "</argdescription>\n\t\t<shortname>"+shortName+"</shortname>\n\t\t<type>"+getArgTypeAsString()+"</type>\n\t\t<default>"+defaultValue+"</default>\n\t</named>\n";
+		String toXML = "\t<named>\n\t\t<name>"+argName+"</name>\n\t\t<argdescription>" + argDescription + "</argdescription>\n\t\t<shortname>"+shortName+"</shortname>\n\t\t<type>"+getArgTypeAsString()+"</type>\n\t\t<default>"+defaultValue+"</default>";
+		//if(possVals.size() > 0){
+		for(int i = 0; i < possVals.size(); i++){
+			toXML = toXML + "\n\t\t<restricted>"+possVals.get(i)+"</restricted>";
+		}
+		toXML = toXML + "\n\t</named>\n";
+		
+		//}
 		
 		return toXML;
 	}

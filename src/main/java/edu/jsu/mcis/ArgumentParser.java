@@ -120,6 +120,11 @@ public class ArgumentParser{
 		namedArgs.add(new NamedArg(name, shortName, description, type, defaultValue));
 	}
 	
+	public void addNamedArg(String name, String shortName, String description, Argument.Type type, String defaultValue, ArrayList<String> restrictedVals){
+		args.add(new NamedArg(name, shortName, description, type, defaultValue, restrictedVals));
+		namedArgs.add(new NamedArg(name, shortName, description, type, defaultValue, restrictedVals));
+	}
+	
 	/**
 	*This method adds a positional argument by adding it to the args list and to the PosArgs class.
 	*@param name   the name of the argument.
@@ -407,6 +412,9 @@ public class ArgumentParser{
 		Argument a = new Argument(argName);
 		NamedArg n = (NamedArg) args.get(args.indexOf(a));
 		namedArgs.get(namedArgs.indexOf(n)).setPossVal(list);
+		args.remove(a);
+		args.add(n);
+		
 	}
 	
 	/**
