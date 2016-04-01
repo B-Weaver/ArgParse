@@ -480,5 +480,53 @@ public class ArgsParserTest {
 		p.parseArgs(s);
 		
 	}
+	
+	@Test
+	public void testNamedArgumentsPossibleValuesXML(){
+		String[] s = {"7", "5", "2", "-t", "ellipsoid", "-d", "2"};
+		String filename = "src/test/java/edu/jsu/mcis/Feature12Ex.xml";
+		String outfile = "src/test/java/edu/jsu/mcis/Feature12OutEx.xml";
+		ArgumentParser p = XMLTools.load(filename);
+		p.parseArgs(s);
+		XMLTools.save(p, outfile);
+		assertEquals("ellipsoid", p.getArg("type"));
+		assertEquals("2", p.getArg("digits"));
+	}
+	
+	@Test
+	public void testUnacceptedValueExceptionXML(){
+		String[] s = {"7", "5", "2", "-t", "box", "-d", "15"};
+		String filename = "src/test/java/edu/jsu/mcis/Feature12Ex.xml";
+		String outfile = "src/test/java/edu/jsu/mcis/Feature12OutEx2.xml";
+		ArgumentParser p = XMLTools.load(filename);
+		thrown.expect(UnacceptedValueException.class);
+		thrown.expectMessage("usage: java VolumeCalculatorD length width height type digits\nVolumeCalculatorD.java: unaccepted value: 15");
+		p.parseArgs(s);
+		XMLTools.save(p, outfile);
+	}
+	
+	@Test
+	public void testArgNotFoundXML(){
+		String[] s = {"7", "5", "2", "--vapor", "box", "-d", "15"};
+		String filename = "src/test/java/edu/jsu/mcis/Feature12Ex.xml";
+		String outfile = "src/test/java/edu/jsu/mcis/Feature12OutEx2.xml";
+		ArgumentParser p = XMLTools.load(filename);
+		thrown.expect(ArgumentNotFoundException.class);
+		thrown.expectMessage("The argument vapor was not found");
+		p.parseArgs(s);
+		XMLTools.save(p, outfile);
+	}
+	
+	@Test
+	public void testArgNotFoundShortXML(){
+		String[] s = {"7", "5", "2", "-v", "box", "-d", "15"};
+		String filename = "src/test/java/edu/jsu/mcis/Feature12Ex.xml";
+		String outfile = "src/test/java/edu/jsu/mcis/Feature12OutEx2.xml";
+		ArgumentParser p = XMLTools.load(filename);
+		thrown.expect(ArgumentNotFoundException.class);
+		thrown.expectMessage("No argument found with short name v");
+		p.parseArgs(s);
+		XMLTools.save(p, outfile);
+	}
 		
 }

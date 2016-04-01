@@ -350,9 +350,7 @@ public class ArgumentParser{
 						tempList.remove(tempList.get(i));
 						i--;
 					}
-					else{
-						throw new ArgumentNotFoundException("The argument " + s + " was not found");
-					}
+					
 				}
 				
 				else if(tempList.get(i).contains("-")){

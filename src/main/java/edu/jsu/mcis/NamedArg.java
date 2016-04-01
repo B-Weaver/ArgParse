@@ -33,6 +33,19 @@ public class NamedArg extends Argument{
 		this.argValue = dV;
 		possVals = new ArrayList<String>();
 	}
+	
+	/**
+	*This constructor is called to create a new named argument. The user specifies the name, shortname, description, type, the default value of these arguments, 
+	*and the restricted values for these arguments.
+	*Usage example: new NamedArg("digits", "d", "the number of digits", Argument.Type.FLOAT, "4");
+	*@param n   the name of the argument
+	*@param s   the shortname of the argument
+	*@param d   the description of the argument
+	*@param t   the type of object the argument is
+	*@param dV  the default value of the argument
+	@param rV   the list of restricted values
+	*/
+	
 	public NamedArg(String n, String s, String d, Argument.Type t, String dV, ArrayList<String> rV){
 		super(n, d, t);
 		shortName = s;
