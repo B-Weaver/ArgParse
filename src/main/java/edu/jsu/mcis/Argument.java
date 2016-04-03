@@ -2,17 +2,20 @@ package edu.jsu.mcis;
 import java.util.*;
 
 /**
+*This class is where the arguments and there values are stored. Each argument's type, description, and value is stored here and can be used later.
 *@author Barry Weaver
 *@author Gary Hastert
 *@author Jonathon Beecham
 *@author Matthew Arbuckle
 *@author Oladiran Ojuolape
 *@author Christopher Abercrombie
-*This class is where the arguments and there values are stored. Each argument's type, description, and value is stored here and can be used later.
 */
 
 public class Argument{
 	
+	/**
+	*This class is where the arguments and there values are stored. Each argument's type, description, and value is stored here and can be used later.
+	*/
 
 	protected String argName;
 	protected String argValue;

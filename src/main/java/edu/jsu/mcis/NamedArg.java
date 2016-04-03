@@ -2,16 +2,17 @@ package edu.jsu.mcis;
 import java.util.*;
 
 /**
+*This class is responsible for storing named arguments and their values.
 *@author Barry Weaver
 *@author Gary Hastert
 *@author Jonathon Beecham
 *@author Matthew Arbuckle
 *@author Oladiran Ojuolape
 *@author Christopher Abercrombie
-*This class is responsible for storing named arguments and their values.
 */ 
 
 public class NamedArg extends Argument{
+	
 	String shortName;
 	String defaultValue;
 	protected List<String> possVals;

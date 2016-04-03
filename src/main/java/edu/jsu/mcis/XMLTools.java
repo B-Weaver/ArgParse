@@ -11,13 +11,42 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 /**
+*This class is used to load information from an XML file and to write various arguments and their values to said XML file.
+/**
+*This class is used to load information from an XML file and to write various arguments and their values to said XML file. Typically, a user would make an instance of ArgumentParser
+*equal to the load function of XMLTools. Likewise, the user can also save arguments and their values in an XML file. Both ways are done like this:
+*<blockquote><pre>
+*{@code
+*public class VolumeCalculatorD{
+*public static void main(String[] args) {
+*	String filename = "C:/Users/Owner/Desktop/CS310/ArgParse/ArgParse/ArgParse/demos/Feature12Ex.xml";
+*	try{
+*		ArgumentParser parser = XMLTools.load(filename);
+*		parser.parseArgs(args);
+*		int l = Integer.parseInt(parser.getArg("length"));
+*		int w = Integer.parseInt(parser.getArg("width"));
+*		int h = Integer.parseInt(parser.getArg("height"));
+*		int v = l*w*h;
+*		System.out.println("The volume is: " + v);
+*		System.out.println("Digits: " +parser.getArg("digits"));
+*		System.out.println("Type: " +parser.getArg("type"));
+*		
+*		XMLTools.save(parser, "C:/Users/Owner/Desktop/CS310/ArgParse/ArgParse/ArgParse/demos/Feature12Out.xml");
+*	}
+*	catch(Exception e) {
+*		System.out.println(e.getMessage());
+*	}
+* }
+* }
+*}
+*</pre></blockquote>
+*
 *@author Barry Weaver
 *@author Gary Hastert
 *@author Jonathon Beecham
 *@author Matthew Arbuckle
 *@author Oladiran Ojuolape
 *@author Christopher Abercrombie
-*This class is used to load information from an XML file and to write various arguments and their values to said XML file.
 */
 
 public final class XMLTools{
