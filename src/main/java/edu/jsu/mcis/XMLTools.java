@@ -80,11 +80,13 @@ public final class XMLTools{
 						
 						if(el.getNodeName().contains("named")){
 							argName = el.getElementsByTagName("name").item(0).getTextContent();
-							argDescription = el.getElementsByTagName("argdescription").item(0).getTextContent();
+							argDescription = el.getElementsByTagName("description").item(0).getTextContent();
 							argShortName = el.getElementsByTagName("shortname").item(0).getTextContent();
 							argType = el.getElementsByTagName("type").item(0).getTextContent();
 							argValue = el.getElementsByTagName("default").item(0).getTextContent();
-							NodeList restrictedList = el.getElementsByTagName("restricted");
+							
+							//Enter code here to go down into restricted tree
+							NodeList restrictedList = el.getElementsByTagName("value");
 							for(int j = 0; j < restrictedList.getLength(); j++){
 								restrictedVals.add(restrictedList.item(j).getTextContent());
 							}
