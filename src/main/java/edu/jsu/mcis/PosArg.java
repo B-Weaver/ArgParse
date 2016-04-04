@@ -2,16 +2,17 @@ package edu.jsu.mcis;
 import java.util.*;
 
 /**
+*This class is responsible for storing positional arguments and their values.
 *@author Barry Weaver
 *@author Gary Hastert
 *@author Jonathon Beecham
 *@author Matthew Arbuckle
 *@author Oladiran Ojuolape
 *@author Christopher Abercrombie
-*This class is responsible for storing positional arguments and their values.
 */
 
 public class PosArg extends Argument{
+	
 	int position;
 	
 	/**

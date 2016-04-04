@@ -11,16 +11,72 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 /**
+*This class allows for the user to create arguments and set their values by parsing through their inputs. This is the main class that the user will work with for the ArgParser library.
+*The types of arguments that can be used are positional and named arguments. If the user wishes to specify these arguments manually they can do so like this:
+*<blockquote><pre>
+*{@code
+*public class VolumeCalculatorD{
+*public static void main(String[] args) {
+*	String filename = "C:/Users/Owner/Desktop/CS310/ArgParse/ArgParse/ArgParse/demos/Feature12Ex.xml";
+*	try{
+*		ArgumentParser parser = XMLTools.load(filename);
+*		parser.parseArgs(args);
+*		int l = Integer.parseInt(parser.getArg("length"));
+*		int w = Integer.parseInt(parser.getArg("width"));
+*		int h = Integer.parseInt(parser.getArg("height"));
+*		int v = l*w*h;
+*		System.out.println("The volume is: " + v);
+*		System.out.println("Digits: " +parser.getArg("digits"));
+*		System.out.println("Type: " +parser.getArg("type"));
+*		
+*		XMLTools.save(parser, "C:/Users/Owner/Desktop/CS310/ArgParse/ArgParse/ArgParse/demos/Feature12Out.xml");
+*	}
+*	catch(Exception e) {
+*		System.out.println(e.getMessage());
+*	}
+* }
+* }
+*}
+*</pre></blockquote>
+*
+*The user can also read from an XML file to achieve the same results by using the XMLTools class. The user does this by making an instance of ArgumentParser equal to XMLTool's load method.
+*The user is able to save the argument information to an XML file as well using the save method in XMLTools. These are done like this:
+*<blockquote><pre>
+*{@code
+*public class VolumeCalculatorD{
+*public static void main(String[] args) {
+*	String filename = "C:/Users/Owner/Desktop/CS310/ArgParse/ArgParse/ArgParse/demos/Feature12Ex.xml";
+*	try{
+*		ArgumentParser parser = XMLTools.load(filename);
+*		parser.parseArgs(args);
+*		int l = Integer.parseInt(parser.getArg("length"));
+*		int w = Integer.parseInt(parser.getArg("width"));
+*		int h = Integer.parseInt(parser.getArg("height"));
+*		int v = l*w*h;
+*		System.out.println("The volume is: " + v);
+*		System.out.println("Digits: " +parser.getArg("digits"));
+*		System.out.println("Type: " +parser.getArg("type"));
+*		
+*		XMLTools.save(parser, "C:/Users/Owner/Desktop/CS310/ArgParse/ArgParse/ArgParse/demos/Feature12Out.xml");
+*	}
+*	catch(Exception e) {
+*		System.out.println(e.getMessage());
+*	}
+* }
+* }
+*}
+*</pre></blockquote>
+*
 *@author Barry Weaver
 *@author Gary Hastert
 *@author Jonathon Beecham
 *@author Matthew Arbuckle
 *@author Oladiran Ojuolape
 *@author Christopher Abercrombie
-*This class allows for the user to create arguments and set their values by parsing through their inputs.
 */
 
 public class ArgumentParser{
+	
 	protected List<Argument> args;
 	private List<NamedArg> namedArgs;
 	private List<PosArg> posArgs;
