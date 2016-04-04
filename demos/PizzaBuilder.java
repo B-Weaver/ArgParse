@@ -3,7 +3,7 @@ import java.util.*;
 
 public class PizzaBuilder{
 	public static void main(String[] args) {
-		String filename = "C:/Users/Barry/CS310/ArgParse/demos/Feature12Pizza.xml";
+		String filename = "C:/Users/Owner/Desktop/CS310/ArgParse/ArgParse/ArgParse/demos/Feature12Pizza.xml";
 		try{
 			ArgumentParser parser = XMLTools.load(filename);
 			parser.parseArgs(args);
@@ -13,7 +13,7 @@ public class PizzaBuilder{
 			float p = (d*.75f) + t + (c*.25f);
 			System.out.println("The price is: $" + p);
 			
-			XMLTools.save(parser, "C:/Users/Barry/CS310/ArgParse/demos/Feature12PizzaOut.xml");
+			XMLTools.save(parser, "C:/Users/Owner/Desktop/CS310/ArgParse/ArgParse/ArgParse/demos/Feature12PizzaOut.xml");
 		}
 		catch(Exception e) {
 			System.out.println(e.getMessage());
