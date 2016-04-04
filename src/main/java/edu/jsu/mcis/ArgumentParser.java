@@ -364,16 +364,6 @@ public class ArgumentParser{
 	}
 	
 	/**
-	*This method is to be called by the user. It should be called by the user instead of parse. This method calls checkArgsThenParse. It is mainly
-	*here for something the user can call easier instead of checkArgsThenParse because it has a shorter name.
-	*@param arr   an array with values for arguments provided by the user.
-	*/
-	
-	public void parseArgs(String[] arr) {
-		checkArgsThenParse(arr);
-	}
-	
-	/**
 	*This method checks for the named arguments, assigns their default values, and removes the arguments from the array of arguments. 
 	*It then calls parse for the positional arguments left to be assigned values.
 	*@param arr   an array with values for arguments provided by the user.
@@ -381,7 +371,7 @@ public class ArgumentParser{
 	*@exception ArgumentNotFoundException  an exception thrown when the user provides a long-form or a short-name argument that doesn't exist in the list of arguments.
 	*/
 	
-	public void checkArgsThenParse(String[] arr){
+	public void parseArgs(String[] arr){
 		ArrayList<String> tempList = new ArrayList<String>(Arrays.asList(arr));
 		
 		if(tempList.contains("--help")){

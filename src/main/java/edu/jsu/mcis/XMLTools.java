@@ -12,7 +12,7 @@ import org.xml.sax.SAXParseException;
 
 /**
 *This class is used to load information from an XML file and to write various arguments and their values to said XML file.
-/**
+*
 *This class is used to load information from an XML file and to write various arguments and their values to said XML file. Typically, a user would make an instance of ArgumentParser
 *equal to the load function of XMLTools. Likewise, the user can also save arguments and their values in an XML file. Both ways are done like this:
 *<blockquote><pre>
