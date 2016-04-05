@@ -469,7 +469,7 @@ public class ArgsParserTest {
 	@Test
 	public void testNamedArgumentsPossibleValues(){
 		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of an ellipsoid.");
-		ArrayList<String> list = new ArrayList<String>();
+		List<String> list = new ArrayList<String>();
 		list.add("box");
 		list.add("ellipsoid");
 		list.add("pyramid");
@@ -489,7 +489,7 @@ public class ArgsParserTest {
 	@Test
 	public void testUnacceptedValueException(){
 		ArgumentParser p = new ArgumentParser("VolumeCalculator", "Calculate the volume of an ellipsoid.");
-		ArrayList<String> list = new ArrayList<String>();
+		List<String> list = new ArrayList<String>();
 		list.add("box");
 		list.add("ellipsoid");
 		list.add("pyramid");

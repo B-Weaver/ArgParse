@@ -106,7 +106,7 @@ public final class XMLTools{
 						String argType = "";
 						String argValue = "";
 						String argPosition = "";
-						ArrayList<String> restrictedVals = new ArrayList<String>();
+						List<String> restrictedVals = new ArrayList<String>();
 						Argument.Type t;
 						int count = 0;
 						

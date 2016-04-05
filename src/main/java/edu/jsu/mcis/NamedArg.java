@@ -47,7 +47,7 @@ public class NamedArg extends Argument{
 	@param rV   the list of restricted values
 	*/
 	
-	public NamedArg(String n, String s, String d, Argument.Type t, String dV, ArrayList<String> rV){
+	public NamedArg(String n, String s, String d, Argument.Type t, String dV, List<String> rV){
 		super(n, d, t);
 		shortName = s;
 		defaultValue = dV;
@@ -93,7 +93,7 @@ public class NamedArg extends Argument{
 		return toXML;
 	}
 	
-	protected void setPossVal(ArrayList<String> str){
+	protected void setPossVal(List<String> str){
 		possVals = str;
 	}
 }

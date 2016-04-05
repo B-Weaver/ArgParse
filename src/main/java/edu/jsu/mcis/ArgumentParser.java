@@ -176,7 +176,7 @@ public class ArgumentParser{
 		namedArgs.add(new NamedArg(name, shortName, description, type, defaultValue));
 	}
 	
-	public void addNamedArg(String name, String shortName, String description, Argument.Type type, String defaultValue, ArrayList<String> restrictedVals){
+	public void addNamedArg(String name, String shortName, String description, Argument.Type type, String defaultValue, List<String> restrictedVals){
 		args.add(new NamedArg(name, shortName, description, type, defaultValue, restrictedVals));
 		namedArgs.add(new NamedArg(name, shortName, description, type, defaultValue, restrictedVals));
 	}
@@ -452,7 +452,7 @@ public class ArgumentParser{
 	*@param list      the list of restricted values
 	*/
 	
-	public void addNamedArgPossValues(String argName, ArrayList<String> list){
+	public void addNamedArgPossValues(String argName, List<String> list){
 		Argument a = new Argument(argName);
 		NamedArg n = (NamedArg) args.get(args.indexOf(a));
 		namedArgs.get(namedArgs.indexOf(n)).setPossVal(list);
