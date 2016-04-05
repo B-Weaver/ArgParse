@@ -5,32 +5,32 @@
 	</program>
 	<positional>
 		<name>length</name>
-		<argdescription>the length of the shape</argdescription>
+		<argdescription></argdescription>
 		<type>integer</type>
 		<position>1</position>
 	</positional>
 	<positional>
 		<name>width</name>
-		<argdescription>the width of the shape</argdescription>
+		<argdescription></argdescription>
 		<type>float</type>
 		<position>2</position>
 	</positional>
 	<positional>
 		<name>height</name>
-		<argdescription>the height of the shape</argdescription>
+		<argdescription></argdescription>
 		<type>string</type>
 		<position>3</position>
 	</positional>
 	<named>
 		<name>type</name>
-		<argdescription>the type of shape</argdescription>
+		<argdescription></argdescription>
 		<shortname>t</shortname>
 		<type>boolean</type>
 		<default>true</default>
 	</named>
 	<named>
 		<name>digits</name>
-		<argdescription>the number of digits</argdescription>
+		<argdescription></argdescription>
 		<shortname>d</shortname>
 		<type>float</type>
 		<default>4</default>

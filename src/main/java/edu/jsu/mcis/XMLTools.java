@@ -94,6 +94,8 @@ public final class XMLTools{
 			
 			NodeList listOfXMLArgs = documentElement.getChildNodes();
 			
+			
+			
 			if(listOfXMLArgs != null && listOfXMLArgs.getLength() > 0){
 				for(int i = 0; i < listOfXMLArgs.getLength(); i++){
 					if(listOfXMLArgs.item(i).getNodeType() == Node.ELEMENT_NODE){
@@ -109,16 +111,37 @@ public final class XMLTools{
 						
 						if(el.getNodeName().contains("named")){
 							argName = el.getElementsByTagName("name").item(0).getTextContent();
-							argDescription = el.getElementsByTagName("description").item(0).getTextContent();
+							if(el.getNodeName().contains("description")){
+								argDescription = el.getElementsByTagName("description").item(0).getTextContent();
+							}
 							argShortName = el.getElementsByTagName("shortname").item(0).getTextContent();
 							argType = el.getElementsByTagName("type").item(0).getTextContent();
 							argValue = el.getElementsByTagName("default").item(0).getTextContent();
 							
 							//Enter code here to go down into restricted tree
-							NodeList restrictedList = el.getElementsByTagName("value");
-							for(int j = 0; j < restrictedList.getLength(); j++){
-								restrictedVals.add(restrictedList.item(j).getTextContent());
+							NodeList restrictedChildren = el.getChildNodes();//("restricted");
+							for(int pp = 0; pp < restrictedChildren.getLength(); pp++){
+								System.out.println(restrictedChildren.item(pp).getNodeName());
 							}
+							
+							if(restrictedChildren.getLength() > 0){
+								
+								//NodeList valueChilds = restricted.getChildNodes();
+								for(int j = 0; j < restrictedChildren.getLength(); j++){
+									//Element restricted = (Element) restrictedChildren.item(j);
+									//if(restrictedChildren.item(j).getNodeType() == Node.ELEMENT_NODE){
+										//Element val = (Element) restrictedChildren.item(j);
+										if(el.getNodeName().contains("restricted")){
+											String rV = el.getElementsByTagName("value").item(0).getTextContent();
+											restrictedVals.add(rV);
+										}
+										
+									//}
+									
+									
+								}
+							}
+							
 							
 							switch(argType.toLowerCase()){
 								case "integer":
@@ -139,7 +162,9 @@ public final class XMLTools{
 						}
 						else if(el.getNodeName().contains("positional")){
 							argName = el.getElementsByTagName("name").item(0).getTextContent();
-							argDescription = el.getElementsByTagName("argdescription").item(0).getTextContent();
+							if(el.getNodeName().contains("description")){
+								argDescription = el.getElementsByTagName("description").item(0).getTextContent();
+							}
 							argType = el.getElementsByTagName("type").item(0).getTextContent();
 							argPosition = el.getElementsByTagName("position").item(0).getTextContent();
 							switch(argType.toLowerCase()){
