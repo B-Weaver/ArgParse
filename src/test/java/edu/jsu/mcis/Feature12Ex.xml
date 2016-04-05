@@ -1,6 +1,6 @@
 <ArgParser>
 	<program>
-		<programname>VolumeCalculatorD</programname>
+		<name>VolumeCalculatorD</name>
 		<description>Calculate the volume of any shape</description>
 	</program>
 	<positional>

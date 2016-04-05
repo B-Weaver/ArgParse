@@ -227,7 +227,7 @@ public final class XMLTools{
 						Element el = (Element) listOfXMLArgs.item(i);
 						
 						if(el.getNodeName().contains("program")){
-							prog[0] = el.getElementsByTagName("programname").item(0).getTextContent();
+							prog[0] = el.getElementsByTagName("name").item(0).getTextContent();
 							prog[1] = el.getElementsByTagName("description").item(0).getTextContent();
 						}
 					}

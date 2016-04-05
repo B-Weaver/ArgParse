@@ -1,6 +1,6 @@
 <ArgParser>
 	<program>
-		<programname>PizzaBuilder</programname>
+		<name>PizzaBuilder</name>
 		<description>Build Pizza and Calculate price</description>
 	</program>
 	<positional>

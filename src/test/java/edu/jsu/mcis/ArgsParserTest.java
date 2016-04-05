@@ -534,7 +534,7 @@ public class ArgsParserTest {
 	public void testArgNotFoundXML(){
 		String[] s = {"7", "5", "2", "--vapor", "box", "-d", "15"};
 		String filename = "src/test/java/edu/jsu/mcis/Feature12Ex.xml";
-		String outfile = "src/test/java/edu/jsu/mcis/Feature12OutEx2.xml";
+		String outfile = "src/test/java/edu/jsu/mcis/Feature12OutEx3.xml";
 		ArgumentParser p = XMLTools.load(filename);
 		thrown.expect(ArgumentNotFoundException.class);
 		thrown.expectMessage("The argument vapor was not found");
@@ -546,7 +546,7 @@ public class ArgsParserTest {
 	public void testArgNotFoundShortXML(){
 		String[] s = {"7", "5", "2", "-v", "box", "-d", "15"};
 		String filename = "src/test/java/edu/jsu/mcis/Feature12Ex.xml";
-		String outfile = "src/test/java/edu/jsu/mcis/Feature12OutEx2.xml";
+		String outfile = "src/test/java/edu/jsu/mcis/Feature12OutEx4.xml";
 		ArgumentParser p = XMLTools.load(filename);
 		thrown.expect(ArgumentNotFoundException.class);
 		thrown.expectMessage("No argument found with short name v");
