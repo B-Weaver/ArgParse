@@ -80,14 +80,15 @@ public class NamedArg extends Argument{
 	
 	@Override
 	public String stringToXML(){
-		String toXML = "\t<named>\n\t\t<name>"+argName+"</name>\n\t\t<argdescription>" + argDescription + "</argdescription>\n\t\t<shortname>"+shortName+"</shortname>\n\t\t<type>"+getArgTypeAsString()+"</type>\n\t\t<default>"+defaultValue+"</default>";
-		//if(possVals.size() > 0){
-		for(int i = 0; i < possVals.size(); i++){
-			toXML = toXML + "\n\t\t<restricted>"+possVals.get(i)+"</restricted>";
+		String toXML = "\t<named>\n\t\t<name>"+argName+"</name>\n\t\t<description>" + argDescription + "</description>\n\t\t<shortname>"+shortName+"</shortname>\n\t\t<type>"+getArgTypeAsString()+"</type>\n\t\t<default>"+defaultValue+"</default>";
+		if(possVals.size() > 0){
+			toXML = toXML + "\n\t\t<restricted>";	
+			for(int i = 0; i < possVals.size(); i++){
+				toXML = toXML + "\n\t\t\t<value>"+possVals.get(i)+"</value>";
+			}
+			toXML = toXML + "\n\t\t</restricted>";
 		}
 		toXML = toXML + "\n\t</named>\n";
-		
-		//}
 		
 		return toXML;
 	}

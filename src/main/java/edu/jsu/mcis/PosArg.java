@@ -36,7 +36,7 @@ public class PosArg extends Argument{
 	
 	@Override
 	public String stringToXML(){
-		String toXML = "\t<positional>\n\t\t<name>"+argName+"</name>\n\t\t<argdescription>" + argDescription +"</argdescription>\n\t\t<type>"+getArgTypeAsString()+"</type>\n\t\t<position>"+position+"</position>\n\t</positional>\n";
+		String toXML = "\t<positional>\n\t\t<name>"+argName+"</name>\n\t\t<description>" + argDescription +"</description>\n\t\t<type>"+getArgTypeAsString()+"</type>\n\t\t<position>"+position+"</position>\n\t</positional>\n";
 		return toXML;
 	}
 }

@@ -467,7 +467,7 @@ public class ArgumentParser{
 	*/
 	
 	public String writeArgsAsXML(){
-		String s = "<ArgParser>\n\t<program>\n\t\t<programname>" + programName + "</programname>\n\t\t<description>" + programPurpose +"</description>\n\t</program>\n";
+		String s = "<ArgParser>\n\t<program>\n\t\t<name>" + programName + "</name>\n\t\t<description>" + programPurpose +"</description>\n\t</program>\n";
 		for(Argument a : args){
 			s += a.stringToXML();
 		}
