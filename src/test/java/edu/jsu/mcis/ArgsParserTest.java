@@ -376,6 +376,31 @@ public class ArgsParserTest {
 	}
 	
 	@Test
+	public void testParseXMLFileAndGetDescription(){
+		String[] s = {"7", "5", "2", "-t", "square", "--digits", "6"};
+		String filename = "src/test/java/edu/jsu/mcis/Feature9Ex.xml";
+		ArgumentParser p = XMLTools.load(filename);
+		try {
+			p.parseArgs(s);
+		}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		assertEquals("length the length of the shape", p.getArg(0).getNameAndDescription());
+	}
+	
+	@Test
+	public void testInvalidArgumentType(){
+		String[] s = {"7", "5", "2", "-t", "square", "--digits", "6"};
+		String filename = "demos/Feature9Ex2.xml";
+		thrown.expect(InvalidArgumentTypeException.class);
+		thrown.expectMessage("goat is not a valid argument type");
+		ArgumentParser p = XMLTools.load(filename);
+		
+		p.parseArgs(s);
+	}
+	
+	@Test
 	public void testParseXMLFileNoNamedArgs(){
 		String[] s = {"7", "5", "2"};
 		String filename = "src/test/java/edu/jsu/mcis/Feature9Ex.xml";
@@ -500,7 +525,7 @@ public class ArgsParserTest {
 		String outfile = "src/test/java/edu/jsu/mcis/Feature12OutEx2.xml";
 		ArgumentParser p = XMLTools.load(filename);
 		thrown.expect(UnacceptedValueException.class);
-		//thrown.expectMessage("usage: java VolumeCalculatorD length width height type digits\nVolumeCalculatorD.java: unaccepted value: 15");
+		thrown.expectMessage("usage: java VolumeCalculatorD length width height type digits\nVolumeCalculatorD.java: unaccepted value: 15");
 		p.parseArgs(s);
 		XMLTools.save(p, outfile);
 	}

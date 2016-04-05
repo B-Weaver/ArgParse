@@ -112,36 +112,14 @@ public final class XMLTools{
 						
 						if(el.getNodeName().contains("named")){
 							argName = el.getElementsByTagName("name").item(0).getTextContent();
-							if(el.getNodeName().contains("description")){
-								argDescription = el.getElementsByTagName("description").item(0).getTextContent();
+							NodeList nl = el.getElementsByTagName("description");
+							if(nl.getLength() > 0){
+								argDescription = nl.item(0).getTextContent();
 							}
 							argShortName = el.getElementsByTagName("shortname").item(0).getTextContent();
 							argType = el.getElementsByTagName("type").item(0).getTextContent();
 							argValue = el.getElementsByTagName("default").item(0).getTextContent();
 							
-							//Enter code here to go down into restricted tree
-<<<<<<< HEAD
-							NodeList restrictedChildren = el.getChildNodes();//("restricted");
-							for(int pp = 0; pp < restrictedChildren.getLength(); pp++){
-								System.out.println(restrictedChildren.item(pp).getNodeName());
-							}
-							
-							if(restrictedChildren.getLength() > 0){
-								
-								//NodeList valueChilds = restricted.getChildNodes();
-								for(int j = 0; j < restrictedChildren.getLength(); j++){
-									//Element restricted = (Element) restrictedChildren.item(j);
-									//if(restrictedChildren.item(j).getNodeType() == Node.ELEMENT_NODE){
-										//Element val = (Element) restrictedChildren.item(j);
-										if(el.getNodeName().contains("restricted")){
-											String rV = el.getElementsByTagName("value").item(0).getTextContent();
-											restrictedVals.add(rV);
-										}
-										
-									//}
-									
-									
-=======
 							NodeList restrictedValueNodeList = el.getChildNodes();
 							if(restrictedValueNodeList != null && restrictedValueNodeList.getLength() > 0){
 								for(int j = 0; j < restrictedValueNodeList.getLength(); j++){
@@ -159,12 +137,14 @@ public final class XMLTools{
 											}
 										}
 									}
->>>>>>> bfa4ccea55c52819cec3d6842a1c3e34baac06af
 								}
 							}
+							argType = argType.toLowerCase();
 							
-							
-							switch(argType.toLowerCase()){
+							if(!argType.equals("integer") && !argType.equals("boolean") && !argType.equals("string") && !argType.equals("float")){
+								throw new InvalidArgumentTypeException(argType + " is not a valid argument type");
+							}
+							switch(argType){
 								case "integer":
 									t = Argument.Type.INT;
 									break;
@@ -184,13 +164,10 @@ public final class XMLTools{
 						}
 						else if(el.getNodeName().contains("positional")){
 							argName = el.getElementsByTagName("name").item(0).getTextContent();
-<<<<<<< HEAD
-							if(el.getNodeName().contains("description")){
-								argDescription = el.getElementsByTagName("description").item(0).getTextContent();
+							NodeList nl = el.getElementsByTagName("description");
+							if(nl.getLength() > 0){
+								argDescription = nl.item(0).getTextContent();
 							}
-=======
-							argDescription = el.getElementsByTagName("description").item(0).getTextContent();
->>>>>>> bfa4ccea55c52819cec3d6842a1c3e34baac06af
 							argType = el.getElementsByTagName("type").item(0).getTextContent();
 							argPosition = el.getElementsByTagName("position").item(0).getTextContent();
 							switch(argType.toLowerCase()){
