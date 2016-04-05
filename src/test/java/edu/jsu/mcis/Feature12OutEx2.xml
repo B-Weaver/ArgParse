@@ -5,45 +5,34 @@
 	</program>
 	<positional>
 		<name>length</name>
-		<description>the length of the shape</description>
+		<argdescription>the length of the shape</argdescription>
 		<type>float</type>
 		<position>1</position>
 	</positional>
 	<positional>
 		<name>width</name>
-		<description>the width of the shape</description>
+		<argdescription>the width of the shape</argdescription>
 		<type>float</type>
 		<position>2</position>
 	</positional>
 	<positional>
 		<name>height</name>
-		<description>the height of the shape</description>
+		<argdescription>the height of the shape</argdescription>
 		<type>float</type>
 		<position>3</position>
 	</positional>
 	<named>
 		<name>type</name>
-		<description>the type of shape</description>
+		<argdescription>the type of shape</argdescription>
 		<shortname>t</shortname>
 		<type>string</type>
 		<default>box</default>
-		<restricted>
-			<value>box</value>
-			<value>ellipsoid</value>
-			<value>pyramid</value>
-		</restricted>
 	</named>
 	<named>
 		<name>digits</name>
-		<description>the number of digits</description>
+		<argdescription>the number of digits</argdescription>
 		<shortname>d</shortname>
 		<type>integer</type>
 		<default>4</default>
-		<restricted>
-			<value>2</value>
-			<value>3</value>
-			<value>4</value>
-			<value>8</value>
-		</restricted>
 	</named>
 </ArgParser>

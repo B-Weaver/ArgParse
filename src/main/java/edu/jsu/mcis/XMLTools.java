@@ -106,6 +106,7 @@ public final class XMLTools{
 						String argPosition = "";
 						ArrayList<String> restrictedVals = new ArrayList<String>();
 						Argument.Type t;
+						int count = 0;
 						
 						if(el.getNodeName().contains("named")){
 							argName = el.getElementsByTagName("name").item(0).getTextContent();
@@ -115,9 +116,25 @@ public final class XMLTools{
 							argValue = el.getElementsByTagName("default").item(0).getTextContent();
 							
 							//Enter code here to go down into restricted tree
-							NodeList restrictedList = el.getElementsByTagName("value");
-							for(int j = 0; j < restrictedList.getLength(); j++){
-								restrictedVals.add(restrictedList.item(j).getTextContent());
+							NodeList restrictedValueNodeList = el.getChildNodes();
+							if(restrictedValueNodeList != null && restrictedValueNodeList.getLength() > 0){
+								for(int j = 0; j < restrictedValueNodeList.getLength(); j++){
+									if(restrictedValueNodeList.item(j).getNodeType() == Node.ELEMENT_NODE){
+										Element values = (Element) restrictedValueNodeList.item(j);
+										NodeList vals = values.getChildNodes();
+										if(values.getNodeName().contains("restricted")){
+											if(vals !=null && vals.getLength() > 0){
+												for(int k = 0; k < vals.getLength(); k++){
+													if(vals.item(k).getNodeType() == Node.ELEMENT_NODE){
+														restrictedVals.add(values.getElementsByTagName("value").item(count).getTextContent());
+														count++;
+														System.out.println(restrictedVals);
+													}
+												} 
+											}
+										}
+									}
+								}
 							}
 							
 							switch(argType.toLowerCase()){
@@ -136,10 +153,11 @@ public final class XMLTools{
 								
 							}
 							p.addNamedArg(argName, argShortName, argDescription, t, argValue, restrictedVals);
+							restrictedVals = new ArrayList<String>();
 						}
 						else if(el.getNodeName().contains("positional")){
 							argName = el.getElementsByTagName("name").item(0).getTextContent();
-							argDescription = el.getElementsByTagName("argdescription").item(0).getTextContent();
+							argDescription = el.getElementsByTagName("description").item(0).getTextContent();
 							argType = el.getElementsByTagName("type").item(0).getTextContent();
 							argPosition = el.getElementsByTagName("position").item(0).getTextContent();
 							switch(argType.toLowerCase()){

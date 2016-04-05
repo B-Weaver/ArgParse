@@ -483,14 +483,14 @@ public class ArgsParserTest {
 	
 	@Test
 	public void testNamedArgumentsPossibleValuesXML(){
-		String[] s = {"7", "5", "2", "-t", "ellipsoid", "-d", "2"};
+		String[] s = {"7", "5", "2", "-t", "ellipsoid", "-d", "4"};
 		String filename = "src/test/java/edu/jsu/mcis/Feature12Ex.xml";
 		String outfile = "src/test/java/edu/jsu/mcis/Feature12OutEx.xml";
 		ArgumentParser p = XMLTools.load(filename);
 		p.parseArgs(s);
 		XMLTools.save(p, outfile);
 		assertEquals("ellipsoid", p.getArg("type"));
-		assertEquals("2", p.getArg("digits"));
+		assertEquals("4", p.getArg("digits"));
 	}
 	
 	@Test
