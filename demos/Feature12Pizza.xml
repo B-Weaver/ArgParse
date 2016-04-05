@@ -5,41 +5,45 @@
 	</program>
 	<positional>
 		<name>diameter</name>
-		<argdescription>the diameter of the pizza</argdescription>
+		<description>the diameter of the pizza</description>
 		<type>float</type>
 		<position>1</position>
 	</positional>
 	<positional>
 		<name>toppings</name>
-		<argdescription>the number of toppings</argdescription>
+		<description>the number of toppings</description>
 		<type>float</type>
 		<position>2</position>
 	</positional>
 	<positional>
 		<name>cuts</name>
-		<argdescription>the number of cuts made to slice</argdescription>
+		<description>the number of cuts made to slice</description>
 		<type>float</type>
 		<position>3</position>
 	</positional>
 	<named>
 		<name>cheese</name>
-		<argdescription>the type of cheese</argdescription>
+		<description>the type of cheese</description>
 		<shortname>c</shortname>
 		<type>string</type>
 		<default>american</default>
-		<restricted>american</restricted>
-		<restricted>cheddar</restricted>
-		<restricted>motzorella</restricted>
+		<restricted>
+			<value>american</value>
+			<value>cheddar</value>
+			<value>motzorella</value>
+		</restricted>
 	</named>
 	<named>
 		<name>dough</name>
-		<argdescription>the dough made into crust</argdescription>
+		<description>the dough made into crust</description>
 		<shortname>d</shortname>
 		<type>string</type>
 		<default>regular</default>
-		<restricted>regular</restricted>
-		<restricted>thin</restricted>
-		<restricted>hand-tossed</restricted>
-		<restricted>thick</restricted>
+		<restricted>
+			<value>regular</value>
+			<value>thin</value>
+			<value>hand-tossed</value>
+			<value>thick</value>
+		</restricted>
 	</named>
 </ArgParser>

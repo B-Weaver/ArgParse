@@ -7,7 +7,7 @@ public class VolumeCalculator{
 		parser.addPosArg("width", "the width of the box", Argument.Type.INT, "2");
 		parser.addPosArg("height", "the height of the box", Argument.Type.INT, "3");
 		try {
-			parser.checkArgsThenParse(args);
+			parser.parseArgs(args);
 			int l = Integer.parseInt(parser.getArg("length"));
 			int w = Integer.parseInt(parser.getArg("width"));
 			int h = Integer.parseInt(parser.getArg("height"));

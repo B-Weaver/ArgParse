@@ -12,7 +12,7 @@ import org.xml.sax.SAXParseException;
 
 /**
 *This class is used to load information from an XML file and to write various arguments and their values to said XML file.
-/**
+*
 *This class is used to load information from an XML file and to write various arguments and their values to said XML file. Typically, a user would make an instance of ArgumentParser
 *equal to the load function of XMLTools. Likewise, the user can also save arguments and their values in an XML file. Both ways are done like this:
 *<blockquote><pre>
@@ -108,6 +108,7 @@ public final class XMLTools{
 						String argPosition = "";
 						ArrayList<String> restrictedVals = new ArrayList<String>();
 						Argument.Type t;
+						int count = 0;
 						
 						if(el.getNodeName().contains("named")){
 							argName = el.getElementsByTagName("name").item(0).getTextContent();
@@ -119,6 +120,7 @@ public final class XMLTools{
 							argValue = el.getElementsByTagName("default").item(0).getTextContent();
 							
 							//Enter code here to go down into restricted tree
+<<<<<<< HEAD
 							NodeList restrictedChildren = el.getChildNodes();//("restricted");
 							for(int pp = 0; pp < restrictedChildren.getLength(); pp++){
 								System.out.println(restrictedChildren.item(pp).getNodeName());
@@ -139,6 +141,25 @@ public final class XMLTools{
 									//}
 									
 									
+=======
+							NodeList restrictedValueNodeList = el.getChildNodes();
+							if(restrictedValueNodeList != null && restrictedValueNodeList.getLength() > 0){
+								for(int j = 0; j < restrictedValueNodeList.getLength(); j++){
+									if(restrictedValueNodeList.item(j).getNodeType() == Node.ELEMENT_NODE){
+										Element values = (Element) restrictedValueNodeList.item(j);
+										NodeList vals = values.getChildNodes();
+										if(values.getNodeName().contains("restricted")){
+											if(vals !=null && vals.getLength() > 0){
+												for(int k = 0; k < vals.getLength(); k++){
+													if(vals.item(k).getNodeType() == Node.ELEMENT_NODE){
+														restrictedVals.add(values.getElementsByTagName("value").item(count).getTextContent());
+														count++;
+													}
+												} 
+											}
+										}
+									}
+>>>>>>> bfa4ccea55c52819cec3d6842a1c3e34baac06af
 								}
 							}
 							
@@ -159,12 +180,17 @@ public final class XMLTools{
 								
 							}
 							p.addNamedArg(argName, argShortName, argDescription, t, argValue, restrictedVals);
+							restrictedVals = new ArrayList<String>();
 						}
 						else if(el.getNodeName().contains("positional")){
 							argName = el.getElementsByTagName("name").item(0).getTextContent();
+<<<<<<< HEAD
 							if(el.getNodeName().contains("description")){
 								argDescription = el.getElementsByTagName("description").item(0).getTextContent();
 							}
+=======
+							argDescription = el.getElementsByTagName("description").item(0).getTextContent();
+>>>>>>> bfa4ccea55c52819cec3d6842a1c3e34baac06af
 							argType = el.getElementsByTagName("type").item(0).getTextContent();
 							argPosition = el.getElementsByTagName("position").item(0).getTextContent();
 							switch(argType.toLowerCase()){

@@ -48,7 +48,7 @@ public class ArgParserKeywords{
 		parser.addNamedArg("type", "t", "type of shape", Argument.Type.STRING, "box");
 		parser.addNamedArg("digits", "d", "digits of type", Argument.Type.STRING, "4");
 		try {
-			parser.checkArgsThenParse(args);
+			parser.parseArgs(args);
 			int l = Integer.parseInt(parser.getArg("length"));
 			int w = Integer.parseInt(parser.getArg("width"));
 			int h = Integer.parseInt(parser.getArg("height"));
