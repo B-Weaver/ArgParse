@@ -128,7 +128,6 @@ public final class XMLTools{
 													if(vals.item(k).getNodeType() == Node.ELEMENT_NODE){
 														restrictedVals.add(values.getElementsByTagName("value").item(count).getTextContent());
 														count++;
-														System.out.println(restrictedVals);
 													}
 												} 
 											}
