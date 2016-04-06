@@ -1,0 +1,50 @@
+<ArgParser>
+	<program>
+		<name>VolumeCalculatorD</name>
+		<description>Calculate the volume of any shape</description>
+	</program>
+	<positional>
+		<name>length</name>
+		<description>the length of the shape</description>
+		<type>float</type>
+		<position>1</position>
+	</positional>
+	<positional>
+		<name>width</name>
+		<description>the width of the shape</description>
+		<type>float</type>
+		<position>2</position>
+	</positional>
+	<positional>
+		<name>height</name>
+		<description>the height of the shape</description>
+		<type>float</type>
+		<position>3</position>
+	</positional>
+	<named>
+		<name>type</name>
+		<description>the type of shape</description>
+		<shortname>t</shortname>
+		<type>string</type>
+		<default>box</default>
+		<restricted>
+			<value>box</value>
+			<value>ellipsoid</value>
+			<value>pyramid</value>
+		</restricted>
+		<required>true</required>
+	</named>
+	<named>
+		<name>digits</name>
+		<description>the number of digits</description>
+		<shortname>d</shortname>
+		<type>integer</type>
+		<default>4</default>
+		<restricted>
+			<value>2</value>
+			<value>3</value>
+			<value>4</value>
+			<value>8</value>
+		</restricted>
+	</named>
+</ArgParser>

@@ -15,7 +15,8 @@ public class NamedArg extends Argument{
 	
 	String shortName;
 	String defaultValue;
-	protected List<String> possVals;
+	String requiredArg;
+	protected List<String> possibleValues;
 	
 	/**
 	*This constructor is called to create a new named argument. The user specifies the name, shortname, description, type, and the default value of these arguments.
@@ -32,7 +33,17 @@ public class NamedArg extends Argument{
 		shortName = s;
 		defaultValue = dV;
 		this.argValue = dV;
-		possVals = new ArrayList<String>();
+		possibleValues = new ArrayList<String>();
+		requiredArg = "false";
+	}
+	
+	public NamedArg(String n, String s, String d, Argument.Type t, String dV, String rA){
+		super(n, d, t);
+		shortName = s;
+		defaultValue = dV;
+		this.argValue = dV;
+		possibleValues = new ArrayList<String>();
+		requiredArg = rA;
 	}
 	
 	/**
@@ -52,7 +63,17 @@ public class NamedArg extends Argument{
 		shortName = s;
 		defaultValue = dV;
 		this.argValue = dV;
-		possVals = rV;
+		possibleValues = rV;
+		requiredArg = "false";
+	}
+	
+	public NamedArg(String n, String s, String d, Argument.Type t, String dV, String rA, List<String> rV){
+		super(n, d, t);
+		shortName = s;
+		defaultValue = dV;
+		this.argValue = dV;
+		possibleValues = rV;
+		requiredArg = rA;
 	}
 	
 	/**
@@ -78,13 +99,17 @@ public class NamedArg extends Argument{
 	*@return   a string formatting the named arguments and their values to an XML file.
 	*/
 	
+	public String isArgRequired(){
+		return requiredArg;
+	}
+	
 	@Override
 	public String stringToXML(){
 		String toXML = "\t<named>\n\t\t<name>"+argName+"</name>\n\t\t<description>" + argDescription + "</description>\n\t\t<shortname>"+shortName+"</shortname>\n\t\t<type>"+getArgTypeAsString()+"</type>\n\t\t<default>"+defaultValue+"</default>";
-		if(possVals.size() > 0){
+		if(possibleValues.size() > 0){
 			toXML = toXML + "\n\t\t<restricted>";	
-			for(int i = 0; i < possVals.size(); i++){
-				toXML = toXML + "\n\t\t\t<value>"+possVals.get(i)+"</value>";
+			for(int i = 0; i < possibleValues.size(); i++){
+				toXML = toXML + "\n\t\t\t<value>"+possibleValues.get(i)+"</value>";
 			}
 			toXML = toXML + "\n\t\t</restricted>";
 		}
@@ -93,7 +118,7 @@ public class NamedArg extends Argument{
 		return toXML;
 	}
 	
-	protected void setPossVal(List<String> str){
-		possVals = str;
+	protected void setPossibleValue(List<String> str){
+		possibleValues = str;
 	}
 }

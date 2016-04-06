@@ -84,6 +84,7 @@ public final class XMLTools{
 		program = x.programLoad(file);
 		String programName = program[0];
 		String programDescription = program[1];
+		Boolean hasRequired = false;
 		ArgumentParser p = new ArgumentParser(programName, programDescription);
 		try{
 			DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
@@ -109,6 +110,7 @@ public final class XMLTools{
 						List<String> restrictedVals = new ArrayList<String>();
 						Argument.Type t;
 						int count = 0;
+						String required = "false";
 						
 						if(el.getNodeName().contains("named")){
 							argName = el.getElementsByTagName("name").item(0).getTextContent();
@@ -119,7 +121,10 @@ public final class XMLTools{
 							argShortName = el.getElementsByTagName("shortname").item(0).getTextContent();
 							argType = el.getElementsByTagName("type").item(0).getTextContent();
 							argValue = el.getElementsByTagName("default").item(0).getTextContent();
-							
+							if(el.getNodeName().contains("required")){
+								required = el.getElementsByTagName("required").item(0).getTextContent();
+								hasRequired = true;
+							}
 							NodeList restrictedValueNodeList = el.getChildNodes();
 							if(restrictedValueNodeList != null && restrictedValueNodeList.getLength() > 0){
 								for(int j = 0; j < restrictedValueNodeList.getLength(); j++){
@@ -159,7 +164,11 @@ public final class XMLTools{
 									break;
 								
 							}
-							p.addNamedArg(argName, argShortName, argDescription, t, argValue, restrictedVals);
+							if(hasRequired == true){
+								p.addNamedArg(argName, argShortName, argDescription, t, argValue, required, restrictedVals);
+							}
+							else
+								p.addNamedArg(argName, argShortName, argDescription, t, argValue, restrictedVals);
 							restrictedVals = new ArrayList<String>();
 						}
 						else if(el.getNodeName().contains("positional")){
