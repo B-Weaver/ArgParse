@@ -405,15 +405,6 @@ public class ArgumentParser{
 						String s = tempList.get(i).substring(2, tempList.get(i).length());
 						String v = tempList.get(i+1);
 						getArg(s);
-						/*
-						Argument a = new Argument(s);
-						if(args.contains(a)){
-							args.get(args.indexOf(a)).setValue(v);
-							tempList.remove(tempList.get(i));
-							tempList.remove(tempList.get(i));
-							i--;
-						}
-						*/
 						for(NamedArg n : namedArgs){
 							if(n.getName().equals(s)){
 								if(n.possibleValues.size() > 0){

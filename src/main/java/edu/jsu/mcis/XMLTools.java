@@ -168,14 +168,6 @@ public final class XMLTools{
 							}
 							
 							p.addNamedArg(argName, argShortName, argDescription, t, argValue, requiredArg, restrictedVals);
-							/*
-							if(hasRequired == true){
-								
-							}
-							else
-								p.addNamedArg(argName, argShortName, argDescription, t, argValue, restrictedVals);
-							restrictedVals = new ArrayList<String>();
-							*/
 						}
 						else if(el.getNodeName().contains("positional")){
 							argName = el.getElementsByTagName("name").item(0).getTextContent();
