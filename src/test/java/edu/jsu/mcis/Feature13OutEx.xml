@@ -32,6 +32,7 @@
 			<value>ellipsoid</value>
 			<value>pyramid</value>
 		</restricted>
+		<required>true</required>
 	</named>
 	<named>
 		<name>digits</name>

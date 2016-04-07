@@ -1,0 +1,50 @@
+<ArgParser>
+	<program>
+		<name>PizzaBuilder</name>
+		<description>Build Pizza and Calculate price</description>
+	</program>
+	<positional>
+		<name>diameter</name>
+		<description>the diameter of the pizza</description>
+		<type>float</type>
+		<position>1</position>
+	</positional>
+	<positional>
+		<name>toppings</name>
+		<description>the number of toppings</description>
+		<type>float</type>
+		<position>2</position>
+	</positional>
+	<positional>
+		<name>cuts</name>
+		<description>the number of cuts made to slice</description>
+		<type>float</type>
+		<position>3</position>
+	</positional>
+	<named>
+		<name>cheese</name>
+		<description>the type of cheese</description>
+		<shortname>c</shortname>
+		<type>string</type>
+		<default>american</default>
+		<restricted>
+			<value>american</value>
+			<value>cheddar</value>
+			<value>motzorella</value>
+		</restricted>
+	</named>
+	<named>
+		<name>dough</name>
+		<description>the dough made into crust</description>
+		<shortname>d</shortname>
+		<type>string</type>
+		<default>regular</default>
+		<restricted>
+			<value>regular</value>
+			<value>thin</value>
+			<value>hand-tossed</value>
+			<value>thick</value>
+		</restricted>
+		<required>true</required>
+	</named>
+</ArgParser>

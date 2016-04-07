@@ -176,15 +176,46 @@ public class ArgumentParser{
 		namedArgs.add(new NamedArg(name, shortName, description, type, defaultValue));
 	}
 	
+	/**
+	*This method adds a named argument by adding it to the args list and to the NamedArgs class.
+	*@param name   the name of the argument.
+	*@param shortName   the short name version of the argument, such as 't' instead of "type."
+	*@param description   the description of said argument.
+	*@param type   the type of argument.
+	*@param defaultValue   the user specified default value of the named argument.
+	*@param required   a boolean that, if true, the named arg is required.
+	*/
+	
 	public void addNamedArg(String name, String shortName, String description, Argument.Type type, String defaultValue, Boolean required){
 		args.add(new NamedArg(name, shortName, description, type, defaultValue, required));
 		namedArgs.add(new NamedArg(name, shortName, description, type, defaultValue, required));
 	}
 	
+	/**
+	*This method adds a named argument by adding it to the args list and to the NamedArgs class.
+	*@param name   the name of the argument.
+	*@param shortName   the short name version of the argument, such as 't' instead of "type."
+	*@param description   the description of said argument.
+	*@param type   the type of argument.
+	*@param defaultValue   the user specified default value of the named argument.
+	*@param restrictedVals   a list containing the restricted range of values the named argument can have.
+	*/
+	
 	public void addNamedArg(String name, String shortName, String description, Argument.Type type, String defaultValue, List<String> restrictedVals){
 		args.add(new NamedArg(name, shortName, description, type, defaultValue, restrictedVals));
 		namedArgs.add(new NamedArg(name, shortName, description, type, defaultValue, restrictedVals));
 	}
+	
+	/**
+	*This method adds a named argument by adding it to the args list and to the NamedArgs class.
+	*@param name   the name of the argument.
+	*@param shortName   the short name version of the argument, such as 't' instead of "type."
+	*@param description   the description of said argument.
+	*@param type   the type of argument.
+	*@param defaultValue   the user specified default value of the named argument.
+	*@param required   a boolean value that, if true, states that the argument is a required argument.
+	*@param restrictedVals   a list containing the restricted range of values the named argument can have.
+	*/
 	
 	public void addNamedArg(String name, String shortName, String description, Argument.Type type, String defaultValue, Boolean required, List<String> restrictedVals){
 		args.add(new NamedArg(name, shortName, description, type, defaultValue, required, restrictedVals));

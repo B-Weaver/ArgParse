@@ -37,6 +37,18 @@ public class NamedArg extends Argument{
 		requiredArg = false;
 	}
 	
+	/**
+	*This constructor is called to create a new named argument. The user specifies the name, shortname, description, type, and the default value of these arguments as well as
+	*if the argument is required.
+	*Usage example: new NamedArg("digits", "d", "the number of digits", Argument.Type.FLOAT, "4", true);
+	*@param n   the name of the argument
+	*@param s   the shortname of the argument
+	*@param d   the description of the argument
+	*@param t   the type of object the argument is
+	*@param dV  the default value of the argument
+	*@param rA  a boolean value stating if the argument is required. If true then the argument is required.
+	*/
+	
 	public NamedArg(String n, String s, String d, Argument.Type t, String dV, Boolean rA){
 		super(n, d, t);
 		shortName = s;
@@ -67,6 +79,19 @@ public class NamedArg extends Argument{
 		requiredArg = false;
 	}
 	
+	/**
+	*This constructor is called to create a new named argument. The user specifies the name, shortname, description, type, the default value of these arguments, 
+	*and the restricted values for these arguments.
+	*Usage example: new NamedArg("digits", "d", "the number of digits", Argument.Type.FLOAT, "4");
+	*@param n   the name of the argument
+	*@param s   the shortname of the argument
+	*@param d   the description of the argument
+	*@param t   the type of object the argument is
+	*@param dV  the default value of the argument
+	*@param rA  a boolean value stating if the argument is requried. If true, then the argument is required.
+	*@param rV   the list of restricted values
+	*/
+	
 	public NamedArg(String n, String s, String d, Argument.Type t, String dV, Boolean rA, List<String> rV){
 		super(n, d, t);
 		shortName = s;
@@ -95,13 +120,18 @@ public class NamedArg extends Argument{
 	}
 	
 	/**
-	*This method is used by the writeArgsAsXML method in ArgumentParser, which is used by the save method in XMLTools, to write the named arguments to an XML file.
-	*@return   a string formatting the named arguments and their values to an XML file.
+	*This method is used by the parseArgs method in ArgumentParser. It checks to see if an argument is a required argument.
+	*@return    a boolean value stating if the named argument is required. If it returns true then the argument is required.
 	*/
 	
 	public Boolean isArgRequired(){
 		return requiredArg;
 	}
+	
+	/**
+	*This method is used by the writeArgsAsXML method in ArgumentParser, which is used by the save method in XMLTools, to write the named arguments to an XML file.
+	*@return   a string formatting the named arguments and their values to an XML file.
+	*/
 	
 	@Override
 	public String stringToXML(){
@@ -112,6 +142,9 @@ public class NamedArg extends Argument{
 				toXML = toXML + "\n\t\t\t<value>"+possibleValues.get(i)+"</value>";
 			}
 			toXML = toXML + "\n\t\t</restricted>";
+		}
+		if(requiredArg == true){
+			toXML = toXML + "\n\t\t<required>true</required>";
 		}
 		toXML = toXML + "\n\t</named>\n";
 		
