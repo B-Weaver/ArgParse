@@ -110,7 +110,7 @@ public final class XMLTools{
 						List<String> restrictedVals = new ArrayList<String>();
 						Argument.Type t;
 						int count = 0;
-						String required = "false";
+						Boolean requiredArg = false;
 						
 						if(el.getNodeName().contains("named")){
 							argName = el.getElementsByTagName("name").item(0).getTextContent();
@@ -122,7 +122,8 @@ public final class XMLTools{
 							argType = el.getElementsByTagName("type").item(0).getTextContent();
 							argValue = el.getElementsByTagName("default").item(0).getTextContent();
 							if(el.getNodeName().contains("required")){
-								required = el.getElementsByTagName("required").item(0).getTextContent();
+								if(el.getElementsByTagName("required").item(0).getTextContent().equals("true"));
+								requiredArg = true;
 								hasRequired = true;
 							}
 							NodeList restrictedValueNodeList = el.getChildNodes();
@@ -165,7 +166,7 @@ public final class XMLTools{
 								
 							}
 							if(hasRequired == true){
-								p.addNamedArg(argName, argShortName, argDescription, t, argValue, required, restrictedVals);
+								p.addNamedArg(argName, argShortName, argDescription, t, argValue, requiredArg, restrictedVals);
 							}
 							else
 								p.addNamedArg(argName, argShortName, argDescription, t, argValue, restrictedVals);

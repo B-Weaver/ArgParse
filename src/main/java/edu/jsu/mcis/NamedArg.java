@@ -15,7 +15,7 @@ public class NamedArg extends Argument{
 	
 	String shortName;
 	String defaultValue;
-	String requiredArg;
+	Boolean requiredArg;
 	protected List<String> possibleValues;
 	
 	/**
@@ -34,10 +34,10 @@ public class NamedArg extends Argument{
 		defaultValue = dV;
 		this.argValue = dV;
 		possibleValues = new ArrayList<String>();
-		requiredArg = "false";
+		requiredArg = false;
 	}
 	
-	public NamedArg(String n, String s, String d, Argument.Type t, String dV, String rA){
+	public NamedArg(String n, String s, String d, Argument.Type t, String dV, Boolean rA){
 		super(n, d, t);
 		shortName = s;
 		defaultValue = dV;
@@ -64,10 +64,10 @@ public class NamedArg extends Argument{
 		defaultValue = dV;
 		this.argValue = dV;
 		possibleValues = rV;
-		requiredArg = "false";
+		requiredArg = false;
 	}
 	
-	public NamedArg(String n, String s, String d, Argument.Type t, String dV, String rA, List<String> rV){
+	public NamedArg(String n, String s, String d, Argument.Type t, String dV, Boolean rA, List<String> rV){
 		super(n, d, t);
 		shortName = s;
 		defaultValue = dV;
@@ -99,7 +99,7 @@ public class NamedArg extends Argument{
 	*@return   a string formatting the named arguments and their values to an XML file.
 	*/
 	
-	public String isArgRequired(){
+	public Boolean isArgRequired(){
 		return requiredArg;
 	}
 	

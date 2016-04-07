@@ -176,7 +176,7 @@ public class ArgumentParser{
 		namedArgs.add(new NamedArg(name, shortName, description, type, defaultValue));
 	}
 	
-	public void addNamedArg(String name, String shortName, String description, Argument.Type type, String defaultValue, String required){
+	public void addNamedArg(String name, String shortName, String description, Argument.Type type, String defaultValue, Boolean required){
 		args.add(new NamedArg(name, shortName, description, type, defaultValue, required));
 		namedArgs.add(new NamedArg(name, shortName, description, type, defaultValue, required));
 	}
@@ -186,7 +186,7 @@ public class ArgumentParser{
 		namedArgs.add(new NamedArg(name, shortName, description, type, defaultValue, restrictedVals));
 	}
 	
-	public void addNamedArg(String name, String shortName, String description, Argument.Type type, String defaultValue, String required, List<String> restrictedVals){
+	public void addNamedArg(String name, String shortName, String description, Argument.Type type, String defaultValue, Boolean required, List<String> restrictedVals){
 		args.add(new NamedArg(name, shortName, description, type, defaultValue, required, restrictedVals));
 		namedArgs.add(new NamedArg(name, shortName, description, type, defaultValue, required, restrictedVals));
 	}
@@ -383,6 +383,12 @@ public class ArgumentParser{
 	
 	public void parseArgs(String[] arr){
 		ArrayList<String> tempList = new ArrayList<String>(Arrays.asList(arr));
+		//need way to look past dashes in tempList to check for required arg.
+		for(NamedArg n : namedArgs){
+			if(!tempList.contains(n.getName()) && !tempList.contains(n.getShort()) && n.isArgRequired()){
+				throw new RequiredArgNotFoundException("There is no value found for required argument " + n.getName());
+			}
+		}
 		
 		if(tempList.contains("--help")){
 			tempList.remove(tempList.indexOf("--help"));
@@ -464,7 +470,7 @@ public class ArgumentParser{
 	*@param list      the list of restricted values
 	*/
 	
-	public void addNamedArgPossValues(String argName, List<String> list){
+	public void addNamedArgPossibleValues(String argName, List<String> list){
 		Argument a = new Argument(argName);
 		NamedArg n = (NamedArg) args.get(args.indexOf(a));
 		namedArgs.get(namedArgs.indexOf(n)).setPossibleValue(list);
