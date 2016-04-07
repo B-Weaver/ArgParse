@@ -383,9 +383,8 @@ public class ArgumentParser{
 	
 	public void parseArgs(String[] arr){
 		ArrayList<String> tempList = new ArrayList<String>(Arrays.asList(arr));
-		//need way to look past dashes in tempList to check for required arg.
 		for(NamedArg n : namedArgs){
-			if(!tempList.contains(n.getName()) && !tempList.contains(n.getShort()) && n.isArgRequired()){
+			if(!tempList.contains("--"+n.getName()) && !tempList.contains("-"+n.getShort()) && n.isArgRequired()){
 				throw new RequiredArgNotFoundException("There is no value found for required argument " + n.getName());
 			}
 		}
@@ -406,12 +405,41 @@ public class ArgumentParser{
 						String s = tempList.get(i).substring(2, tempList.get(i).length());
 						String v = tempList.get(i+1);
 						getArg(s);
+						/*
 						Argument a = new Argument(s);
 						if(args.contains(a)){
 							args.get(args.indexOf(a)).setValue(v);
 							tempList.remove(tempList.get(i));
 							tempList.remove(tempList.get(i));
 							i--;
+						}
+						*/
+						for(NamedArg n : namedArgs){
+							if(n.getName().equals(s)){
+								if(n.possibleValues.size() > 0){
+									if(n.possibleValues.contains(v)){
+										Argument b = new Argument(n.getName());
+										args.get(args.indexOf(b)).setValue(v);
+										tempList.remove(tempList.get(i));
+										tempList.remove(tempList.get(i));
+										i--;
+										break;
+									}
+									
+									else
+										throw new UnacceptedValueException(unacceptedValueMessage(v));
+								}
+								
+								else{
+									Argument b = new Argument(n.getName());
+									args.get(args.indexOf(b)).setValue(v);
+									tempList.remove(tempList.get(i));
+									tempList.remove(tempList.get(i));
+									i--;
+									break;
+								}
+								
+							}
 						}
 						
 					}

@@ -121,7 +121,8 @@ public final class XMLTools{
 							argShortName = el.getElementsByTagName("shortname").item(0).getTextContent();
 							argType = el.getElementsByTagName("type").item(0).getTextContent();
 							argValue = el.getElementsByTagName("default").item(0).getTextContent();
-							if(el.getNodeName().contains("required")){
+							NodeList rL = el.getElementsByTagName("required");
+							if(rL.getLength() > 0){
 								if(el.getElementsByTagName("required").item(0).getTextContent().equals("true"));
 								requiredArg = true;
 								hasRequired = true;
@@ -165,12 +166,16 @@ public final class XMLTools{
 									break;
 								
 							}
+							
+							p.addNamedArg(argName, argShortName, argDescription, t, argValue, requiredArg, restrictedVals);
+							/*
 							if(hasRequired == true){
-								p.addNamedArg(argName, argShortName, argDescription, t, argValue, requiredArg, restrictedVals);
+								
 							}
 							else
 								p.addNamedArg(argName, argShortName, argDescription, t, argValue, restrictedVals);
 							restrictedVals = new ArrayList<String>();
+							*/
 						}
 						else if(el.getNodeName().contains("positional")){
 							argName = el.getElementsByTagName("name").item(0).getTextContent();

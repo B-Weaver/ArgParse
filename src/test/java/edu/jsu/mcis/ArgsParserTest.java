@@ -519,8 +519,20 @@ public class ArgsParserTest {
 	}
 	
 	@Test
-	public void testUnacceptedValueExceptionXML(){
-		String[] s = {"7", "5", "2", "-t", "box", "-d", "15"};
+	public void testUnacceptedValueExceptionXMLShortNamedTest(){
+		String[] s = {"7", "5", "2", "-t", "sphere", "--digits", "4"};
+		String filename = "src/test/java/edu/jsu/mcis/Feature12Ex.xml";
+		String outfile = "src/test/java/edu/jsu/mcis/Feature12OutEx2.xml";
+		ArgumentParser p = XMLTools.load(filename);
+		thrown.expect(UnacceptedValueException.class);
+		thrown.expectMessage("usage: java VolumeCalculatorD length width height type digits\nVolumeCalculatorD.java: unaccepted value: sphere");
+		p.parseArgs(s);
+		XMLTools.save(p, outfile);
+	}
+	
+	@Test
+	public void testUnacceptedValueExceptionXMLLongNamedTest(){
+		String[] s = {"7", "5", "2", "-t", "box", "--digits", "15"};
 		String filename = "src/test/java/edu/jsu/mcis/Feature12Ex.xml";
 		String outfile = "src/test/java/edu/jsu/mcis/Feature12OutEx2.xml";
 		ArgumentParser p = XMLTools.load(filename);
@@ -592,4 +604,39 @@ public class ArgsParserTest {
 		
 		assertEquals("ellipsoid", p.getArg("type"));
 	}
+	
+	@Test
+	public void testNamedArgumentsRequiredArgumentXML(){
+		String[] s = {"7", "5", "2", "-t", "ellipsoid", "-d", "4"};
+		String filename = "src/test/java/edu/jsu/mcis/Feature13Ex.xml";
+		String outfile = "src/test/java/edu/jsu/mcis/Feature13OutEx.xml";
+		ArgumentParser p = XMLTools.load(filename);
+		p.parseArgs(s);
+		XMLTools.save(p, outfile);
+		assertEquals("ellipsoid", p.getArg("type"));
+		assertEquals("4", p.getArg("digits"));
+	}
+	
+	@Test
+	public void testNamedArgumentsRequiredArgumentExceptionXML(){
+		String[] s = {"7", "5", "2", "-d", "4"};
+		String filename = "src/test/java/edu/jsu/mcis/Feature13Ex.xml";
+		String outfile = "src/test/java/edu/jsu/mcis/Feature13OutEx.xml";
+		ArgumentParser p = XMLTools.load(filename);
+		thrown.expect(RequiredArgNotFoundException.class);
+		p.parseArgs(s);
+		XMLTools.save(p, outfile);
+		assertEquals("ellipsoid", p.getArg("type"));
+		assertEquals("4", p.getArg("digits"));
+	}
 }
+
+
+
+
+
+
+
+
+
+
