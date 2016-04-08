@@ -431,28 +431,14 @@ public class ArgumentParser{
 		}
 		else{
 			for(int i = 0; i < tempList.size(); i++){
-				if(namedArgs.size() > 0){
-					if(tempList.get(i).contains("--")){
-						String s = tempList.get(i).substring(2, tempList.get(i).length());
-						String v = tempList.get(i+1);
-						getArg(s);
-						for(NamedArg n : namedArgs){
-							if(n.getName().equals(s)){
-								if(n.possibleValues.size() > 0){
-									if(n.possibleValues.contains(v)){
-										Argument b = new Argument(n.getName());
-										args.get(args.indexOf(b)).setValue(v);
-										tempList.remove(tempList.get(i));
-										tempList.remove(tempList.get(i));
-										i--;
-										break;
-									}
-									
-									else
-										throw new UnacceptedValueException(unacceptedValueMessage(v));
-								}
-								
-								else{
+				if(tempList.get(i).contains("--")){
+					String s = tempList.get(i).substring(2, tempList.get(i).length());
+					String v = tempList.get(i+1);
+					getArg(s);
+					for(NamedArg n : namedArgs){
+						if(n.getName().equals(s)){
+							if(n.possibleValues.size() > 0){
+								if(n.possibleValues.contains(v)){
 									Argument b = new Argument(n.getName());
 									args.get(args.indexOf(b)).setValue(v);
 									tempList.remove(tempList.get(i));
@@ -461,34 +447,33 @@ public class ArgumentParser{
 									break;
 								}
 								
+								else
+									throw new UnacceptedValueException(unacceptedValueMessage(v));
 							}
+							
+							else{
+								Argument b = new Argument(n.getName());
+								args.get(args.indexOf(b)).setValue(v);
+								tempList.remove(tempList.get(i));
+								tempList.remove(tempList.get(i));
+								i--;
+								break;
+							}
+							
 						}
-						
 					}
-				
-					else if(tempList.get(i).contains("-")){
-						String s = tempList.get(i).substring(1, tempList.get(i).length());
-						String v = tempList.get(i+1);
-						boolean shortFound = false;
-						
-						for(NamedArg n : namedArgs){
-							if(n.getShort().equals(s)){
-								if(n.possibleValues.size() > 0){
-									if(n.possibleValues.contains(v)){
-										Argument b = new Argument(n.getName());
-										args.get(args.indexOf(b)).setValue(v);
-										tempList.remove(tempList.get(i));
-										tempList.remove(tempList.get(i));
-										i--;
-										shortFound = true;
-										break;
-									}
-									
-									else
-										throw new UnacceptedValueException(unacceptedValueMessage(v));
-								}
-								
-								else{
+					
+				}
+			
+				else if(tempList.get(i).contains("-")){
+					String s = tempList.get(i).substring(1, tempList.get(i).length());
+					String v = tempList.get(i+1);
+					boolean shortFound = false;
+					
+					for(NamedArg n : namedArgs){
+						if(n.getShort().equals(s)){
+							if(n.possibleValues.size() > 0){
+								if(n.possibleValues.contains(v)){
 									Argument b = new Argument(n.getName());
 									args.get(args.indexOf(b)).setValue(v);
 									tempList.remove(tempList.get(i));
@@ -498,11 +483,24 @@ public class ArgumentParser{
 									break;
 								}
 								
+								else
+									throw new UnacceptedValueException(unacceptedValueMessage(v));
 							}
+							
+							else{
+								Argument b = new Argument(n.getName());
+								args.get(args.indexOf(b)).setValue(v);
+								tempList.remove(tempList.get(i));
+								tempList.remove(tempList.get(i));
+								i--;
+								shortFound = true;
+								break;
+							}
+							
 						}
-						if(!shortFound){
-							throw new ArgumentNotFoundException("No argument found with short name " + s);
-						}
+					}
+					if(!shortFound){
+						throw new ArgumentNotFoundException("No argument found with short name " + s);
 					}
 				}
 			}
