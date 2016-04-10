@@ -211,13 +211,7 @@ public final class XMLTools{
 		return p;
 	}
 	
-	/**
-	*This method is called by the load method to provide the method the name and description of the file to be given to the instance of ArgumentParser the load method creates.
-	*@param file   the name of the file to be read from.
-	*@return   an String array containing the name and description of the file being read from.
-	*/
-	
-	public String[] programLoad(String file){
+	private String[] programLoad(String file){
 		String[] prog = new String[2];
 		try{
 			DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
