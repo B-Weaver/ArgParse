@@ -457,13 +457,22 @@ public class ArgsParserTest {
 	}
 	
 	@Test
+	public void testParseXMLFileFileNotAXMLFile(){
+		String[] s = {"7", "true", "2","-t", "ellipsoid"};
+		String filename = "src/test/java/edu/jsu/mcis/Cat.bod";
+		
+		thrown.expect(XMLException.class);
+		thrown.expectMessage(filename + " is not an XML File.");
+		ArgumentParser p = XMLTools.load(filename);
+	}
+	
+	@Test
 	public void testParseXMLFileFileNotFound(){
 		String[] s = {"7", "true", "2","-t", "ellipsoid"};
-		String filename = "src/test/java/edu/jsu/mcis/Cat.xml";
+		String filename = "src/test/java/edu/jsu/mcis/bup.xml";
 		
 		thrown.expect(XMLException.class);
 		ArgumentParser p = XMLTools.load(filename);
-		p.parseArgs(s);
 	}
 	
 	@Test
