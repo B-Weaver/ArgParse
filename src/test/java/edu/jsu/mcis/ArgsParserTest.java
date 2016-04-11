@@ -477,11 +477,9 @@ public class ArgsParserTest {
 		p.addPosArg("length", "the length of the box", Argument.Type.FLOAT, "1");
 		p.addPosArg("width", "the width of the box", Argument.Type.FLOAT, "2");
 		p.addPosArg("height", "the height of the box", Argument.Type.FLOAT, "3");
-		p.addNamedArg("type", "t", "type of shape", Argument.Type.STRING, "box");
+		p.addNamedArg("type", "t", "type of shape", Argument.Type.STRING, "box", list);
 		p.addNamedArg("digits", "d", "digits of type", Argument.Type.STRING, "4");
-		p.addNamedArgPossibleValues("type", list);
 		p.parseArgs(s);
-		
 		assertEquals("pyramid", p.getArg("type"));
 	}
 	
@@ -497,9 +495,8 @@ public class ArgsParserTest {
 		p.addPosArg("length", "the length of the box", Argument.Type.FLOAT, "1");
 		p.addPosArg("width", "the width of the box", Argument.Type.FLOAT, "2");
 		p.addPosArg("height", "the height of the box", Argument.Type.FLOAT, "3");
-		p.addNamedArg("type", "t", "type of shape", Argument.Type.STRING, "box");
+		p.addNamedArg("type", "t", "type of shape", Argument.Type.STRING, "box", list);
 		p.addNamedArg("digits", "d", "digits of type", Argument.Type.STRING, "4");
-		p.addNamedArgPossibleValues("type", list);
 		thrown.expect(UnacceptedValueException.class);
 		thrown.expectMessage("usage: java VolumeCalculator length width height type digits\nVolumeCalculator.java: unaccepted value: boat");
 		p.parseArgs(s);
@@ -579,9 +576,7 @@ public class ArgsParserTest {
 		p.addPosArg("height", "the height of the box", Argument.Type.FLOAT, "3");
 		p.addNamedArg("type", "t", "type of shape", Argument.Type.STRING, "box", true, list);
 		p.addNamedArg("digits", "d", "digits of type", Argument.Type.STRING, "4", false);
-		p.addNamedArgPossibleValues("type", list);
 		p.parseArgs(s);
-		
 		assertEquals("ellipsoid", p.getArg("type"));
 	}
 	
@@ -598,10 +593,8 @@ public class ArgsParserTest {
 		p.addPosArg("height", "the height of the box", Argument.Type.FLOAT, "3");
 		p.addNamedArg("type", "t", "type of shape", Argument.Type.STRING, "box", true, list);
 		p.addNamedArg("digits", "d", "digits of type", Argument.Type.STRING, "4", false);
-		p.addNamedArgPossibleValues("type", list);
 		thrown.expect(RequiredArgNotFoundException.class);
 		p.parseArgs(s);
-		
 		assertEquals("ellipsoid", p.getArg("type"));
 	}
 	
