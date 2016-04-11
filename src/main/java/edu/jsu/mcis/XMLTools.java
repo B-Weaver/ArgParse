@@ -81,11 +81,9 @@ public final class XMLTools{
 	public static ArgumentParser load(String file){
 		String[] program = new String[2];
 		XMLTools x = new XMLTools();
-		program = x.programLoad(file);
-		String programName = program[0];
-		String programDescription = program[1];
-		Boolean hasRequired = false;
-		ArgumentParser p = new ArgumentParser(programName, programDescription);
+		String programName = "";
+		String programDescription = "";
+		ArgumentParser p = new ArgumentParser();
 		try{
 			DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
@@ -95,12 +93,37 @@ public final class XMLTools{
 			
 			NodeList listOfXMLArgs = documentElement.getChildNodes();
 			
-			
-			
 			if(listOfXMLArgs != null && listOfXMLArgs.getLength() > 0){
 				for(int i = 0; i < listOfXMLArgs.getLength(); i++){
 					if(listOfXMLArgs.item(i).getNodeType() == Node.ELEMENT_NODE){
 						Element el = (Element) listOfXMLArgs.item(i);
+						
+						if(el.getNodeName().contains("program")){
+							program[0] = el.getElementsByTagName("name").item(0).getTextContent();
+							program[1] = el.getElementsByTagName("description").item(0).getTextContent();
+						}
+					}
+				}
+			}
+		
+			programName = program[0];
+			programDescription = program[1];
+			Boolean hasRequired = false;
+			p = new ArgumentParser(programName, programDescription);
+			DocumentBuilderFactory docBuilderFactory2 = DocumentBuilderFactory.newInstance();
+			DocumentBuilder docBuilder2 = docBuilderFactory.newDocumentBuilder();
+			Document doc2 = docBuilder2.parse(new File(file));
+
+			Element documentElementB = doc2.getDocumentElement();
+			
+			NodeList listOfXMLArgsB = documentElement.getChildNodes();
+			
+			
+			
+			if(listOfXMLArgsB != null && listOfXMLArgsB.getLength() > 0){
+				for(int i = 0; i < listOfXMLArgs.getLength(); i++){
+					if(listOfXMLArgsB.item(i).getNodeType() == Node.ELEMENT_NODE){
+						Element el = (Element) listOfXMLArgsB.item(i);
 						String argName = "";
 						String argShortName = "";
 						String argDescription = "";
@@ -209,42 +232,5 @@ public final class XMLTools{
 			throw new XMLException(file);
 		}
 		return p;
-	}
-	
-	private String[] programLoad(String file){
-		String[] prog = new String[2];
-		try{
-			DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
-			Document doc = docBuilder.parse(new File(file));
-
-			Element documentElement = doc.getDocumentElement();
-			
-			NodeList listOfXMLArgs = documentElement.getChildNodes();
-			
-			if(listOfXMLArgs != null && listOfXMLArgs.getLength() > 0){
-				for(int i = 0; i < listOfXMLArgs.getLength(); i++){
-					if(listOfXMLArgs.item(i).getNodeType() == Node.ELEMENT_NODE){
-						Element el = (Element) listOfXMLArgs.item(i);
-						
-						if(el.getNodeName().contains("program")){
-							prog[0] = el.getElementsByTagName("name").item(0).getTextContent();
-							prog[1] = el.getElementsByTagName("description").item(0).getTextContent();
-						}
-					}
-				}
-			}
-		}
-		catch(SAXException e){
-			
-		}
-		catch(ParserConfigurationException e){
-			
-		}
-		catch(IOException e){
-			throw new XMLException(file);
-		}
-		return prog;
-	}
-	
+	}	
 }

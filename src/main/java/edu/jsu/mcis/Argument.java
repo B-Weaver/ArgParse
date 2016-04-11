@@ -29,14 +29,6 @@ public class Argument{
 	public enum Type{ STRING, INT, FLOAT, BOOLEAN };
 	protected Type type;
 	
-	/**
-	*This is the default constructor. If the user provides no name and no description for the argument those values are left blank and the type is defaulted to String.
-	*For example: new Argument().
-	*/
-	
-	public Argument(){
-		this("", "", Type.STRING);
-	}
 	
 	/**
 	*In this constructor the user specifies the name of the argument but no description. The type is defaulted to String as well.
