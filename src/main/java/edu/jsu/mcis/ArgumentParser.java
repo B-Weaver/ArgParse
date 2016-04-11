@@ -512,20 +512,6 @@ public class ArgumentParser{
 		
 	}
 	
-	/**
-	*This method is used to take a list of values and add it to the list of restricted values for an argument in the NamedArg class.
-	*@param argName   the name of the argument whose restricted values are being set.
-	*@param list      the list of restricted values
-	*/
-	
-	public void addNamedArgPossibleValues(String argName, List<String> list){
-		Argument a = new Argument(argName);
-		NamedArg n = (NamedArg) args.get(args.indexOf(a));
-		namedArgs.get(namedArgs.indexOf(n)).setPossibleValue(list);
-		args.remove(a);
-		args.add(n);
-		
-	}
 	
 	/**
 	*This method is used in the save method of XMLTools. This method converts the arguments and their values into a format to be used in an XML file.
