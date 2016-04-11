@@ -79,14 +79,12 @@ public final class XMLTools{
 	*/
 
 	public static ArgumentParser load(String file){
+		ArgumentParser p = new ArgumentParser();
 		if(!file.substring(file.length()-4).equals(".xml")){
 			throw new XMLException(file);
 		}
 		String[] program = new String[2];
-		XMLTools x = new XMLTools();
-		String programName = "";
-		String programDescription = "";
-		ArgumentParser p = new ArgumentParser();
+		
 		try{
 			DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
@@ -109,10 +107,10 @@ public final class XMLTools{
 				}
 			}
 		
-			programName = program[0];
-			programDescription = program[1];
 			Boolean hasRequired = false;
-			p = new ArgumentParser(programName, programDescription);
+			
+			p = new ArgumentParser(program[0], program[1]);
+			
 			DocumentBuilderFactory docBuilderFactory2 = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder2 = docBuilderFactory.newDocumentBuilder();
 			Document doc2 = docBuilder2.parse(new File(file));
@@ -224,6 +222,7 @@ public final class XMLTools{
 					}
 				}	
 			}
+			
 		}
 		catch(SAXException e){
 			
