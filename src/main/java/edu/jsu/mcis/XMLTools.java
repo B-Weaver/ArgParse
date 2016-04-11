@@ -79,6 +79,9 @@ public final class XMLTools{
 	*/
 
 	public static ArgumentParser load(String file){
+		if(!file.substring(file.length()-4).equals(".xml")){
+			throw new XMLException(file);
+		}
 		String[] program = new String[2];
 		XMLTools x = new XMLTools();
 		String programName = "";

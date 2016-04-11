@@ -19,6 +19,6 @@ public class XMLException extends RuntimeException{
 	*@param message		message to be shown when exception thrown
 	*/
 	public XMLException(String message){
-		super("XML File " + message + " Not Found.");
+		super(message + " is not an XML File.");
 	}
 }
