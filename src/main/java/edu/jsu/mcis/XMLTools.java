@@ -111,20 +111,10 @@ public final class XMLTools{
 			
 			p = new ArgumentParser(program[0], program[1]);
 			
-			DocumentBuilderFactory docBuilderFactory2 = DocumentBuilderFactory.newInstance();
-			DocumentBuilder docBuilder2 = docBuilderFactory.newDocumentBuilder();
-			Document doc2 = docBuilder2.parse(new File(file));
-
-			Element documentElementB = doc2.getDocumentElement();
-			
-			NodeList listOfXMLArgsB = documentElement.getChildNodes();
-			
-			
-			
-			if(listOfXMLArgsB != null && listOfXMLArgsB.getLength() > 0){
+			if(listOfXMLArgs != null && listOfXMLArgs.getLength() > 0){
 				for(int i = 0; i < listOfXMLArgs.getLength(); i++){
-					if(listOfXMLArgsB.item(i).getNodeType() == Node.ELEMENT_NODE){
-						Element el = (Element) listOfXMLArgsB.item(i);
+					if(listOfXMLArgs.item(i).getNodeType() == Node.ELEMENT_NODE){
+						Element el = (Element) listOfXMLArgs.item(i);
 						String argName = "";
 						String argShortName = "";
 						String argDescription = "";
@@ -222,7 +212,6 @@ public final class XMLTools{
 					}
 				}	
 			}
-			
 		}
 		catch(SAXException e){
 			
