@@ -151,16 +151,4 @@ public class NamedArg extends Argument{
 		
 		return toXML;
 	}
-	
-	protected void setPossibleValue(List<String> str){
-		possibleValues = str;
-	}
-	
-	protected void makeArgumentMutuallyExclusive(){
-		isMutuallyExclusive = true;
-	}
-	
-	protected Boolean isArgumentMutuallyExclusive(){
-		return isMutuallyExclusive;
-	}
 }
