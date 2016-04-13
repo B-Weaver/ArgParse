@@ -12,35 +12,33 @@ import org.xml.sax.SAXParseException;
 
 /**
 *This class allows for the user to create arguments and set their values by parsing through their inputs. This is the main class that the user will work with for the ArgParser library.
-*The types of arguments that can be used are positional and named arguments. If the user wishes to specify these arguments manually they can do so like this:
+*The types of arguments that can be used are positional and named arguments. If the user wishes to specify these arguments manually. This is performed as follows:
 *<blockquote><pre>
 *{@code
-*public class VolumeCalculatorD{
-*public static void main(String[] args) {
-*	String filename = "C:/Users/Owner/Desktop/CS310/ArgParse/ArgParse/ArgParse/demos/Feature12Ex.xml";
-*	try{
-*		ArgumentParser parser = XMLTools.load(filename);
-*		parser.parseArgs(args);
-*		int l = Integer.parseInt(parser.getArg("length"));
-*		int w = Integer.parseInt(parser.getArg("width"));
-*		int h = Integer.parseInt(parser.getArg("height"));
-*		int v = l*w*h;
-*		System.out.println("The volume is: " + v);
-*		System.out.println("Digits: " +parser.getArg("digits"));
-*		System.out.println("Type: " +parser.getArg("type"));
-*		
-*		XMLTools.save(parser, "C:/Users/Owner/Desktop/CS310/ArgParse/ArgParse/ArgParse/demos/Feature12Out.xml");
-*	}
-*	catch(Exception e) {
-*		System.out.println(e.getMessage());
-*	}
-* }
-* }
+*public class VolumeCalculator{
+*	public static void main(String[] args) {
+*		ArgumentParser parser = new ArgumentParser("VolumeCalculator", "Calculate the volume of a shape.");
+*		parser.addPosArg("length","the length of the box (int)", Argument.Type.INT, "1");
+*		parser.addPosArg("width", "the width of the box (int)", Argument.Type.INT, "2");
+*		parser.addPosArg("height", "the height of the box (int)", Argument.Type.INT, "3");
+*		try {
+*			parser.parseArgs(args);
+*			int l = Integer.parseInt(parser.getArg("length"));
+*			int w = Integer.parseInt(parser.getArg("width"));
+*			int h = Integer.parseInt(parser.getArg("height"));
+*			int v = l*w*h;
+*			System.out.println("The volume is: " + v);
+*		}
+*		catch(Exception e) {
+*			System.out.println(e.getMessage());
+*		}
+*   }
+*}
 *}
 *</pre></blockquote>
 *
 *The user can also read from an XML file to achieve the same results by using the XMLTools class. The user does this by making an instance of ArgumentParser equal to XMLTool's load method.
-*The user is able to save the argument information to an XML file as well using the save method in XMLTools. These are done like this:
+*The user is able to save the argument information to an XML file as well using the save method in XMLTools. These are performed as follows:
 *<blockquote><pre>
 *{@code
 *public class VolumeCalculatorD{
