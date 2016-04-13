@@ -14,8 +14,7 @@ import java.util.*;
 
 public class InvalidArgumentTypeException extends RuntimeException{
 	/**
-	*This exception is thrown when the user gives an argument an illegal type. Arguments should only be of types int, float, boolean, or string. If the user tries to
-	*make an argument of any other type then the exception will be thrown.
+	*This constructor takes a string that is used to print out the exception message.
 	*@param message		message to be shown when exception thrown
 	*/
 	public InvalidArgumentTypeException(String message){

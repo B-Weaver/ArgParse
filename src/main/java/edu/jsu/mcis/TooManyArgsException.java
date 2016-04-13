@@ -14,8 +14,7 @@ import java.util.*;
 
 public class TooManyArgsException extends RuntimeException{
 	/**
-	*This exception is thrown if the user provides too many values for the positional arguments. For example, if the program has three positional arguments and the user provides
-	*four or more values for those arguments, then the exception will be thrown with a message showing the extra value(s).
+	*This constructor takes a string that is used to print out the exception message.
 	*@param message		message to be shown when exception thrown
 	*/
 	public TooManyArgsException(String message){
