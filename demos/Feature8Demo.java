@@ -8,9 +8,9 @@ public class Feature8Demo{
 		parser.addPosArg("height", "the height of the box (int)", Argument.Type.INT, "3");
 		try {
 			parser.parseArgs(args);
-			int l = Integer.parseInt(parser.getArg("length"));
-			int w = Integer.parseInt(parser.getArg("width"));
-			int h = Integer.parseInt(parser.getArg("height"));
+			int l = Integer.parseInt(parser.getArgValue("length"));
+			int w = Integer.parseInt(parser.getArgValue("width"));
+			int h = Integer.parseInt(parser.getArgValue("height"));
 			int v = l*w*h;
 			System.out.println("The volume is: " + v);
 		}

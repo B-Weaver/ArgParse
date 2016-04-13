@@ -7,9 +7,9 @@ public class PizzaBuilder{
 		try{
 			ArgumentParser parser = XMLTools.load(filename);
 			parser.parseArgs(args);
-			float d = Float.parseFloat(parser.getArg("diameter"));
-			float t = Float.parseFloat(parser.getArg("toppings"));
-			float c = Float.parseFloat(parser.getArg("cuts"));
+			float d = Float.parseFloat(parser.getArgValue("diameter"));
+			float t = Float.parseFloat(parser.getArgValue("toppings"));
+			float c = Float.parseFloat(parser.getArgValue("cuts"));
 			float p = (d*.75f) + t + (c*.25f);
 			System.out.println("The price is: $" + p);
 			
