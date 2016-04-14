@@ -2,7 +2,7 @@ import edu.jsu.mcis.*;
 
 public class VolumeCalculatorC{
 	public static void main(String[] args) {
-		String filename = "C:/Users/Owner/Desktop/CS310/ArgParse/ArgParse/ArgParse/demos/Feature9Ex.xml";
+		String filename = "C:/Users/Barry/CS310/ArgParse/demos/Feature9Ex.xml";
 		try{
 			ArgumentParser parser = XMLTools.load(filename);
 			parser.parseArgs(args);
@@ -14,7 +14,7 @@ public class VolumeCalculatorC{
 			System.out.println("Digits: " +parser.getArg("digits"));
 			System.out.println("Type: " +parser.getArg("type"));
 			
-			XMLTools.save(parser, "C:/Users/Owner/Desktop/CS310/ArgParse/ArgParse/ArgParse/demos/Feature10.xml");
+			XMLTools.save(parser, "C:/Users/Barry/CS310/ArgParse/demos/Feature10.xml");
 		}
 		catch(Exception e) {
 			System.out.println(e.getMessage());
