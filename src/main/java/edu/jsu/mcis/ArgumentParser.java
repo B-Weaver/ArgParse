@@ -41,9 +41,9 @@ import org.xml.sax.SAXParseException;
 *The user is able to save the argument information to an XML file as well using the save method in XMLTools. These are performed as follows:
 *<blockquote><pre>
 *{@code
-*public class VolumeCalculatorD{
+*public class VolumeCalculator{
 *	public static void main(String[] args) {
-*		String filename = "C:/Users/Owner/Desktop/CS310/ArgParse/ArgParse/ArgParse/demos/Feature12Ex.xml";
+*		String filename = "C:/Users/Owner/Desktop/InFile.xml";
 *		try{
 *			ArgumentParser parser = XMLTools.load(filename);
 *			parser.parseArgs(args);
@@ -55,7 +55,7 @@ import org.xml.sax.SAXParseException;
 *			System.out.println("Digits: " +parser.getArgValue("digits"));
 *			System.out.println("Type: " +parser.getArgValue("type"));
 *		
-*			XMLTools.save(parser, "C:/Users/Owner/Desktop/CS310/ArgParse/ArgParse/ArgParse/demos/Feature12Out.xml");
+*			XMLTools.save(parser, "C:/Users/Owner/Desktop/OutFile.xml");
 *		}
 *		catch(Exception e) {
 *			System.out.println(e.getMessage());

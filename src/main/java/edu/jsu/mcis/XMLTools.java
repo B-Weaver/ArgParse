@@ -17,9 +17,9 @@ import org.xml.sax.SAXParseException;
 *equal to the load function of XMLTools. Likewise, the user can also save arguments and their values in an XML file. Both ways are done like this:
 *<blockquote><pre>
 *{@code
-*public class VolumeCalculatorD{
+*public class VolumeCalculator{
 *public static void main(String[] args) {
-*	String filename = "C:/Users/Owner/Desktop/CS310/ArgParse/ArgParse/ArgParse/demos/Feature12Ex.xml";
+*	String filename = "C:/Users/Owner/Desktop/InFile.xml";
 *	try{
 *		ArgumentParser parser = XMLTools.load(filename);
 *		parser.parseArgs(args);
@@ -31,7 +31,7 @@ import org.xml.sax.SAXParseException;
 *		System.out.println("Digits: " +parser.getArgValue("digits"));
 *		System.out.println("Type: " +parser.getArgValue("type"));
 *		
-*		XMLTools.save(parser, "C:/Users/Owner/Desktop/CS310/ArgParse/ArgParse/ArgParse/demos/Feature12Out.xml");
+*		XMLTools.save(parser, "C:/Users/Owner/Desktop/OutFile.xml");
 *	}
 *	catch(Exception e) {
 *		System.out.println(e.getMessage());
