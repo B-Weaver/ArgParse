@@ -12,9 +12,9 @@ public class ArgParserKeywords{
 		parser.addPosArg("height", "the height of the box (float)", Argument.Type.FLOAT, "3");
 		try {
 			parser.parseArgs(args);
-			int l = Integer.parseInt(parser.getArg("length"));
-			int w = Integer.parseInt(parser.getArg("width"));
-			int h = Integer.parseInt(parser.getArg("height"));
+			int l = Integer.parseInt(parser.getArgValue("length"));
+			int w = Integer.parseInt(parser.getArgValue("width"));
+			int h = Integer.parseInt(parser.getArgValue("height"));
 			int v = l*w*h;
 			output = v + "";
 		}
@@ -49,9 +49,9 @@ public class ArgParserKeywords{
 		parser.addNamedArg("digits", "d", "digits of type", Argument.Type.STRING, "4");
 		try {
 			parser.parseArgs(args);
-			int l = Integer.parseInt(parser.getArg("length"));
-			int w = Integer.parseInt(parser.getArg("width"));
-			int h = Integer.parseInt(parser.getArg("height"));
+			int l = Integer.parseInt(parser.getArgValue("length"));
+			int w = Integer.parseInt(parser.getArgValue("width"));
+			int h = Integer.parseInt(parser.getArgValue("height"));
 			int v = l*w*h;
 			output = v + "";
 		}
@@ -61,15 +61,15 @@ public class ArgParserKeywords{
 	}
 	
 	public String getLength(){
-		return parser.getArg("length");
+		return parser.getArgValue("length");
 	}
 	
 	public String getWidth(){
-		return parser.getArg("width");
+		return parser.getArgValue("width");
 	}
 	
 	public String getHeight(){
-		return parser.getArg("height");
+		return parser.getArgValue("height");
 	}
 	
 	public String getProgramOutput(){
@@ -77,11 +77,11 @@ public class ArgParserKeywords{
 	}
 	
 	public String getDigits(){
-		return parser.getArg("digits");
+		return parser.getArgValue("digits");
 	}
 	
 	public String getType(){
-		return parser.getArg("type");
+		return parser.getArgValue("type");
 	}
 	
 	public void StartAbsurdProgramWithArguments(String[] args){
@@ -93,18 +93,18 @@ public class ArgParserKeywords{
 	}
 	
 	public String getPet(){
-		return parser2.getArg("Pet");
+		return parser2.getArgValue("Pet");
 	}
 	
 	public String getNumber(){
-		return parser2.getArg("Number");
+		return parser2.getArgValue("Number");
 	}
 	
 	public String getRainy(){
-		return parser2.getArg("Rainy");
+		return parser2.getArgValue("Rainy");
 	}
 	
 	public String getBathrooms(){
-		return parser2.getArg("Bathrooms");
+		return parser2.getArgValue("Bathrooms");
 	}
 }

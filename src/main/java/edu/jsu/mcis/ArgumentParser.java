@@ -23,9 +23,9 @@ import org.xml.sax.SAXParseException;
 *		parser.addPosArg("height", "the height of the box (int)", Argument.Type.INT, "3");
 *		try {
 *			parser.parseArgs(args);
-*			int l = Integer.parseInt(parser.getArg("length"));
-*			int w = Integer.parseInt(parser.getArg("width"));
-*			int h = Integer.parseInt(parser.getArg("height"));
+*			int l = Integer.parseInt(parser.getArgValue("length"));
+*			int w = Integer.parseInt(parser.getArgValue("width"));
+*			int h = Integer.parseInt(parser.getArgValue("height"));
 *			int v = l*w*h;
 *			System.out.println("The volume is: " + v);
 *		}
@@ -41,21 +41,21 @@ import org.xml.sax.SAXParseException;
 *The user is able to save the argument information to an XML file as well using the save method in XMLTools. These are performed as follows:
 *<blockquote><pre>
 *{@code
-*public class VolumeCalculatorD{
+*public class VolumeCalculator{
 *	public static void main(String[] args) {
-*		String filename = "C:/Users/Owner/Desktop/CS310/ArgParse/ArgParse/ArgParse/demos/Feature12Ex.xml";
+*		String filename = "C:/Users/Owner/Desktop/InFile.xml";
 *		try{
 *			ArgumentParser parser = XMLTools.load(filename);
 *			parser.parseArgs(args);
-*			int l = Integer.parseInt(parser.getArg("length"));
-*			int w = Integer.parseInt(parser.getArg("width"));
-*			int h = Integer.parseInt(parser.getArg("height"));
+*			int l = Integer.parseInt(parser.getArgValue("length"));
+*			int w = Integer.parseInt(parser.getArgValue("width"));
+*			int h = Integer.parseInt(parser.getArgValue("height"));
 *			int v = l*w*h;
 *			System.out.println("The volume is: " + v);
-*			System.out.println("Digits: " +parser.getArg("digits"));
-*			System.out.println("Type: " +parser.getArg("type"));
+*			System.out.println("Digits: " +parser.getArgValue("digits"));
+*			System.out.println("Type: " +parser.getArgValue("type"));
 *		
-*			XMLTools.save(parser, "C:/Users/Owner/Desktop/CS310/ArgParse/ArgParse/ArgParse/demos/Feature12Out.xml");
+*			XMLTools.save(parser, "C:/Users/Owner/Desktop/OutFile.xml");
 *		}
 *		catch(Exception e) {
 *			System.out.println(e.getMessage());
@@ -312,7 +312,7 @@ public class ArgumentParser{
 	*@exception ArgumentNotFoundException  thrown when the argument doesn't exist.
 	*/
 	
-	public String getArg(String unit){
+	public String getArgValue(String unit){
 		Argument a = new Argument(unit);
 		try{
 			return args.get(args.indexOf(a)).getValue();
@@ -432,7 +432,7 @@ public class ArgumentParser{
 				if(tempList.get(i).contains("--")){
 					String s = tempList.get(i).substring(2, tempList.get(i).length());
 					String v = tempList.get(i+1);
-					getArg(s);
+					getArgValue(s);
 					for(NamedArg n : namedArgs){
 						if(n.getName().equals(s)){
 							if(n.possibleValues.size() > 0){

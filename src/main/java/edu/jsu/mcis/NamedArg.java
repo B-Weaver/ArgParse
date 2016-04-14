@@ -17,7 +17,6 @@ public class NamedArg extends Argument{
 	String defaultValue;
 	Boolean requiredArg;
 	protected List<String> possibleValues;
-	Boolean isMutuallyExclusive = false;
 	
 	/**
 	*This constructor is called to create a new named argument. The user specifies the name, shortname, description, type, and the default value of these arguments.
